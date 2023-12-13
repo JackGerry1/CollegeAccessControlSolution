@@ -26,6 +26,8 @@ public:
     std::string getForename() const;
     std::string getSurname() const;
     std::string getFullName() const;
+
+    static bool compareByFullName(const User& a, const User& b); // Declaration of static member function
 };
 
 #endif // USER_H

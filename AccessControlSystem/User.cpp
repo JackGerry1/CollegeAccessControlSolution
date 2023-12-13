@@ -91,12 +91,12 @@ void User::removeRole(std::string removedRole) {
 	// Implementation to remove a role from a user
 }
 
-bool compareUsersByFullName(const User& a, const User& b) {
+bool User::compareByFullName(const User& a, const User& b) {
 	return a.getFullName() < b.getFullName();
 }
 
 void User::displayUsersAlphabetically(std::vector<User>& users) {
-	std::sort(users.begin(), users.end(), compareUsersByFullName);
+	std::sort(users.begin(), users.end(), compareByFullName);
 
 	std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
 	for (const auto& user : users) {
