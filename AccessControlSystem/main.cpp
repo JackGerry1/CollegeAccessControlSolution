@@ -11,11 +11,11 @@ int main() {
     std::vector<User> users;
 
     while (!exitProgram) {
-
         std::cout << "Menu:\n";
         std::cout << "1. Add User\n";
         std::cout << "2. Display Users Alphabetically\n";
-        std::cout << "3. Exit\n";
+        std::cout << "3. Remove User\n"; // Adding the option to remove user
+        std::cout << "4. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
 
@@ -31,6 +31,9 @@ int main() {
             User::displayUsersAlphabetically(users);
             break;
         case 3:
+            newUser.removeUser(users);
+            break;
+        case 4:
             std::cout << "Exiting Program...\n";
             exitProgram = true;
             break;
@@ -38,8 +41,8 @@ int main() {
             std::cout << "Invalid choice. Please try again.\n";
             break;
         }
-
     }
 
     return 0;
 }
+

@@ -22,6 +22,10 @@ std::string User::getFullName() const {
 	return forename + " " + surname;
 }
 
+std::string User::getRole() const {
+	return role;
+}
+
 void User::addUser() {
 	std::string newForename, newSurname, newRole;
 	std::cout << "Enter forename: ";
@@ -38,11 +42,32 @@ void User::addUser() {
 	swipeCard = newSwipeCard; // Assigning a new swipe card when adding a user
 
 	system("cls");
-	std::cout << "Added New User: Name: " << getFullName() << ", Role: " << role << ", Swipe Card ID: " << swipeCard.addSwipeCard() << ", User ID: " << getUserID() << "\n\n";
+	std::cout << "Added New User: Name: " << getFullName() << ", Role: " << getRole() << ", Swipe Card ID: " << swipeCard.addSwipeCard() << ", User ID: " << getUserID() << "\n\n";
 }
 
-void User::removeUser() {
-	// Implementation to remove a user from a database or collection
+void User::removeUser(std::vector<User>& users) {
+	if (users.empty()) {
+		std::cout << "No users to remove.\n";
+		return;
+	}
+	// TODO: get swipecard number for respective users
+	std::cout << "Current Users:\n";
+	for (size_t i = 0; i < users.size(); ++i) {
+		std::cout << i << ". Name: " << users[i].getFullName() << ", Role: " << users[i].getRole() << ", User ID: " << users[i].getUserID() << std::endl;
+	}
+
+	int index;
+	std::cout << "Enter the index of the user you want to remove: ";
+	std::cin >> index;
+
+	if (index >= 0 && index < users.size()) {
+		std::string removedUser = users[index].getFullName();
+		users.erase(users.begin() + index);
+		std::cout << removedUser << " has been removed.\n";
+	}
+	else {
+		std::cout << "Invalid index.\n";
+	}
 }
 
 void User::updateUser() {

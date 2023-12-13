@@ -7,6 +7,9 @@
 
 */
 
+//TODO: create a get cardID function to get the value outside this class?
+// also update the .h file to include this new function 
+
 SwipeCard::SwipeCard(std::string cardID)
     : cardID(cardID) {}
 

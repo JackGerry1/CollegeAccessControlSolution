@@ -17,7 +17,7 @@ public:
     User(std::string forename, std::string surname, std::string role, int userID);
 
     void addUser();
-    void removeUser();
+    void removeUser(std::vector<User>& users);
     void updateUser();
     std::string addRole();
     void removeRole(std::string removedRole);
@@ -26,6 +26,7 @@ public:
     std::string getForename() const;
     std::string getSurname() const;
     std::string getFullName() const;
+    std::string getRole() const;
 
     static bool compareByFullName(const User& a, const User& b); // Declaration of static member function
 };
