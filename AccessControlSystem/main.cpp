@@ -31,7 +31,7 @@ int main() {
             User::displayUsersAlphabetically(users);
             break;
         case 3:
-            newUser.removeUser(users);
+            newUser.removeUser();
             break;
         case 4:
             std::cout << "Exiting Program...\n";

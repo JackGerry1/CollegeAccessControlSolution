@@ -52,30 +52,23 @@ void User::addUser() {
 	
 }
 
-void User::removeUser(std::vector<User>& users) {
-	if (users.empty()) {
-		std::cout << "No users to remove.\n";
-		return;
-	}
-	// TODO: get swipecard number for respective users
-	std::cout << "Current Users:\n";
-	for (size_t i = 0; i < users.size(); ++i) {
-		std::cout << i << ". Name: " << users[i].getFullName() << ", Role: " << users[i].getRole() << ", User ID: " << users[i].getUserID() << std::endl;
-	}
+void User::removeUser() {
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
 
-	int index;
-	std::cout << "Enter the index of the user you want to remove: ";
-	std::cin >> index;
+	if (!userData.empty()) {
+		IDCardLog::displayUsersFromLogFile();
 
-	if (index >= 0 && index < users.size()) {
-		std::string removedUser = users[index].getFullName();
-		users.erase(users.begin() + index);
-		std::cout << removedUser << " has been removed.\n";
+		int index;
+		std::cout << "Enter the index of the user you want to remove: ";
+		std::cin >> index;
+
+		IDCardLog::removeUserFromLogFile(index);
 	}
 	else {
-		std::cout << "Invalid index.\n";
+		std::cout << "No users found in the log file. Nothing to remove.\n\n";
 	}
 }
+
 
 void User::updateUser() {
 	// Implementation to update user information
