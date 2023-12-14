@@ -7,4 +7,7 @@
 class IDCardLog {
 public:
     static void logUserData(const std::string& userInfo);
+    static std::vector<std::string> readUserDataFromFile();
+    static void displayUsersFromLogFile();
+    static void removeUserFromLogFile(int index);
 };

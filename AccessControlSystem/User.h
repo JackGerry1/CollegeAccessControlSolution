@@ -17,7 +17,7 @@ public:
     User(std::string forename, std::string surname, std::string role, int userID);
 
     void addUser();
-    void removeUser(std::vector<User>& users);
+    void removeUser();
     void updateUser();
     std::string addRole();
     void removeRole(std::string removedRole);
