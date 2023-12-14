@@ -1,4 +1,6 @@
 #include "User.h"
+#include "IDCardLog.h"
+#include <string>
 #include <iomanip>
 #include <vector>
 #include <algorithm>
@@ -42,7 +44,12 @@ void User::addUser() {
 	swipeCard = newSwipeCard; // Assigning a new swipe card when adding a user
 
 	system("cls");
-	std::cout << "Added New User: Name: " << getFullName() << ", Role: " << getRole() << ", Swipe Card ID: " << swipeCard.addSwipeCard() << ", User ID: " << getUserID() << "\n\n";
+
+	std::string userInfo = "Name: " + getFullName() + ", Role: " + getRole() + ", Swipe Card ID: " + swipeCard.addSwipeCard() + ", User ID: " + std::to_string(getUserID()) + "\n";
+	// Outputting to a file
+	IDCardLog::logUserData(userInfo); // Call the function in IDCardLog to write the user info to a file
+	std::cout << "Added User Info: " << userInfo << "\n";
+	
 }
 
 void User::removeUser(std::vector<User>& users) {
