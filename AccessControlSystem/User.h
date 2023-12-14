@@ -21,14 +21,12 @@ public:
     void updateUser();
     std::string addRole();
     void removeRole(std::string removedRole);
-    static void displayUsersAlphabetically(std::vector<User>& users);
+    static void displayUsersAlphabetically();
     int getUserID();
     std::string getForename() const;
     std::string getSurname() const;
     std::string getFullName() const;
     std::string getRole() const;
-
-    static bool compareByFullName(const User& a, const User& b); // Declaration of static member function
 };
 
 #endif // USER_H

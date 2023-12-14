@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 User::User(std::string forename, std::string surname, std::string role, int userID)
 	: forename(forename), surname(surname), role(role), userID(1), swipeCard("") {}
@@ -116,15 +117,37 @@ void User::removeRole(std::string removedRole) {
 	// Implementation to remove a role from a user
 }
 
-bool User::compareByFullName(const User& a, const User& b) {
-	return a.getFullName() < b.getFullName();
-}
+void User::displayUsersAlphabetically() {
+	std::vector<std::string> names; // Create a vector to hold user names
 
-void User::displayUsersAlphabetically(std::vector<User>& users) {
-	std::sort(users.begin(), users.end(), compareByFullName);
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+	std::string token, name;
+	if (!userData.empty()) {
+		for (const std::string& userString : userData) {
+			// Parse userString to extract relevant information (name, role, etc.)
+			std::istringstream ss(userString);
+			while (std::getline(ss, token, ',')) {
+				if (token.find("Name:") != std::string::npos) {
+					// Extracting the name from the line
+					size_t pos = token.find("Name:");
+					name = token.substr(pos + 6); // Assuming "Name: " has 6 characters
+					names.push_back(name);
+					break;
+				}
+			}
+		}
 
-	std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
-	for (const auto& user : users) {
-		std::cout << "Name: " << user.getFullName() << std::endl;
+		// Sort the names vector alphabetically
+		std::sort(names.begin(), names.end());
+
+		// Display the sorted list of users
+		std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
+		for (const auto& name : names) {
+			std::cout << "Name: " << name << std::endl;
+		}
+	}
+	else {
+		std::cout << "No users found in the log file.\n";
 	}
 }
+

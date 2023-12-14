@@ -8,7 +8,6 @@ int main() {
     int choice;
     bool exitProgram = false;
     User newUser("", "", "", 0);
-    std::vector<User> users;
 
     while (!exitProgram) {
         std::cout << "Menu:\n";
@@ -24,11 +23,10 @@ int main() {
         switch (choice) {
         case 1: {
             newUser.addUser();
-            users.push_back(newUser);
             break;
         }
         case 2:
-            User::displayUsersAlphabetically(users);
+            User::displayUsersAlphabetically();
             break;
         case 3:
             newUser.removeUser();
