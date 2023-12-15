@@ -1,9 +1,13 @@
+//IDCardLog.h: This file contains functions and attributes for the IDCardLog class. 
+
 #pragma once
+// include libraries and other header files for the IDCardLog.cpp file
+#include "User.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include "User.h"
 
+// create a class with the public methods for the IDCardLog.cpp file
 class IDCardLog {
 public:
     static void logUserData(const std::string& userInfo);

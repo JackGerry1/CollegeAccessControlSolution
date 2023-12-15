@@ -2,3 +2,9 @@ Name: jack gerry, Role: Visitor / Guest, Swipe Card ID: 805551823, User ID: 1
 Name: jack smith, Role: Manager, Swipe Card ID: 503655319, User ID: 1
 Name: jack gerry, Role: Student, Swipe Card ID: 995636067, User ID: 1
 Name: adam smith, Role: Security, Swipe Card ID: 684549606, User ID: 1
+Name: keith walter, Role: Contract Cleaner, Swipe Card ID: 735336223, User ID: 1
+Name: a a, Role: Visitor / Guest, Swipe Card ID: 431785620, User ID: 0
+Name: j j, Role: Visitor / Guest, Swipe Card ID: 382507276, User ID: 1
+Name: k k, Role: Staff Member, Swipe Card ID: 374330477, User ID: 2
+Name: jack gerry, Role: Contract Cleaner, Swipe Card ID: 926472849, User ID: 0
+Name: 1 1, Role: Staff Member, Swipe Card ID: 501532512, User ID: 0
