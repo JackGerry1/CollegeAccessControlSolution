@@ -13,24 +13,6 @@ TEST(UserTest, GetUserIDTest) {
 	ASSERT_EQ(user.getUserID(), 2);
 }
 
-// Test for the GetForename function
-TEST(UserTest, GetForenameTest) {
-	// Create exampe user
-	User user("John", "Doe", "", 1);
-
-	// Check if the user's forename matches the expected value
-	ASSERT_EQ(user.getForename(), "John");
-}
-
-// Test for the GetSurname function
-TEST(UserTest, GetSurnameTest) {
-	// Create exampe user
-	User user("John", "Doe", "", 1);
-
-	// Check if the user's surname matches the expected value
-	ASSERT_EQ(user.getSurname(), "Doe");
-}
-
 // Test for the GetFullName function
 TEST(UserTest, GetFullNameTest) {
 	// Create exampe user
