@@ -14,4 +14,5 @@ public:
     static std::vector<std::string> readUserDataFromFile();
     static void displayUsersFromLogFile();
     static void removeUserFromLogFile(int index);
+    static void updateUserInLogFile(int index, const std::string& newForename, const std::string& newSurname, const std::string& newRole, bool generateCard);
 };

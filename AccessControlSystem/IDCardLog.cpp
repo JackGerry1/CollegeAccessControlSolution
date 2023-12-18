@@ -65,7 +65,6 @@ void IDCardLog::displayUsersFromLogFile() {
     }
 }
 
-
 // function to remove a user from the log file
 void IDCardLog::removeUserFromLogFile(int index) {
     // Read user data from the log file and store in vector
@@ -102,3 +101,72 @@ void IDCardLog::removeUserFromLogFile(int index) {
     }
 }
 
+void IDCardLog::updateUserInLogFile(int index, const std::string& newForename, const std::string& newSurname, const std::string& newRole, bool generateCard) {
+    std::vector<std::string> userData = readUserDataFromFile();
+
+    if (index >= 0 && index < userData.size()) {
+        std::string& userToUpdate = userData[index];
+
+        // Extract existing role and swipe card ID from the user data
+        std::string existingRole, swipeCardID;
+        size_t roleStart = userToUpdate.find("Role: ");
+        if (roleStart != std::string::npos) {
+            size_t roleEnd = userToUpdate.find(",", roleStart);
+            existingRole = userToUpdate.substr(roleStart + 6, roleEnd - roleStart - 6);
+        }
+
+        size_t swipeCardStart = userToUpdate.find("Swipe Card ID: ");
+        if (swipeCardStart != std::string::npos) {
+            swipeCardID = userToUpdate.substr(swipeCardStart + 15);
+        }
+
+        // Update user information based on user input
+        size_t nameStart = userToUpdate.find("Name: ") + 6;
+        size_t commaPosition = userToUpdate.find(",", nameStart); // Find the comma after the name
+        size_t surnameStart = userToUpdate.find(" ", nameStart); // Find the space between forename and surname
+
+        if (!newForename.empty()) {
+            if (commaPosition != std::string::npos) {
+                userToUpdate.replace(nameStart, surnameStart - nameStart, newForename);
+            }
+            else {
+                userToUpdate.replace(nameStart, userToUpdate.find(" ", nameStart) - nameStart, newForename);
+            }
+        }
+        if (!newSurname.empty()) {
+            size_t commaAfterSurname = userToUpdate.find(",", surnameStart); // Find the comma after the surname
+            if (commaAfterSurname != std::string::npos) {
+                userToUpdate.replace(surnameStart + 1, commaAfterSurname - (surnameStart + 1), newSurname);
+            }
+            else {
+                userToUpdate.replace(surnameStart + 1, userToUpdate.find("\n", surnameStart) - (surnameStart + 1), newSurname);
+            }
+        }
+
+        if (generateCard) {
+            SwipeCard card("");
+            swipeCardID = card.addSwipeCard();
+            userToUpdate.replace(userToUpdate.find("Swipe Card ID: ") + 15, userToUpdate.find("\n") - (userToUpdate.find("Swipe Card ID: ") + 15), swipeCardID);
+        }
+
+        if (!newRole.empty()) {
+            existingRole = newRole;
+            userToUpdate.replace(userToUpdate.find("Role: ") + 6, userToUpdate.find(",", userToUpdate.find("Role: ")) - (userToUpdate.find("Role: ") + 6), existingRole);
+        }
+
+        std::ofstream outputFile("LogFiles/ID_Card_List.txt", std::ios::trunc);
+        if (outputFile.is_open()) {
+            for (const std::string& user : userData) {
+                outputFile << user << "\n";
+            }
+            outputFile.close();
+            std::cout << "User information updated.\n";
+        }
+        else {
+            std::cerr << "Unable to open file\n";
+        }
+    }
+    else {
+        std::cout << "Invalid index.\n";
+    }
+}

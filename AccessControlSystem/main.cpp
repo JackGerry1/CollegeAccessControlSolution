@@ -8,7 +8,7 @@ int main() {
 	int choice;
 	bool exitProgram = false;
 	// Creating a blank User Objectg
-	User newUser("", "", "", 0); 
+	User newUser("", "", ""); 
 
 	// loop for menu system
 	while (!exitProgram) {
@@ -16,8 +16,9 @@ int main() {
 		std::cout << "Menu:\n";
 		std::cout << "1. Add User\n";
 		std::cout << "2. Display Users Alphabetically\n";
-		std::cout << "3. Remove User\n"; 
-		std::cout << "4. Exit\n";
+		std::cout << "3. Remove User\n";
+		std::cout << "4. Update User\n";
+		std::cout << "5. Exit\n";
 		std::cout << "Enter your choice: ";
 		std::cin >> choice; // Taking user input for menu choice
 
@@ -38,8 +39,12 @@ int main() {
 		case 3:
 			newUser.removeUser(); 
 			break;
+		// update user case
+		case 4: 
+			newUser.updateUser();
+			break;
 		// exit program case
-		case 4:
+		case 5:
 			// Setting the flag to exit the loop and program after outputting a message 
 			std::cout << "Exiting Program...\n"; 
 			exitProgram = true; 

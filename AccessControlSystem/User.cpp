@@ -3,13 +3,8 @@
 #include "User.h"
 
 // Constructor initializing user details for forename surname role user id and swipecard
-User::User(std::string forename, std::string surname, std::string role, int userID)
-	: forename(forename), surname(surname), role(role), userID(userID), swipeCard("") {}
-
-// function to increment and return the userID
-int User::getUserID() {
-	return userID++;
-}
+User::User(std::string forename, std::string surname, std::string role)
+	: forename(forename), surname(surname), role(role), swipeCard("") {}
 
 // function to the combine the forename and surname specifed by the user
 std::string User::getFullName() const {
@@ -48,7 +43,7 @@ void User::addUser() {
 	system("cls");
 
 	// Creating user information string using the info gathered previusly
-	std::string userInfo = "Name: " + getFullName() + ", Role: " + getRole() + ", Swipe Card ID: " + swipeCard.addSwipeCard() + ", User ID: " + std::to_string(getUserID()) + "\n";
+	std::string userInfo = "Name: " + getFullName() + ", Role: " + getRole() + ", Swipe Card ID: " + swipeCard.addSwipeCard() + "\n";
 
 	// Outputting user information to a log file
 	IDCardLog::logUserData(userInfo);
@@ -81,8 +76,53 @@ void User::removeUser() {
 
 // function to update user from the log file
 void User::updateUser() {
-	// Implementation to update user information
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+
+	if (!userData.empty()) {
+		IDCardLog::displayUsersFromLogFile();
+
+		int index;
+		std::cout << "Enter the index of the user you want to update: ";
+		std::cin >> index;
+
+		if (index >= 0 && index < userData.size()) {
+			std::string newForename, newSurname;
+			std::string newRole;
+			bool generateCard = false;
+
+			std::cout << "Enter new forename (Leave blank to keep unchanged): ";
+			std::cin.ignore(); 
+			std::getline(std::cin, newForename);
+
+			std::cout << "Enter new surname (Leave blank to keep unchanged): ";
+			std::getline(std::cin, newSurname);
+
+			std::cout << "Do you want to generate a new swipe card? (yes/no): ";
+			std::string generateCardInput;
+			std::cin >> generateCardInput;
+			if (generateCardInput == "yes") {
+				generateCard = true;
+			}
+
+			std::cout << "Do you want to change the role? (yes/no): ";
+			std::string changeRoleInput;
+			std::cin >> changeRoleInput;
+
+			if (changeRoleInput == "yes") {
+				newRole = addRole();
+			}
+
+			IDCardLog::updateUserInLogFile(index, newForename, newSurname, newRole, generateCard);
+		}
+		else {
+			std::cout << "Invalid index.\n";
+		}
+	}
+	else {
+		std::cout << "No users found in the log file.\n\n";
+	}
 }
+
 
 std::string User::addRole() {
 	int choice;
@@ -121,7 +161,7 @@ std::string User::addRole() {
 		return "Emergency Responder";
 		// Returning an empty string for an invalid choice this will never be reached because of the way the loop is setup
 	default:
-		return "";
+		return "No Role";
 	}
 }
 
