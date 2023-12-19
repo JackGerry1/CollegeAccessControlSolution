@@ -8,7 +8,7 @@ int main() {
 	int choice;
 	bool exitProgram = false;
 	// Creating a blank User Objectg
-	User newUser("", "", ""); 
+	User newUser("", "", std::vector<std::string>{""});
 
 	// loop for menu system
 	while (!exitProgram) {
@@ -18,7 +18,8 @@ int main() {
 		std::cout << "2. Display Users Alphabetically\n";
 		std::cout << "3. Remove User\n";
 		std::cout << "4. Update User\n";
-		std::cout << "5. Exit\n";
+		std::cout << "5. Add Roles To Existing Users\n";
+		std::cout << "6. Exit\n";
 		std::cout << "Enter your choice: ";
 		std::cin >> choice; // Taking user input for menu choice
 
@@ -43,12 +44,17 @@ int main() {
 		case 4: 
 			newUser.updateUser();
 			break;
-		// exit program case
+		// add roles to existing users
 		case 5:
+			newUser.addRoleToUser();
+			break;
+		// exit program case
+		case 6:
 			// Setting the flag to exit the loop and program after outputting a message 
 			std::cout << "Exiting Program...\n"; 
 			exitProgram = true; 
 			break;
+
 		default:
 			// Handling invalid user input
 			std::cout << "Invalid choice. Please try again.\n"; 

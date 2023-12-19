@@ -1,37 +1,35 @@
-//User.h: This file contains functions and attributes for the user class. 
-
 #pragma once
 
-// include all libaries and other header files so i don't have to include in the User.cpp file
 #include "IDCardLog.h"
 #include "SwipeCard.h"
 #include <string>
-#include <iomanip>
 #include <vector>
+#include <iostream>
 #include <algorithm>
-#include <sstream>
 
-// create user class with private attributes
+// class for user
 class User {
+// private attributes and composition with SwipeCard
 private:
     std::string forename;
     std::string surname;
-    std::string role;
-    // Composite relationship with SwipeCard
-    SwipeCard swipeCard; 
+    std::vector<std::string> roles; 
+    SwipeCard swipeCard;
 
-
+// public functions and constructor for User
 public:
-    // constructor for User class
-    User(std::string forename, std::string surname, std::string role);
+    User(std::string forename, std::string surname, std::vector<std::string> roles);
 
-    // public function declarations for the User class
     void addUser();
     void removeUser();
     void updateUser();
-    std::string addRole();
+    std::vector<std::string> addRoles(); // Modified to return a vector of roles
     void removeRole(std::string removedRole);
     static void displayUsersAlphabetically();
     std::string getFullName() const;
-    std::string getRole() const;
+    std::vector<std::string> getRoles() const; // Getter for roles
+    void addRoleToUser();
+    void displayRoleMenu();
+    std::string getRoleFromChoice(int choice);
+    std::string updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd);
 };
