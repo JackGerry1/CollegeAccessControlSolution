@@ -49,116 +49,6 @@ void User::addUser() {
 	std::cout << "Added User Info: " << userInfo << "\n";
 }
 
-std::vector<std::string> User::addRoles() {
-	std::vector<std::string> addedRoles;
-	int numRoles;
-	std::cout << "Enter the number of roles to add: ";
-	std::cin >> numRoles;
-
-	int choice;
-	// Displaying role options
-	std::cout << "Enter roles:\n";
-	for (int i = 0; i < numRoles; ++i) {
-		std::cout << "Role " << i + 1 << ":\n";
-		std::cout << "1. Staff Member\n";
-		std::cout << "2. Student\n";
-		std::cout << "3. Visitor / Guest\n";
-		std::cout << "4. Contract Cleaner\n";
-		std::cout << "5. Manager\n";
-		std::cout << "6. Security\n";
-		std::cout << "7. Emergency Responder\n";
-
-		// Taking user input for the role choice
-		do {
-			std::cout << "Enter your choice (1-7) for Role " << i + 1 << ": ";
-			std::cin >> choice;
-			// Validating the choice within the given range (1-7)
-		} while (choice < 1 || choice > 7);
-
-		// Adding the corresponding role based on the user's choice to the addedRoles vector
-		switch (choice) {
-		case 1:
-			addedRoles.push_back("Staff Member");
-			break;
-		case 2:
-			addedRoles.push_back("Student");
-			break;
-		case 3:
-			addedRoles.push_back("Visitor / Guest");
-			break;
-		case 4:
-			addedRoles.push_back("Contract Cleaner");
-			break;
-		case 5:
-			addedRoles.push_back("Manager");
-			break;
-		case 6:
-			addedRoles.push_back("Security");
-			break;
-		case 7:
-			addedRoles.push_back("Emergency Responder");
-			break;
-		default:
-			// Invalid choice will add "No Role"
-			addedRoles.push_back("No Role");
-			break;
-		}
-	}
-
-	return addedRoles;
-}
-
-void User::addRoleToUser() {
-	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
-	if (!userData.empty()) {
-		IDCardLog::displayUsersFromLogFile();
-		int index;
-		std::cout << "Enter the index of the user to add roles: ";
-		std::cin >> index;
-
-		if (index >= 0 && index < userData.size()) {
-			std::string selectedUser = userData[index];
-			std::cout << "Selected User: " << selectedUser << std::endl;
-
-			// Request how many roles to add
-			int numRoles;
-			std::cout << "Enter the number of roles to add: ";
-			std::cin >> numRoles;
-			std::cin.ignore(); // Clear buffer
-
-			std::vector<std::string> rolesToAdd;
-			for (int i = 0; i < numRoles; ++i) {
-				int choice;
-				// Displaying role options
-				std::cout << "Enter role " << i + 1 << ": ";
-				std::cin >> choice;
-				// Validating the choice within the given range (1-7) 
-				if (choice >= 1 && choice <= 7) {
-					std::string role = getRoleFromChoice(choice);
-					rolesToAdd.push_back(role);
-				}
-				else {
-					std::cout << "Invalid choice. Skipping role addition." << std::endl;
-				}
-			}
-
-			// Update user's roles
-			std::string updatedUser = updateUserRoles(selectedUser, rolesToAdd);
-			userData[index] = updatedUser;
-			IDCardLog::updateUserDataFile(userData);
-
-			std::cout << "Roles added to user at index " << index << ":\n";
-			std::cout << "Updated User Info: " << updatedUser << std::endl;
-		}
-		else {
-			std::cout << "Invalid index.\n";
-		}
-	}
-	else {
-		std::cout << "No users found in the log file.\n\n";
-	}
-}
-
 std::string User::getRoleFromChoice(int choice) {
 	switch (choice) {
 	case 1:
@@ -180,73 +70,118 @@ std::string User::getRoleFromChoice(int choice) {
 	}
 }
 
-std::string User::updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd) {
-	std::string name, roles, swipeCardID;
+int User::displayRoleMenuAndGetChoice() {
+	int choice;
+	std::cout << "Enter roles:\n";
+	std::cout << "1. Staff Member\n";
+	std::cout << "2. Student\n";
+	std::cout << "3. Visitor / Guest\n";
+	std::cout << "4. Contract Cleaner\n";
+	std::cout << "5. Manager\n";
+	std::cout << "6. Security\n";
+	std::cout << "7. Emergency Responder\n";
 
-	size_t namePos = userData.find("Name:");
-	if (namePos != std::string::npos) {
-		size_t rolePos = userData.find("Role:", namePos);
-		if (rolePos != std::string::npos) {
-			size_t swipeCardIDPos = userData.find("Swipe Card ID:", rolePos);
-			if (swipeCardIDPos != std::string::npos) {
-				// Extracting Name
-				size_t nameEndPos = rolePos - 2; // End position of Name substring
-				name = userData.substr(namePos + 6, nameEndPos - (namePos + 6));
+	do {
+		std::cout << "Enter your choice (1-7): ";
+		std::cin >> choice;
+	} while (choice < 1 || choice > 7);
 
-				// Extracting Roles
-				size_t rolesEndPos = swipeCardIDPos - 2; // End position of Roles substring
-				roles = userData.substr(rolePos + 6, rolesEndPos - (rolePos + 5));
+	return choice;
+}
 
-				// Extracting Swipe Card ID
-				swipeCardID = userData.substr(swipeCardIDPos + 15);
-			}
+std::vector<std::string> User::addRoles() {
+	std::vector<std::string> addedRoles;
+	int numRoles;
+	std::cout << "Enter the number of roles to add: ";
+	std::cin >> numRoles;
+
+	for (int i = 0; i < numRoles; ++i) {
+		int choice = displayRoleMenuAndGetChoice();
+		std::string role = getRoleFromChoice(choice);
+		addedRoles.push_back(role);
+	}
+
+	return addedRoles;
+}
+
+void User::addRoleToUser() {
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+	if (!userData.empty()) {
+		IDCardLog::displayUsersFromLogFile();
+		int index;
+		std::cout << "Enter the index of the user to add roles: ";
+		std::cin >> index;
+
+		if (index >= 0 && index < userData.size()) {
+			std::string selectedUser = userData[index];
+			std::cout << "Selected User: " << selectedUser << std::endl;
+
+			std::vector<std::string> rolesToAdd = addRoles();
+
+			// Update user's roles
+			std::string updatedUser = updateUserRoles(selectedUser, rolesToAdd);
+			userData[index] = updatedUser;
+			IDCardLog::updateUserDataFile(userData);
+
+			std::cout << "Roles added to user at index " << index << ":\n";
+			std::cout << "Updated User Info: " << updatedUser << std::endl;
+		}
+		else {
+			std::cout << "Invalid index.\n";
 		}
 	}
-
-	// Console output to show initial user data
-	std::cout << "Initial User Info - Name: " << name << ", Role: " << roles << ", Swipe Card ID: " << swipeCardID << "\n";
-
-	// Split existing roles into a vector and trim spaces
-	std::istringstream rolesStream(roles);
-	std::vector<std::string> existingRoles;
-	std::string roleToken;
-	while (std::getline(rolesStream, roleToken, ',')) {
-		// Trim leading and trailing spaces before adding roles to the vector
-		roleToken.erase(0, roleToken.find_first_not_of(" \t\r\n"));
-		roleToken.erase(roleToken.find_last_not_of(" \t\r\n") + 1);
-		existingRoles.push_back(roleToken);
+	else {
+		std::cout << "No users found in the log file.\n\n";
 	}
-
-	// Append new roles to the existing ones and trim spaces
-	for (const auto& role : rolesToAdd) {
-		// Check if the role already exists before appending
-		if (std::find(existingRoles.begin(), existingRoles.end(), role) == existingRoles.end()) {
-			std::string trimmedRole = role; // Copy the role to trim leading and trailing spaces
-			trimmedRole.erase(0, trimmedRole.find_first_not_of(" \t\r\n"));
-			trimmedRole.erase(trimmedRole.find_last_not_of(" \t\r\n") + 1);
-			existingRoles.push_back(trimmedRole);
-		}
-	}
-
-	// Reconstruct the updated roles string with trimmed roles
-	std::string updatedRoles;
-	for (size_t i = 0; i < existingRoles.size(); ++i) {
-		if (i != 0) {
-			updatedRoles += ", "; // Add a comma and a space before adding a new role (except for the first role)
-		}
-		updatedRoles += existingRoles[i];
-	}
-
-	// Console output to display updated roles
-	std::cout << "Updated Roles: " << updatedRoles << "\n";
-
-	// Reconstruct the updated user info
-	std::string updatedUser = "Name: " + name + ", Role: " + updatedRoles + ", Swipe Card ID: " + swipeCardID;
-	std::cout << "UPDATED USER: " << updatedUser << "\n";
-	return updatedUser;
 }
 
 
+std::string User::updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd) {
+	std::string updatedUser = userData;
+	std::cout << "USERDATA START: " << userData << "\n";
+	size_t rolesPos = updatedUser.find("Roles: ");
+
+	if (rolesPos != std::string::npos) {
+		size_t swipeCardIDPos = updatedUser.find("Swipe Card ID: ", rolesPos);
+		if (swipeCardIDPos != std::string::npos) {
+			size_t endOfRolesPos = updatedUser.find(",", rolesPos);
+			if (endOfRolesPos == std::string::npos || endOfRolesPos > swipeCardIDPos) {
+				endOfRolesPos = swipeCardIDPos;
+			}
+			std::string existingRoles = updatedUser.substr(rolesPos + 7, endOfRolesPos - (rolesPos + 7));
+
+			// Split existing roles into a vector
+			std::istringstream rolesStream(existingRoles);
+			std::vector<std::string> existingRolesVec;
+			std::string roleToken;
+			while (std::getline(rolesStream, roleToken, ',')) {
+				existingRolesVec.push_back(roleToken);
+			}
+
+			// Append new roles
+			for (const auto& newRole : rolesToAdd) {
+				// Check if the role already exists
+				if (std::find(existingRolesVec.begin(), existingRolesVec.end(), newRole) == existingRolesVec.end()) {
+					existingRolesVec.push_back(newRole);
+				}
+			}
+
+			// Join roles into a string with commas
+			std::string updatedRoles;
+			for (size_t i = 0; i < existingRolesVec.size(); ++i) {
+				if (i != 0) {
+					updatedRoles += ", ";
+				}
+				updatedRoles += existingRolesVec[i];
+			}
+
+			// Replace the old roles with updated roles
+			updatedUser.replace(rolesPos + 7, endOfRolesPos - (rolesPos + 7), updatedRoles);
+		}
+	}
+	std::cout << "USERDATA end: " << updatedUser << "\n";
+	return updatedUser;
+}
 
 // function to remove a user from the log file
 void User::removeUser() {

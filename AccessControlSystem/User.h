@@ -29,7 +29,7 @@ public:
     std::string getFullName() const;
     std::vector<std::string> getRoles() const; // Getter for roles
     void addRoleToUser();
-    void displayRoleMenu();
+    int displayRoleMenuAndGetChoice();
     std::string getRoleFromChoice(int choice);
     std::string updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd);
 };
