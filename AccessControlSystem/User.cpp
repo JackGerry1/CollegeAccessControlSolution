@@ -119,7 +119,7 @@ void User::addRoleToUser() {
 			std::vector<std::string> rolesToAdd = addRoles();
 
 			// Update user's roles
-			std::string updatedUser = updateUserRoles(selectedUser, rolesToAdd);
+			std::string updatedUser = IDCardLog::updateUserRoles(selectedUser, rolesToAdd);
 			userData[index] = updatedUser;
 			IDCardLog::updateUserDataFile(userData);
 
@@ -133,54 +133,6 @@ void User::addRoleToUser() {
 	else {
 		std::cout << "No users found in the log file.\n\n";
 	}
-}
-
-
-std::string User::updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd) {
-	std::string updatedUser = userData;
-	std::cout << "USERDATA START: " << userData << "\n";
-	size_t rolesPos = updatedUser.find("Roles: ");
-
-	if (rolesPos != std::string::npos) {
-		size_t swipeCardIDPos = updatedUser.find("Swipe Card ID: ", rolesPos);
-		if (swipeCardIDPos != std::string::npos) {
-			size_t endOfRolesPos = updatedUser.find(",", rolesPos);
-			if (endOfRolesPos == std::string::npos || endOfRolesPos > swipeCardIDPos) {
-				endOfRolesPos = swipeCardIDPos;
-			}
-			std::string existingRoles = updatedUser.substr(rolesPos + 7, endOfRolesPos - (rolesPos + 7));
-
-			// Split existing roles into a vector
-			std::istringstream rolesStream(existingRoles);
-			std::vector<std::string> existingRolesVec;
-			std::string roleToken;
-			while (std::getline(rolesStream, roleToken, ',')) {
-				existingRolesVec.push_back(roleToken);
-			}
-
-			// Append new roles
-			for (const auto& newRole : rolesToAdd) {
-				// Check if the role already exists
-				if (std::find(existingRolesVec.begin(), existingRolesVec.end(), newRole) == existingRolesVec.end()) {
-					existingRolesVec.push_back(newRole);
-				}
-			}
-
-			// Join roles into a string with commas
-			std::string updatedRoles;
-			for (size_t i = 0; i < existingRolesVec.size(); ++i) {
-				if (i != 0) {
-					updatedRoles += ", ";
-				}
-				updatedRoles += existingRolesVec[i];
-			}
-
-			// Replace the old roles with updated roles
-			updatedUser.replace(rolesPos + 7, endOfRolesPos - (rolesPos + 7), updatedRoles);
-		}
-	}
-	std::cout << "USERDATA end: " << updatedUser << "\n";
-	return updatedUser;
 }
 
 // function to remove a user from the log file

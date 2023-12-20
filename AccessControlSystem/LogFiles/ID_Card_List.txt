@@ -1,2 +1,4 @@
 Name: jack gery, Roles: Staff Member, Student, Swipe Card ID: 397119809
 Name: alexander kennedy, Roles: Visitor / Guest, Staff Member, Student, Contract Cleaner, Swipe Card ID: 699838557
+Name: keith smith, Roles: Staff Member, Visitor / Guest, Contract Cleaner, Student, Swipe Card ID: 727567625
+Name: jeffery smith, Roles: Staff Member, Student, Swipe Card ID: 054924522
