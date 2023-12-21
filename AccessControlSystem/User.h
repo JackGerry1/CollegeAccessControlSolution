@@ -24,12 +24,11 @@ public:
     void removeUser();
     void updateUser();
     std::vector<std::string> addRoles(); // Modified to return a vector of roles
-    void removeRole(std::string removedRole);
+    void removeRole();
     static void displayUsersAlphabetically();
     std::string getFullName() const;
     std::vector<std::string> getRoles() const; // Getter for roles
     void addRoleToUser();
     int displayRoleMenuAndGetChoice();
     std::string getRoleFromChoice(int choice);
-    std::string updateUserRoles(const std::string& userData, const std::vector<std::string>& rolesToAdd);
 };

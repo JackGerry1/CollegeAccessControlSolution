@@ -20,21 +20,21 @@ std::vector<std::string> User::getRoles() const {
 void User::addUser() {
 	// declare variabels for forename and surname
 	std::string newForename, newSurname;
-	
+
 	// get forename from user
 	std::cout << "Enter forename: ";
 	std::cin >> newForename;
-	
+
 	// get surname from user
 	std::cout << "Enter surname: ";
 	std::cin >> newSurname;
-	
+
 	// assign to the variables in the constructor so it can be used in the getFullName()
 	forename = newForename;
 	surname = newSurname;
 
 	// Invoke function to add multiple roles
-	roles = addRoles(); 
+	roles = addRoles();
 
 	// Logging user information to a log file
 	std::string userInfo = "Name: " + getFullName() + ", Roles:";
@@ -187,7 +187,7 @@ void User::updateUser() {
 			std::cout << "Do you want to generate a new swipe card? (yes/no): ";
 			std::string generateCardInput;
 			std::cin >> generateCardInput;
-			
+
 			if (generateCardInput == "yes") {
 				generateCard = true;
 			}
@@ -209,10 +209,93 @@ void User::updateUser() {
 	}
 }
 
-// function to remove role from user
-void User::removeRole(std::string removedRole) {
-	// Implementation to remove a role from a user
+void User::removeRole() {
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+
+	if (userData.empty()) {
+		std::cout << "No users found in the log file.\n";
+		return;
+	}
+
+	IDCardLog::displayUsersFromLogFile();
+
+	int userIndex;
+	std::cout << "Enter the index of the user to remove a role from: ";
+	std::cin >> userIndex;
+
+	if (userIndex < 0 || userIndex >= userData.size()) {
+		std::cout << "Invalid user index.\n";
+		return;
+	}
+
+	std::string selectedUser = userData[userIndex];
+	std::cout << "Selected User: " << selectedUser << std::endl;
+
+	size_t rolesPos = selectedUser.find("Roles: ");
+	if (rolesPos == std::string::npos) {
+		std::cout << "Roles information not found for this user.\n";
+		return;
+	}
+
+	size_t swipeCardIDPos = selectedUser.find("Swipe Card ID: ", rolesPos);
+	if (swipeCardIDPos == std::string::npos) {
+		std::cout << "Invalid user data format.\n";
+		return;
+	}
+
+	std::string existingRoles = selectedUser.substr(rolesPos + 7, swipeCardIDPos - (rolesPos + 9));
+	std::istringstream rolesStream(existingRoles);
+	std::vector<std::string> existingRolesVec;
+	std::string roleToken;
+	while (std::getline(rolesStream, roleToken, ',')) {
+		existingRolesVec.push_back(roleToken);
+	}
+
+	if (existingRolesVec.empty()) {
+		std::cout << "No roles found for this user.\n";
+		return;
+	}
+
+	int roleIndex;
+	std::cout << "Enter the index of the role to remove (0-" << existingRolesVec.size() - 1 << "): ";
+	std::cin >> roleIndex;
+
+	if (roleIndex < 0 || roleIndex >= existingRolesVec.size()) {
+		std::cout << "Invalid role index.\n";
+		return;
+	}
+
+	existingRolesVec.erase(existingRolesVec.begin() + roleIndex);
+
+	std::ostringstream updatedUserStream;
+	updatedUserStream << "Name: " << selectedUser.substr(6, rolesPos - 8);
+	updatedUserStream << ", Roles: ";
+
+	if (!existingRolesVec.empty()) {
+		for (size_t i = 0; i < existingRolesVec.size(); ++i) {
+			updatedUserStream << existingRolesVec[i];
+			updatedUserStream << ",";
+		}
+	}
+	else {
+		updatedUserStream << ",";
+	}
+
+	std::string updatedRoles = updatedUserStream.str();
+	userData[userIndex] = updatedRoles + selectedUser.substr(swipeCardIDPos - 1);
+
+	size_t found = userData[userIndex].find("  "); // Find position of double space
+	while (found != std::string::npos) {
+		userData[userIndex].replace(found, 2, " "); // Replace double space with single space
+		found = userData[userIndex].find("  ", found + 1); // Search for next occurrence
+	}
+
+	IDCardLog::updateUserDataFile(userData);
+
+	std::cout << "Role removed from the user at index " << userIndex << ":\n";
+	std::cout << "Updated User Info: " << userData[userIndex] << std::endl;
 }
+
 
 // function to display the users alphabeticaly in the log file
 void User::displayUsersAlphabetically() {
@@ -235,9 +318,9 @@ void User::displayUsersAlphabetically() {
 					// Extracting the name from the line
 					size_t pos = token.find("Name:");
 					// Assuming "Name: " has 6 characters because after that is the full name
-					name = token.substr(pos + 6); 
+					name = token.substr(pos + 6);
 					// Add extracted name to the vector
-					names.push_back(name); 
+					names.push_back(name);
 					break;
 				}
 			}

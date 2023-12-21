@@ -1,4 +1,24 @@
-Name: jack gery, Roles: Staff Member, Student, Swipe Card ID: 397119809
-Name: alexander kennedy, Roles: Visitor / Guest, Staff Member, Student, Contract Cleaner, Swipe Card ID: 699838557
-Name: keith smith, Roles: Staff Member, Visitor / Guest, Contract Cleaner, Student, Swipe Card ID: 727567625
-Name: jeffery smith, Roles: Staff Member, Student, Swipe Card ID: 054924522
+Name: Keith George, Roles: Staff Member, Student, Visitor / Guest, Swipe Card ID: 603652688
+Name: Rachel Hall, Roles: Contract Cleaner, Swipe Card ID: 912345678
+Name: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681
+Name: Lily Garcia, Roles: Manager, Swipe Card ID: 216549873
+Name: Quentin Adams, Roles: Visitor / Guest, Swipe Card ID: 678912345
+Name: Michael Brown, Roles: Security, Swipe Card ID: 543217896
+Name: Xavier Adams, Roles: Visitor / Guest, Swipe Card ID: 789123456
+Name: Oliver Martinez, Roles: Staff Member, Swipe Card ID: 345678901
+Name: Wendy Johnson, Roles: Student, Swipe Card ID: 654321987
+Name: Ian Thompson, Roles: Student, Swipe Card ID: 876543219
+Name: David Miller, Roles: Contract Cleaner, Swipe Card ID: 789123456
+Name: George Harris, Roles: Emergency Responder, Swipe Card ID: 159753468
+Name: Yvonne Martinez, Roles: Contract Cleaner, Swipe Card ID: 123456789
+Name: Emily Davis, Roles: Manager, Swipe Card ID: 321654987
+Name: Kevin White, Roles: Contract Cleaner, Swipe Card ID: 891234567
+Name: Zoe Parker, Roles: Manager, Swipe Card ID: 654987321
+Name: Charlie Brown, Roles: Visitor / Guest, Swipe Card ID: 456789123
+Name: Ursula Harris, Roles: Emergency Responder, Swipe Card ID: 975346812
+Name: Victor King, Roles: Staff Member, Swipe Card ID: 456789012
+Name: Jasmine Clark, Roles: Visitor / Guest, Swipe Card ID: 567891234
+Name: Thomas Wright, Roles: Security, Swipe Card ID: 432178965
+Name: Hannah Evans, Roles: Staff Member, Swipe Card ID: 234567890
+Name: Bob Smith, Roles: Student, Swipe Card ID: 987654321
+Name: Alice Johnson, Roles: Staff Member, Swipe Card ID: 123456789

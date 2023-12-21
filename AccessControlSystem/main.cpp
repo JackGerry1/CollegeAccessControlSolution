@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "User.h"
+#include "IDCardLog.h"
 
 int main() {
 	// choice is the the users choice from the menu and controls whether the program should exit
@@ -19,7 +20,9 @@ int main() {
 		std::cout << "3. Remove User\n";
 		std::cout << "4. Update User\n";
 		std::cout << "5. Add Roles To Existing Users\n";
-		std::cout << "6. Exit\n";
+		std::cout << "6. Remove Roles From Existing Users\n";
+		std::cout << "7. Display ID_Card_List.txt File\n";
+		std::cout << "8. Exit\n";
 		std::cout << "Enter your choice: ";
 		std::cin >> choice; // Taking user input for menu choice
 
@@ -48,8 +51,14 @@ int main() {
 		case 5:
 			newUser.addRoleToUser();
 			break;
-		// exit program case
 		case 6:
+			newUser.removeRole();
+			break;
+		case 7:
+			IDCardLog::displayUsersFromLogFile();
+			break;
+		// exit program case
+		case 8:
 			// Setting the flag to exit the loop and program after outputting a message 
 			std::cout << "Exiting Program...\n"; 
 			exitProgram = true; 
