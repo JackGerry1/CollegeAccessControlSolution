@@ -1,0 +1,7 @@
+Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Building State: NORMAL
+Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: NORMAL, Building State: NORMAL
+Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: NORMAL, Building State: NORMAL
+Building Name: STEM, Room: KS101, Room Type: Lecture Hall, Room State: EMERGENCY, Building State: EMERGENCY
+Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Building State: NORMAL
+Building Name: ART, Room: KA202, Room Type: Lecture Hall, Room State: NORMAL, Building State: NORMAL
+Building Name: ART, Room: KA443, Room Type: Staff Room, Room State: NORMAL, Building State: NORMAL

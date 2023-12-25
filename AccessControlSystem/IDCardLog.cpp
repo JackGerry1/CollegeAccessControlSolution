@@ -197,10 +197,6 @@ void IDCardLog::updateUserInLogFile(int index, const std::string& newForename, c
 			}
 		}
 
-		// Update forename if provided
-		//TODO HAVE A RANT HERE
-		// TODO FIX THAT COMMA SOMETIMES APPEARS AFTER ADDING A SURNAME AND SOMETIMES DOESN'T?
-		// TODO SET BREAKPOINT AT THIS FUNCTION AND GO THROUGH AND CHECK THESE NESTED IF ELSE STATEMENTS I HAVE A FEELING THEY NEVER GET CALLED
 		if (!newForename.empty()) {
 			size_t spaceAfterName = userToUpdate.find(" ", nameStart);
 			size_t forenameLength = (spaceAfterName != std::string::npos) ? spaceAfterName - nameStart : userToUpdate.length() - nameStart;
@@ -216,17 +212,8 @@ void IDCardLog::updateUserInLogFile(int index, const std::string& newForename, c
 			userToUpdate.replace(userToUpdate.find("Swipe Card ID: ") + 15, userToUpdate.find("\n") - (userToUpdate.find("Swipe Card ID: ") + 15), swipeCardID);
 		}
 
-		std::ofstream outputFile("LogFiles/ID_Card_List.txt", std::ios::trunc);
-		if (outputFile.is_open()) {
-			for (const std::string& user : userData) {
-				outputFile << user << "\n";
-			}
-			outputFile.close();
-			std::cout << "User information updated.\n";
-		}
-		else {
-			std::cerr << "Unable to open file\n";
-		}
+		std::cout << "User information updated.\n";
+		updateUserDataFile(userData);
 	}
 	else {
 		std::cout << "Invalid index.\n";

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "User.h"
+#include "Building.h"
 #include "IDCardLog.h"
 
 int main() {
@@ -10,7 +11,9 @@ int main() {
 	bool exitProgram = false;
 	// Creating a blank User Objectg
 	User newUser("", "", std::vector<std::string>{""});
-
+	
+	// Creating a Building object
+	Building newBuilding("", "");
 	// loop for menu system
 	while (!exitProgram) {
 		// Displaying the menu options
@@ -22,7 +25,13 @@ int main() {
 		std::cout << "5. Add Roles To Existing Users\n";
 		std::cout << "6. Remove Roles From Existing Users\n";
 		std::cout << "7. Display ID_Card_List.txt File\n";
-		std::cout << "8. Exit\n";
+		std::cout << "8. Add Building\n"; // Option to add building
+		std::cout << "9: Add Room\n";
+		std::cout << "10. Remove Room\n";
+		std::cout << "11. Change Room State\n";
+		std::cout << "12. Update Room\n";
+		std::cout << "13. Display Room And Building Info\n";
+		std::cout << "14. Exit\n";
 		std::cout << "Enter your choice: ";
 		std::cin >> choice; // Taking user input for menu choice
 
@@ -51,17 +60,44 @@ int main() {
 		case 5:
 			newUser.addRoleToUser();
 			break;
+		// remove roles from existing users
 		case 6:
 			newUser.removeRole();
 			break;
+		// display user file
 		case 7:
 			IDCardLog::displayUsersFromLogFile();
 			break;
-		// exit program case
+		// add new building case
 		case 8:
+			// Call addBuilding method from Building class 
+			newBuilding.addBuilding(); 
+			break;
+		// add new room case
+		case 9: 
+			newBuilding.addRoom();
+			break;
+		// remove room case 
+		case 10: 
+			newBuilding.removeRoom();
+			break;
+		// change state case
+		case 11:
+			newBuilding.changeRoomAndBuildingState();
+			break;
+		// update room case
+		case 12:
+			newBuilding.updateRoom();
+			break;
+		// display room and building information
+		case 13:
+			BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
+			break;
+		// exit program case
+		case 14:
 			// Setting the flag to exit the loop and program after outputting a message 
-			std::cout << "Exiting Program...\n"; 
-			exitProgram = true; 
+			std::cout << "Exiting Program...\n";
+			exitProgram = true;
 			break;
 
 		default:
