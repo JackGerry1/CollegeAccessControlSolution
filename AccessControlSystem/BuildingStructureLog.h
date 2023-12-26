@@ -11,7 +11,6 @@ public:
     static void logInfo(const std::string& buildingInfo, const std::string& fileLocation);
     static void displayFileInfo(const std::string& fileLocation);
     static std::string getBuildingInfo(int index);
-    static void updateStates(const std::vector<std::string>& roomData);
     static std::vector<std::string> readRoomDataFromFile();
     static void removeRoomFromLogFile(int index);
     static void updateRoomDataFile(const std::vector<std::string>& updatedRoomData);

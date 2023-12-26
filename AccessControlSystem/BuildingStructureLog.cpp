@@ -110,20 +110,6 @@ std::string BuildingStructureLog::getBuildingInfo(int index) {
     return ""; // Return an empty string if the index is out of range or file couldn't be opened
 }
 
-void BuildingStructureLog::updateStates(const std::vector<std::string>& roomData) {
-    std::ofstream outputFile("LogFiles/Building_Structure.txt", std::ofstream::trunc);
-    if (outputFile.is_open()) {
-        for (const std::string& room : roomData) {
-            outputFile << room << '\n';
-        }
-        outputFile.close();
-        std::cout << "Room information updated and logged to file.\n";
-    }
-    else {
-        std::cerr << "Unable to open file for writing.\n";
-    }
-}
-
 void BuildingStructureLog::updateRoomDataFile(const std::vector<std::string>& updatedRoomData) {
     std::ofstream outputFile("LogFiles/Building_Structure.txt", std::ios::trunc); // Open file in truncation mode to clear its contents
 

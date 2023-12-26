@@ -199,7 +199,7 @@ void Building::changeRoomAndBuildingState() {
 				}
 			}
 		}
-		BuildingStructureLog::updateStates(roomData);
+		BuildingStructureLog::updateRoomDataFile(roomData);
 	}
 	else {
 		std::cout << "Invalid room index selected.\n";
