@@ -9,7 +9,7 @@ int main() {
 	// choice is the the users choice from the menu and controls whether the program should exit
 	int choice;
 	bool exitProgram = false;
-	// Creating a blank User Objectg
+	// Creating a blank User Object
 	User newUser("", "", std::vector<std::string>{""});
 	
 	// Creating a Building object
@@ -25,7 +25,7 @@ int main() {
 		std::cout << "5. Add Roles To Existing Users\n";
 		std::cout << "6. Remove Roles From Existing Users\n";
 		std::cout << "7. Display ID_Card_List.txt File\n";
-		std::cout << "8. Add Building\n"; // Option to add building
+		std::cout << "8. Add Building\n";
 		std::cout << "9: Add Room\n";
 		std::cout << "10. Remove Room\n";
 		std::cout << "11. Change Room State\n";
@@ -33,7 +33,8 @@ int main() {
 		std::cout << "13. Display Room And Building Info\n";
 		std::cout << "14. Exit\n";
 		std::cout << "Enter your choice: ";
-		std::cin >> choice; // Taking user input for menu choice
+		// Taking user input for menu choice
+		std::cin >> choice; 
 
 		// Clearing the console screen to make the other display info for adding users etc more clear
 		system("cls"); 
@@ -99,9 +100,8 @@ int main() {
 			std::cout << "Exiting Program...\n";
 			exitProgram = true;
 			break;
-
+		// Handling invalid user input
 		default:
-			// Handling invalid user input
 			std::cout << "Invalid choice. Please try again.\n"; 
 			break;
 		}
