@@ -119,25 +119,25 @@ void Building::addRoom() {
 } // end of addRoom
 
 // Function: removeRoom
-// Objective: remove room from system based on user input
+// Objective: remove room from system based on room input
 void Building::removeRoom() {
-	// Reading user data from a file and storing it in a vector
-	std::vector<std::string> userData = BuildingStructureLog::readRoomDataFromFile();
+	// Reading room data from a file and storing it in a vector
+	std::vector<std::string> roomData = BuildingStructureLog::readRoomDataFromFile();
 
-	// Checking if the user data vector is not empty
-	if (!userData.empty()) {
+	// Checking if the room data vector is not empty
+	if (!roomData.empty()) {
 		BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
 
-		// Taking user input for the index of the user to remove
+		// Taking room input for the index of the room to remove
 		int index;
-		std::cout << "Enter the index of the user you want to remove: ";
+		std::cout << "Enter the index of the room you want to remove: ";
 		std::cin >> index;
 
-		// Removing the user based on the provided index from the log file
+		// Removing the room based on the provided index from the log file
 		BuildingStructureLog::removeRoomFromLogFile(index);
 	}
 	else {
-		std::cout << "No users found in the log file. Nothing to remove.\n\n";
+		std::cout << "No rooms found in the log file. Nothing to remove.\n\n";
 	}
 } // end of removeRoom
 
@@ -167,85 +167,50 @@ void Building::changeRoomAndBuildingState() {
 	// Fetch room data from the file
 	std::vector<std::string> roomData = BuildingStructureLog::readRoomDataFromFile();
 
-	// Display available rooms for user selection
-	std::cout << "Available rooms:\n";
-	for (size_t i = 0; i < roomData.size(); ++i) {
-		std::cout << i << ". " << roomData[i] << '\n';
-	}
+	if (!roomData.empty()) {
+		BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
 
-	int selectedRoomIndex;
-	std::cout << "Select the index of the room to update: ";
-	std::cin >> selectedRoomIndex;
+		int selectedRoomIndex;
+		std::cout << "Select the index of the room to update: ";
+		std::cin >> selectedRoomIndex;
 
-	// Check if the selected index is valid
-	if (selectedRoomIndex >= 0 && selectedRoomIndex < roomData.size()) {
-		// Extract necessary information from the selected room data
-		std::string roomInfo = roomData[selectedRoomIndex];
+		// Check if the selected index is valid
+		if (selectedRoomIndex >= 0 && selectedRoomIndex < roomData.size()) {
+			// Extract necessary information from the selected room data
+			std::string roomInfo = roomData[selectedRoomIndex];
 
-		// Find the start and end positions of the building name within the room information
-		size_t buildingNameStart = roomInfo.find("Building Name: ");
-		size_t buildingNameEnd = roomInfo.find(", Room: ");
+			// Find the start and end positions of the building name within the room information
+			size_t buildingNameStart = roomInfo.find("Building Name: ");
+			size_t buildingNameEnd = roomInfo.find(", Room: ");
 
-		// Extract the building name from the room information using the identified positions
-		std::string buildingName = roomInfo.substr(buildingNameStart + 15, buildingNameEnd - buildingNameStart - 15);
+			// Extract the building name from the room information using the identified positions
+			std::string buildingName = roomInfo.substr(buildingNameStart + 15, buildingNameEnd - buildingNameStart - 15);
 
-		// Find the start and end positions of the room state within the room information
-		size_t roomStateStart = roomInfo.find("Room State: ");
-		size_t roomStateEnd = roomInfo.find(", Building State:");
+			// Find the start and end positions of the room state within the room information
+			size_t roomStateStart = roomInfo.find("Room State: ");
+			size_t roomStateEnd = roomInfo.find(", Building State:");
 
-		// Extract the room state as a string from the room information using the identified positions
-		std::string roomStateStr = roomInfo.substr(roomStateStart + 12, roomStateEnd - roomStateStart - 12);
+			// Extract the room state as a string from the room information using the identified positions
+			std::string roomStateStr = roomInfo.substr(roomStateStart + 12, roomStateEnd - roomStateStart - 12);
 
-		// Toggle the room state between "NORMAL" and "EMERGENCY"
-		RoomState newState = (roomStateStr == "NORMAL") ? RoomState::ROOM_EMERGENCY : RoomState::ROOM_NORMAL;
+			// Toggle the room state between "NORMAL" and "EMERGENCY"
+			RoomState newState = (roomStateStr == "NORMAL") ? RoomState::ROOM_EMERGENCY : RoomState::ROOM_NORMAL;
 
-		// Update the room's state in the room information string
-		std::string updatedRoomInfo = roomInfo.substr(0, roomStateStart + 12) + Room::roomStateToString(newState) +
-			roomInfo.substr(roomStateEnd);
+			// Update the room's state in the room information string
+			std::string updatedRoomInfo = roomInfo.substr(0, roomStateStart + 12) + Room::roomStateToString(newState) +
+				roomInfo.substr(roomStateEnd);
 
-		// Update the selected room's state in the roomData vector
-		roomData[selectedRoomIndex] = updatedRoomInfo;
+			// Update the selected room's state in the roomData vector
+			roomData[selectedRoomIndex] = updatedRoomInfo;
 
-		// Update the building state based on the room states within the same building
-		std::string buildingState = Room::roomStateToString(newState);
+			// Update the building state based on the room states within the same building
+			std::string buildingState = Room::roomStateToString(newState);
 
-		// Track changes in building state due to room state changes
-		bool buildingStateChanged = false; // Track if any room in this building changed its state
-		bool anyRoomInBuildingChanged = false; // Track if any room in the building changed
+			// Track changes in building state due to room state changes
+			bool buildingStateChanged = false; // Track if any room in this building changed its state
+			bool anyRoomInBuildingChanged = false; // Track if any room in the building changed
 
-		// Loop through room data to update building state based on room state changes
-		for (size_t i = 0; i < roomData.size(); ++i) {
-			size_t currentBuildingNameStart = roomData[i].find("Building Name: ");
-
-			// Check if the room data contains building-related information
-			if (currentBuildingNameStart != std::string::npos) {
-				size_t currentBuildingNameEnd = roomData[i].find(", Room: ");
-				std::string currentBuildingName = roomData[i].substr(currentBuildingNameStart + 15, currentBuildingNameEnd - currentBuildingNameStart - 15);
-
-				// Check if the room belongs to the same building as the selected room
-				if (currentBuildingName == buildingName) {
-					size_t currentRoomStateStart = roomData[i].find("Room State: ");
-					size_t currentRoomStateEnd = roomData[i].find(", Building State:");
-					std::string currentRoomStateStr = roomData[i].substr(currentRoomStateStart + 12, currentRoomStateEnd - currentRoomStateStart - 12);
-
-					// Update the room state in the room data for the rooms within the same building
-					if (currentRoomStateStr != buildingState) {
-						roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState +
-							roomData[i].substr(currentRoomStateEnd);
-						buildingStateChanged = true; // Flag that a building changed its state
-					}
-
-					// Mark if the selected room or any other room in the building changed state
-					if (i == static_cast<size_t>(selectedRoomIndex)) {
-						anyRoomInBuildingChanged = true; // Selected room changed
-					}
-				}
-			}
-		}
-
-		// Update the building state if it has changed or if the selected room changed
-		if (buildingStateChanged || anyRoomInBuildingChanged) {
-			// Iterate through room data to update the building state for affected rooms
+			// Loop through room data to update building state based on room state changes
 			for (size_t i = 0; i < roomData.size(); ++i) {
 				size_t currentBuildingNameStart = roomData[i].find("Building Name: ");
 
@@ -256,20 +221,57 @@ void Building::changeRoomAndBuildingState() {
 
 					// Check if the room belongs to the same building as the selected room
 					if (currentBuildingName == buildingName) {
-						size_t buildingStateStart = roomData[i].find("Building State: ");
-						// Update the building state for the rooms within the same building
-						roomData[i] = roomData[i].substr(0, buildingStateStart + 16) + buildingState;
+						size_t currentRoomStateStart = roomData[i].find("Room State: ");
+						size_t currentRoomStateEnd = roomData[i].find(", Building State:");
+						std::string currentRoomStateStr = roomData[i].substr(currentRoomStateStart + 12, currentRoomStateEnd - currentRoomStateStart - 12);
+
+						// Update the room state in the room data for the rooms within the same building
+						if (currentRoomStateStr != buildingState) {
+							roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState +
+								roomData[i].substr(currentRoomStateEnd);
+							buildingStateChanged = true; // Flag that a building changed its state
+						}
+
+						// Mark if the selected room or any other room in the building changed state
+						if (i == static_cast<size_t>(selectedRoomIndex)) {
+							anyRoomInBuildingChanged = true; // Selected room changed
+						}
 					}
 				}
 			}
-		}
 
-		// Update the building state in the log file
-		BuildingStructureLog::updateRoomDataFile(roomData);
+			// Update the building state if it has changed or if the selected room changed
+			if (buildingStateChanged || anyRoomInBuildingChanged) {
+				// Iterate through room data to update the building state for affected rooms
+				for (size_t i = 0; i < roomData.size(); ++i) {
+					size_t currentBuildingNameStart = roomData[i].find("Building Name: ");
+
+					// Check if the room data contains building-related information
+					if (currentBuildingNameStart != std::string::npos) {
+						size_t currentBuildingNameEnd = roomData[i].find(", Room: ");
+						std::string currentBuildingName = roomData[i].substr(currentBuildingNameStart + 15, currentBuildingNameEnd - currentBuildingNameStart - 15);
+
+						// Check if the room belongs to the same building as the selected room
+						if (currentBuildingName == buildingName) {
+							size_t buildingStateStart = roomData[i].find("Building State: ");
+							// Update the building state for the rooms within the same building
+							roomData[i] = roomData[i].substr(0, buildingStateStart + 16) + buildingState;
+						}
+					}
+				}
+			}
+
+			// Update the building state in the log file
+			BuildingStructureLog::updateRoomDataFile(roomData);
+		}
+		else {
+			std::cout << "Invalid room index selected.\n";
+		}
 	}
 	else {
-		std::cout << "Invalid room index selected.\n";
+		std::cout << "No rooms found in the log file.\n\n";
 	}
+
 } // end of changeRoomAndBuildingState
 
 void Building::updateRoom() {
@@ -281,10 +283,10 @@ void Building::updateRoom() {
 		// Prompt user to select a room index for updating
 		int selectedRoomIndex;
 		std::cout << "Select the index of the room to update: ";
-		std::cin >> selectedRoomIndex; 
+		std::cin >> selectedRoomIndex;
 
 		// Check if the selected index is within range
-		if (selectedRoomIndex >= 0 && selectedRoomIndex < roomData.size()) { 
+		if (selectedRoomIndex >= 0 && selectedRoomIndex < roomData.size()) {
 
 			// Extract room information based on the selected index
 			std::string roomInfo = roomData[selectedRoomIndex];

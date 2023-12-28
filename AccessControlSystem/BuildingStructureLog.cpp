@@ -40,12 +40,14 @@ void BuildingStructureLog::displayFileInfo(const std::string& fileLocation) {
     // Open the file for reading
     std::ifstream inFile(fileLocation);
     std::string line;
-
+    
     // Check if the file is opened successfully
     if (inFile.is_open()) {
-        // Read file line by line and display its content
+        int lineNum = 0;
+
+        // Read file line by line and display its content appending the index to the front
         while (std::getline(inFile, line)) {
-            std::cout << line << std::endl;
+            std::cout << lineNum++ << ". " << line << '\n';
         }
         inFile.close(); // Close the file after reading
     }

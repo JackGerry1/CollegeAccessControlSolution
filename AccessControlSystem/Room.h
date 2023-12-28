@@ -26,7 +26,7 @@ public:
     ~Room();
 
     // Method to verify the entry requirements for the room
-    bool verifyEntryRequirements();
+    virtual bool verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState);
 
     // Method to convert RoomState enum value to its corresponding string representation
     static std::string roomStateToString(RoomState state);

@@ -5,3 +5,4 @@ Building Name: STEM, Room: KS101, Room Type: Lecture Hall, Room State: NORMAL, B
 Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Building State: NORMAL
 Building Name: ART, Room: KA202, Room Type: Lecture Hall, Room State: NORMAL, Building State: NORMAL
 Building Name: ART, Room: KA443, Room Type: Staff Room, Room State: NORMAL, Building State: NORMAL
+Building Name: STEM, Room: KS428, Room Type: Secure Room, Room State: NORMAL, Building State: NORMAL

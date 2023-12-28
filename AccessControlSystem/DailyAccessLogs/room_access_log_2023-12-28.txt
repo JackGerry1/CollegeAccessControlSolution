@@ -1,0 +1,4 @@
+ACCESS GRANTED: User: samantha turner, Swipe Card ID: 165498732, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: NORMAL, Date and Time: 2023-12-28 14:08:55
+
+ACCESS DENIED: User: Wendy Johnson, Swipe Card ID: 654321987, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: NORMAL, Date and Time: 2023-12-28 15:03:07
+ACCESS GRANTED: User: samantha turner, Swipe Card ID: 165498732, Building Name: STEM, Room: KS428, Room Type: Secure Room, Room State: NORMAL, Date and Time: 2023-12-28 15:12:50

@@ -29,11 +29,11 @@ std::string Room::roomStateToString(RoomState state) {
 // Function: verifyEntryRequirements
 // Objective: Placeholder function to verify entry requirements for the room.
 //            Actual logic for entry requirement verification should replace the placeholder return value.
-bool Room::verifyEntryRequirements() {
-    // Placeholder logic for verifying entry requirements.
-    // Replace the 'true' return value with the actual verification logic.
-    return true; // Placeholder return value, replace with actual logic
-} // end of verifyEntryRequirements
+// Implement the updated function in the Room class
+bool Room::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState) {
+
+    return false; // Deny access by default
+}
 
 
 // Function: setFloorNumber

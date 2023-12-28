@@ -10,7 +10,22 @@ References:
 	URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
 	URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
 	URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
+	URL: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ Date Accessed: 27/12/23
 */
+
+
+IDCardLog* IDCardLog::instance = nullptr;
+
+IDCardLog::IDCardLog() {
+	// Initialization logic, if any
+}
+
+IDCardLog* IDCardLog::getInstance() {
+	if (!instance) {
+		instance = new IDCardLog();
+	}
+	return instance;
+}
 
 // Function: logUserData
 // Purpose: Log user data when creating a new user
@@ -66,21 +81,24 @@ std::vector<std::string> IDCardLog::readUserDataFromFile() {
 
 // function to displayUsersfrom the Log File
 void IDCardLog::displayUsersFromLogFile() {
-	// Read user data from the log file and store in vector of strings
+	// Read user data from the log file and store in a vector of strings
 	std::vector<std::string> userData = readUserDataFromFile();
 
-	// Check if user data exists
+	// Check if user data is available
 	if (!userData.empty()) {
+		// Display header for user list
 		std::cout << "Current Users:\n";
-		// loop for vector and output each user's data from the vector
-		for (const std::string& user : userData) {
-			std::cout << user << std::endl;
+
+		// Loop through the user data vector and display each user's information
+		for (size_t i = 0; i < userData.size(); ++i) {
+			std::cout << i << ". " << userData[i] << '\n'; // Display user information with index
 		}
-		// newline for readablity
+
+		// Add an extra line for readability
 		std::cout << "\n";
 	}
-	// If no user data is available, display a message
 	else {
+		// Display message if no users are found in the log file
 		std::cout << "No users found in the log file.\n";
 	}
 } // end of displayUsersFromLogFile

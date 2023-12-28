@@ -1,14 +1,25 @@
 // IDCardLog.h: This file defines functions and attributes for the IDCardLog class.
 
 #pragma once
-#include "User.h" // Include necessary headers
+#include "User.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
 
+/*
+References:
+    URL: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ Date Accessed: 27/12/23
+*/
+
+
 // Define a class for handling ID card logging operations
 class IDCardLog {
+private:
+    static IDCardLog* instance;
+    IDCardLog(); // Private constructor declaration
 public:
+    // Function declaration
+    static IDCardLog* getInstance();
     // Log user data to a file
     static void logUserData(const std::string& userInfo);
 

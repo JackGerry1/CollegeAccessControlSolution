@@ -4,6 +4,8 @@
 #include "User.h"
 #include "Building.h"
 #include "IDCardLog.h"
+#include "DailyLogFile.h"
+#include "Simulation.h"
 
 int main() {
 	// choice is the the users choice from the menu and controls whether the program should exit
@@ -11,7 +13,7 @@ int main() {
 	bool exitProgram = false;
 	// Creating a blank User Object
 	User newUser("", "", std::vector<std::string>{""});
-	
+	Simulation sim;
 	// Creating a Building object
 	Building newBuilding("", "");
 	// loop for menu system
@@ -31,7 +33,9 @@ int main() {
 		std::cout << "11. Change Room State\n";
 		std::cout << "12. Update Room\n";
 		std::cout << "13. Display Room And Building Info\n";
-		std::cout << "14. Exit\n";
+		std::cout << "14. Start Simulation\n";
+		std::cout << "15. View Today's Access Attempts\n";
+		std::cout << "16. Exit\n";
 		std::cout << "Enter your choice: ";
 		// Taking user input for menu choice
 		std::cin >> choice; 
@@ -94,8 +98,16 @@ int main() {
 		case 13:
 			BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
 			break;
+		// start simulation
+		case 14: 
+			sim.startSimulation();
+			break;
+		// view today's access attempts
+		case 15:
+			DailyLogFile::viewRoomAccessAttempts();
+			break;
 		// exit program case
-		case 14:
+		case 16:
 			// Setting the flag to exit the loop and program after outputting a message 
 			std::cout << "Exiting Program...\n";
 			exitProgram = true;

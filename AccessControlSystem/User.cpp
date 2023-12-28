@@ -1,4 +1,4 @@
-//User.cpp : This file contains functions and attributes specifeid in the User.h file. 
+// User.cpp : This file contains functions and attributes specifeid in the User.h file. 
 
 #include "User.h"
 
