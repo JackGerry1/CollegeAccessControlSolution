@@ -92,6 +92,45 @@ void Simulation::extractRoomInfo(const std::string& roomToJoin, std::string& roo
 		roomState = roomToJoin.substr(stateStart, stateEnd - stateStart);
 	}
 }
+bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string& formattedRoles, const std::string& roomState, const std::string& log) {
+	bool accessGranted = false;
+	std::string message;
+
+	if (roomType == "Lecture Hall") {
+		LectureHall lectureHall("", "", -1, "", -1);
+		accessGranted = lectureHall.verifyEntryRequirements(formattedRoles, roomState);
+	}
+	else if (roomType == "Teaching Room") {
+		TeachingRoom teachingRoom("", "", -1, "", -1);
+		accessGranted = teachingRoom.verifyEntryRequirements(formattedRoles, roomState);
+	}
+	else if (roomType == "Staff Room") {
+		StaffRoom staffRoom("", "", -1, "", -1);
+		accessGranted = staffRoom.verifyEntryRequirements(formattedRoles, roomState);
+	}
+	else if (roomType == "Secure Room") {
+		SecureRoom secureRoom("", "", -1, "", -1);
+		accessGranted = secureRoom.verifyEntryRequirements(formattedRoles, roomState);
+	}
+	else {
+		std::cout << "Unknown room type encountered." << std::endl;
+	}
+
+	if (accessGranted) {
+		message = "ACCESS GRANTED: " + log;
+	}
+	else {
+		message = "ACCESS DENIED: " + log;
+	}
+	std::string dateTime = getDateAndTime();
+
+	message += ", Date And Time: " + dateTime;
+	std::cout << "Adding To Daily Access Log: " << message << std::endl;
+	DailyLogFile::logRoomAccessAttempts(message);
+	
+
+	return accessGranted;
+}
 
 void Simulation::joinRoom(const std::string& userToJoin) {
 	std::vector<std::string> roomData = BuildingStructureLog::readRoomDataFromFile();
@@ -143,66 +182,14 @@ void Simulation::joinRoom(const std::string& userToJoin) {
 					formattedRoles.end()
 				);
 			}
-
-			bool accessGranted = false; 
-			std::string log = generateLog(userToJoin, roomToJoin, roomState);
-			std::string message;
-			if (roomType == "Lecture Hall") {
-				// Create a LectureHall object with placeholder values
-				LectureHall lectureHall("", "", -1, "", -1);
-				// Verify entry requirements for the LectureHall
-				accessGranted = lectureHall.verifyEntryRequirements(formattedRoles, roomState);
-				if (accessGranted) {
-					message = "ACCESS GRANTED: " + log;
-				}
-				else {
-					message = "ACCESS DENIED: " + log;
-				}
-				
-			}
-			else if (roomType == "Teaching Room") {
-				// Create a TeachingRoom object with placeholder values
-				TeachingRoom teachingRoom("", "", -1, "", -1);
-				// Verify entry requirements for the TeachingRoom
-				accessGranted = teachingRoom.verifyEntryRequirements(formattedRoles, roomState);
-				if (accessGranted) {
-					message = "ACCESS GRANTED: " + log;
-				}
-				else {
-					message = "ACCESS DENIED: " + log;
-				}
-			}
-			else if (roomType == "Staff Room") {
-				// Create a StaffRoom object with placeholder values
-				StaffRoom staffRoom("", "", -1, "", -1);
-				// Verify entry requirements for the StaffRoom
-				accessGranted = staffRoom.verifyEntryRequirements(formattedRoles, roomState);
-				if (accessGranted) {
-					message = "ACCESS GRANTED: " + log;
-				}
-				else {
-					message = "ACCESS DENIED: " + log;
-				}
-			}
-			else if (roomType == "Secure Room") {
-				// Create a SecureRoom object with placeholder values
-				SecureRoom secureRoom("", "", -1, "", -1);
-				// Verify entry requirements for the SecureRoom
-				accessGranted = secureRoom.verifyEntryRequirements(formattedRoles, roomState);
-				if (accessGranted) {
-					message = "ACCESS GRANTED: " + log;
-				}
-				else {
-					message = "ACCESS DENIED: " + log;
-				}
-			}
-			else {
-				// Default action for unknown room types
-				std::cout << "Something has gone seriously wrong if you see this message" << std::endl;
-			}
 			
-			std::cout << "Adding To Daily Access Log: " << message << std::endl;
-			DailyLogFile::logRoomAccessAttempts(message);
+			std::string log = generateLog(userToJoin, roomToJoin, roomState, formattedRoles);
+			bool accessGranted = verifyRoomAccess(roomType, formattedRoles, roomState, log);
+
+			// leave room additional functionality
+			if (accessGranted) {
+				leaveRoom(log);
+			}
 		}
 		else {
 			std::cout << "Invalid room index/line number entered." << std::endl;
@@ -210,22 +197,35 @@ void Simulation::joinRoom(const std::string& userToJoin) {
 	}
 }
 
-std::string Simulation::generateLog(const std::string& userToJoin, const std::string& roomToJoin, const std::string& roomState) {
-	// Get current unformatted time
-	time_t now = time(0);
+void Simulation::leaveRoom(const std::string& log) {
+	bool leavingRoom = false;
 
-	// Create a 'tm' structure to store the broken-down time
-	tm ltm;
+	// Display menu to allow the user to leave the room
+	while (!leavingRoom) {
+		std::cout << "\nOptions:\n"
+			"1. Leave Room\n"
+			"Choose an option: ";
+		int choice;
+		std::cin >> choice;
 
-	// Convert 'time_t' to a local time and store it in 'ltm'
-	localtime_s(&ltm, &now);
+		switch (choice) {
+		case 1: {
+			std::string leaveDateTime = getDateAndTime();
+			std::string leaveMessage = "LEFT ROOM: " + log + ", Date and Time: " + leaveDateTime;
+			DailyLogFile::logRoomAccessAttempts(leaveMessage);
+			std::cout << "You have left the room.\n";
+			leavingRoom = true;
+			break;
+		}
+		default: {
+			std::cout << "Invalid choice. Please choose again.\n";
+			break;
+		}
+		}
+	}
+}
 
-	// Create a string stream to Format the time as: YYYY-MM-DD HH:MM:SS
-	std::ostringstream oss;
-	oss << std::put_time(&ltm, "%Y-%m-%d %H:%M:%S"); 
-
-	std::string dateTime = oss.str();
-
+std::string Simulation::generateLog(const std::string& userToJoin, const std::string& roomToJoin, const std::string& roomState, const std::string& formattedRoles) {
 	size_t nameStart = userToJoin.find("Name:") + 6;
 	size_t nameEnd = userToJoin.find(", Roles:");
 	std::string userName = userToJoin.substr(nameStart, nameEnd - nameStart);
@@ -253,14 +253,33 @@ std::string Simulation::generateLog(const std::string& userToJoin, const std::st
 	std::string roomNumber = roomToJoin.substr(roomNumberStart, roomNumberEnd - roomNumberStart);
 
 	std::string logMessage =
-		"User: " + userName + ", Swipe Card ID: " + swipeCardID +
+		"User: " + userName + ", Roles: " + formattedRoles + ", Swipe Card ID: " + swipeCardID +
 		", Building Name: " + buildingName + ", Room: " + roomNumber +
-		", Room Type: " + roomType + ", Room State: " + roomState +
-		", Date and Time: " + dateTime;
+		", Room Type: " + roomType + ", Room State: " + roomState;
 
 	return logMessage;
 }
 
+
 void Simulation::stopSimulation() {
 	// Implementation for stopping the simulation
+}
+
+std::string Simulation::getDateAndTime() {
+	// Get current unformatted time
+	time_t now = time(0);
+
+	// Create a 'tm' structure to store the broken-down time
+	tm ltm;
+
+	// Convert 'time_t' to a local time and store it in 'ltm'
+	localtime_s(&ltm, &now);
+
+	// Create a string stream to Format the time as: YYYY-MM-DD HH:MM:SS
+	std::ostringstream oss;
+	oss << std::put_time(&ltm, "%Y-%m-%d %H:%M:%S");
+
+	std::string dateTime = oss.str();
+
+	return dateTime;
 }
