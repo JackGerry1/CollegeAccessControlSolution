@@ -15,7 +15,7 @@ References:
 
 // Constructor initializing user details for forename surname role user id and swipecard
 User::User(std::string forename, std::string surname, std::vector<std::string> roles)
-	: forename(forename), surname(surname), roles(roles), swipeCard("") {}
+	: forename(forename), surname(surname), roles(roles) {}
 
 // Function: getFullName
 // Objective: get full name comprised of forename and surname
@@ -36,7 +36,7 @@ std::vector<std::string> User::getRoles() const {
 void User::addUser() {
 	// Declare variables for forename and surname
 	std::string newForename, newSurname;
-
+	SwipeCard swipeCard("");
 	// Get forename and surname from user input
 	std::cout << "Enter forename: ";
 	std::cin >> newForename;
@@ -275,6 +275,26 @@ void User::updateUser() {
 	}
 }
 
+// Function: removeSwipeCardInput
+// Objective: get the correct user input and pass into the removeSwipeCard for the rest of the functionality
+void User::removeSwipeCardInput() {
+	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+	SwipeCard swipeCard("");
+	if (userData.empty()) {
+		std::cout << "No users found in the log file.\n";
+		return;
+	}
+
+	IDCardLog::displayUsersFromLogFile();
+
+	int userIndex;
+	std::cout << "Enter the index/line number of the user to remove the swipe card from: ";
+	std::cin >> userIndex;
+
+	// Pass userIndex and userData to the SwipeCard removal function
+	swipeCard.removeSwipeCard(userIndex, userData);
+} // end of removeSwipeCardInput
+
 // Function: removeRole
 // Objective: Removes a role from a user's information in the log file
 void User::removeRole() {
@@ -381,6 +401,7 @@ void User::removeRole() {
 	IDCardLog::updateUserDataFile(userData);
 
 	// Output the result of the role removal
+	std::cout << "Role removed from the user at index " << userIndex << ":\n";
 	std::cout << "Role removed from the user at index " << userIndex << ":\n";
 	std::cout << "Updated User Info: " << userData[userIndex] << std::endl;
 } // end of removeRole

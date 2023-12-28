@@ -8,3 +8,5 @@ Name: Charlie Brown, Roles: Visitor / Guest, Swipe Card ID: 456789123
 Name: jack smith, Roles: Visitor / Guest, Staff Member, Student, Swipe Card ID: 350963953
 Name: keith smith, Roles: Manager, Swipe Card ID: 108034376
 Name: walter white, Roles: Visitor / Guest, Swipe Card ID: 357623483
+Name: jeffery johnstone, Roles: Staff Member, Swipe Card ID: 279172167
+Name: eleanor blackwood, Roles: Staff Member, Student, Visitor / Guest, Contract Cleaner, Swipe Card ID: 622403187

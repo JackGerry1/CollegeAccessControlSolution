@@ -4,6 +4,9 @@
 
 // include the libraries for the SwipeCard.cpp file
 #include <string>
+#include "IDCardLog.h"
+#include <iostream>
+#include <vector>
 #include <sstream> 
 #include <cstdlib>
 
@@ -17,7 +20,7 @@ public:
     SwipeCard(std::string cardID);
 
     std::string addSwipeCard();
-    void removeSwipeCard();
+    void removeSwipeCard(int userIndex, std::vector<std::string>& userData);
     void updateSwipeCard();
 };
 

@@ -35,7 +35,8 @@ int main() {
 		std::cout << "13. Display Room And Building Info\n";
 		std::cout << "14. Start Simulation\n";
 		std::cout << "15. View Today's Access Attempts\n";
-		std::cout << "16. Exit\n";
+		std::cout << "16. Remove Swipe Card\n";
+		std::cout << "17. Exit\n";
 		std::cout << "Enter your choice: ";
 		// Taking user input for menu choice
 		std::cin >> choice; 
@@ -106,8 +107,12 @@ int main() {
 		case 15:
 			DailyLogFile::viewRoomAccessAttempts();
 			break;
-		// exit program case
+		// remove swipe card
 		case 16:
+			newUser.removeSwipeCardInput();
+			break;
+		// exit program case
+		case 17:
 			// Setting the flag to exit the loop and program after outputting a message 
 			std::cout << "Exiting Program...\n";
 			exitProgram = true;

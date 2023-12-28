@@ -29,12 +29,25 @@ std::string SwipeCard::addSwipeCard() {
     // Assign and return the generated card ID to the cardID variable
     cardID = ss.str(); 
     return cardID; 
-}
+} // end of addSwipeCard
 
 // function to remove a swipe card
-void SwipeCard::removeSwipeCard() {
-    // Implement removal of a swipe card
-}
+void SwipeCard::removeSwipeCard(int userIndex, std::vector<std::string>& userData) {
+    if (userIndex >= 0 && userIndex < userData.size()) {
+        std::string& userLine = userData[userIndex];
+        size_t swipeCardPos = userLine.find("Swipe Card ID:");
+
+        if (swipeCardPos != std::string::npos) {
+            userLine.erase(swipeCardPos + 15, userLine.size() - (swipeCardPos + 15));
+        }
+
+        IDCardLog::updateUserDataFile(userData);
+        std::cout << "Swipe card removed for the selected user.\n";
+    }
+    else {
+        std::cout << "Invalid user index entered.\n";
+    }
+} // end of removeSwipeCard
 
 // function ot update a swipe card
 void SwipeCard::updateSwipeCard() {

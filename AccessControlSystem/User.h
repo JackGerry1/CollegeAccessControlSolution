@@ -9,13 +9,14 @@
 #include <iostream>
 #include <algorithm>
 
+// Forward declaration forming composition because a swipecard is needed for each user created.
+class SwipeCard; 
 // Represents a user with associated functionalities
 class User {
 private:
     std::string forename; // User's forename
     std::string surname; // User's surname
     std::vector<std::string> roles; // User's roles stored as strings
-    SwipeCard swipeCard; // Composition with a SwipeCard object
 
 public:
     // Constructor for User
@@ -33,4 +34,5 @@ public:
     void addRoleToUser(); // Add a role to an existing user
     int displayRoleMenuAndGetChoice(); // Display a menu of roles and get user's choice
     std::string getRoleFromChoice(int choice); // Get a specific role based on user's choice
+    void removeSwipeCardInput(); // get a specific index and prompt user for to remove a swipeCard from a specific user.
 };
