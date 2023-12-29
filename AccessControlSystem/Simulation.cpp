@@ -37,8 +37,7 @@ void Simulation::startSimulation() {
 					break;
 				case 2:
 					// Stop the simulation
-					system("cls");
-					std::cout << "Simulation Stopped\n\n";
+					stopSimulation();
 					continueSimulation = false;
 					break;
 				default:
@@ -204,6 +203,7 @@ void Simulation::leaveRoom(const std::string& log) {
 	while (!leavingRoom) {
 		std::cout << "\nOptions:\n"
 			"1. Leave Room\n"
+			"2. Go Back To Simulation Menu\n"
 			"Choose an option: ";
 		int choice;
 		std::cin >> choice;
@@ -217,13 +217,20 @@ void Simulation::leaveRoom(const std::string& log) {
 			leavingRoom = true;
 			break;
 		}
-		default: {
+		case 2:
+			// Set leavingRoom to true to exit the loop
+			system("cls");
+			std::cout << "Returned To Simulation Menu" << std::endl;
+			leavingRoom = true; 
+			break;
+		default:
 			std::cout << "Invalid choice. Please choose again.\n";
 			break;
-		}
+		
 		}
 	}
 }
+
 
 std::string Simulation::generateLog(const std::string& userToJoin, const std::string& roomToJoin, const std::string& roomState, const std::string& formattedRoles) {
 	size_t nameStart = userToJoin.find("Name:") + 6;
@@ -262,7 +269,8 @@ std::string Simulation::generateLog(const std::string& userToJoin, const std::st
 
 
 void Simulation::stopSimulation() {
-	// Implementation for stopping the simulation
+	system("cls");
+	std::cout << "Simulation Stopped\n\n";
 }
 
 std::string Simulation::getDateAndTime() {

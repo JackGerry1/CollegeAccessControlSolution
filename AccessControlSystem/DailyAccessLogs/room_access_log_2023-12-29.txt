@@ -1,0 +1,7 @@
+ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2023-12-29 07:59:04
+ACCESS GRANTED: User: Rachel Hall, Roles: Contract Cleaner, Swipe Card ID: 912345678, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2023-12-29 08:01:07
+ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2023-12-29 08:04:34
+ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date And Time: 2023-12-29 08:04:56
+ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date And Time: 2023-12-29 08:05:29
+LEFT ROOM: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date and Time: 2023-12-29 08:05:30
+ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2023-12-29 08:05:34

@@ -8,7 +8,7 @@
 // Test for the GetFullName function
 TEST(UserTest, GetFullNameTest) {
 	// Create exampe user
-	User user("John", "Doe", "");
+	User user("John", "Doe", std::vector<std::string>{""});
 
 	// Check if the user's full name matches the expected value
 	ASSERT_EQ(user.getFullName(), "John Doe");
@@ -17,7 +17,7 @@ TEST(UserTest, GetFullNameTest) {
 // Test for displaying users alphabetically when the log file is empty
 TEST(UserTest, DisplayUsersAlphabetically_EmptyLogFile) {
 	// Create example user
-	User user("John", "Doe", "");
+	User user("John", "Doe", std::vector<std::string>{""});
 
 	// Redirect standard output for capturing
 	testing::internal::CaptureStdout();
