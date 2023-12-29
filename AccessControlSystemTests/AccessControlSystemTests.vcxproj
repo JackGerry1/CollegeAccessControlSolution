@@ -99,6 +99,14 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BuildingTests.cpp" />
+    <ClCompile Include="LectureHallTests.cpp" />
+    <ClCompile Include="RoomTests.cpp" />
+    <ClCompile Include="SecureRoomTests.cpp" />
+    <ClCompile Include="SimulationTests.cpp" />
+    <ClCompile Include="StaffRoomTests.cpp" />
+    <ClCompile Include="SwipeCardTests.cpp" />
+    <ClCompile Include="TeachingRoomTests.cpp" />
     <ClCompile Include="UserTests.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

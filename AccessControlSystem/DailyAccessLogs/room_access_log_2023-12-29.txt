@@ -5,3 +5,19 @@ ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732,
 ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date And Time: 2023-12-29 08:05:29
 LEFT ROOM: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date and Time: 2023-12-29 08:05:30
 ACCESS GRANTED: User: samantha turner, Roles: Manager, Swipe Card ID: 165498732, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2023-12-29 08:05:34
+ACCESS GRANTED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date And Time: 2023-12-29 20:40:25
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: NORMAL, Date And Time: 2023-12-29 20:41:52
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2023-12-29 20:43:30
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:43:51
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:44:29
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:45:04
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:46:06
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA101, Room Type: Teaching Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:46:42
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: EMERGENCY, Date And Time: 2023-12-29 20:50:58
+ACCESS DENIED: User: Jack Gerry, Roles: Manager, Swipe Card ID: 665764123, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: EMERGENCY, Date And Time: 2023-12-29 20:55:16
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:56:00
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:56:29
+ACCESS GRANTED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: EMERGENCY, Date And Time: 2023-12-29 20:57:42
+ACCESS GRANTED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: EMERGENCY, Date And Time: 2023-12-29 20:59:59
+LEFT ROOM: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: ART, Room: KA303, Room Type: Staff Room, Room State: EMERGENCY, Date and Time: 2023-12-29 21:00:02
+ACCESS GRANTED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: STEM, Room: KS428, Room Type: Secure Room, Room State: EMERGENCY, Date And Time: 2023-12-29 21:00:08

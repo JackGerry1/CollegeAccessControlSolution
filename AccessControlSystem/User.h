@@ -8,7 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-
+#include <cctype>  
 // Forward declaration forming composition because a swipecard is needed for each user created.
 class SwipeCard; 
 // Represents a user with associated functionalities
@@ -28,6 +28,7 @@ public:
     void updateUser(); // Update user information
     std::vector<std::string> addRoles(); // Add roles to the user, returns a vector of roles
     void removeRole(); // Remove a specific role from the user
+    std::string modifyNameInput(const std::string& input); // Turn names from "JACk" to "Jack"
     static void displayUsersAlphabetically(); // Display users in alphabetical order
     std::string getFullName() const; // Retrieve the user's full name
     std::vector<std::string> getRoles() const; // Getter function to retrieve user's roles

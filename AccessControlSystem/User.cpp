@@ -1,7 +1,7 @@
 // User.cpp : This file contains functions and attributes specifeid in the User.h file. 
 
 #include "User.h"
-
+#include <tuple>
 /*
 References:
 	URL: https://www.geeksforgeeks.org/sort-string-characters/ Date Accessed: 14/12/23
@@ -31,6 +31,28 @@ std::vector<std::string> User::getRoles() const {
 	return roles;
 } // end of getRoles
 
+
+// Function: modifyNameInput
+// Paramaters: string input, which will be the forename or surname
+// Objective: Turn input into this form eg "JACk" becomes "Jack" 
+// to allow the sorting users alphabetically to work correctly because it is case sensitive
+std::string User::modifyNameInput(const std::string& input) {
+	std::string modifiedInput = input;
+
+	// Convert all characters to lowercase
+	for (auto& c : modifiedInput) {
+		c = std::tolower(c);
+	}
+
+	// Capitalise the first character
+	if (!modifiedInput.empty()) {
+		modifiedInput[0] = std::toupper(modifiedInput[0]);
+	}
+
+	return modifiedInput;
+} // end of modifyNameInput
+
+
 // Function: addUser
 // Purpose: Allows user creation and logs user information
 void User::addUser() {
@@ -40,8 +62,15 @@ void User::addUser() {
 	// Get forename and surname from user input
 	std::cout << "Enter forename: ";
 	std::cin >> newForename;
+
+	// Modify the forename input
+	newForename = modifyNameInput(newForename);
+
 	std::cout << "Enter surname: ";
 	std::cin >> newSurname;
+
+	// Modify the surname input
+	newSurname = modifyNameInput(newSurname);
 
 	// Assign the entered values to the user's forename and surname
 	forename = newForename;
@@ -247,8 +276,15 @@ void User::updateUser() {
 			// Prompting for and receiving new forename and surname
 			std::cout << "Enter new forename (Leave blank to keep unchanged): ";
 			std::getline(std::cin, newForename);
+
+			// Modify the forename input
+			newForename = modifyNameInput(newForename);
+
 			std::cout << "Enter new surname (Leave blank to keep unchanged): ";
 			std::getline(std::cin, newSurname);
+
+			// Modify the surname input
+			newSurname = modifyNameInput(newSurname);
 
 			// Prompting for generating a new swipe card
 			std::cout << "Do you want to generate a new swipe card? (yes/no): ";
@@ -405,8 +441,6 @@ void User::removeRole() {
 	std::cout << "Role removed from the user at index " << userIndex << ":\n";
 	std::cout << "Updated User Info: " << userData[userIndex] << std::endl;
 } // end of removeRole
-
-
 
 // Function: displayUsersAlphabetically
 // Objective: display current users alphabetically 

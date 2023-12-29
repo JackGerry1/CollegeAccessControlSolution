@@ -13,7 +13,8 @@
 SwipeCard::SwipeCard(std::string cardID)
     : cardID(cardID) {} 
 
-// function to add a swipe card
+// Function: addSwipeCard
+// Objective: to add a swipe card
 std::string SwipeCard::addSwipeCard() {
     // Initialize a stringstream for creating the card ID
     std::stringstream ss;
@@ -31,7 +32,9 @@ std::string SwipeCard::addSwipeCard() {
     return cardID; 
 } // end of addSwipeCard
 
-// function to remove a swipe card
+// Function: removeSwipeCard
+// Paramaters: Index of user that is having swipe card removed, and the vector of data from the IDCardLogFile
+// Objective: to remove a swipe card
 void SwipeCard::removeSwipeCard(int userIndex, std::vector<std::string>& userData) {
     if (userIndex >= 0 && userIndex < userData.size()) {
         std::string& userLine = userData[userIndex];

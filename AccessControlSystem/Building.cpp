@@ -28,6 +28,32 @@ Building::~Building() {
 	rooms.clear(); // Clears the 'rooms' vector after deleting room objects
 }
 
+// Function: setBuildingCode
+// Parameters: string buildingCode
+// Objective: Sets the building code based on the input provided by the user.
+void Building::setBuildingCode(const std::string& buildingCode) {
+	this->buildingCode = buildingCode;
+} // end of setBuildingCode
+
+// Function: getBuildingCode
+// Objective: Retrieves the building code.
+std::string Building::getBuildingCode() const {
+	return buildingCode;
+} // end of getBuildingCode
+
+// Function: setBuildingName
+// Parameters: const std::string& buildingName
+// Objective: Sets the building name using the input provided.
+void Building::setBuildingName(const std::string& buildingName) {
+	this->buildingName = buildingName;
+} // end of setBuildingName
+
+// Function: getBuildingName
+// Objective: Retrieves the building name.
+std::string Building::getBuildingName() const {
+	return buildingName;
+} // end of getBuildingName
+
 // Function: addRoom
 // Objective: add room to the system based on user input
 void Building::addRoom() {
@@ -506,29 +532,5 @@ void Building::addBuilding() {
 	}
 } // end of addBuilding
 
-// Function: setBuildingCode
-// Parameters: string buildingCode
-// Objective: Sets the building code based on the input provided by the user.
-void Building::setBuildingCode(const std::string& buildingCode) {
-	this->buildingCode = buildingCode;
-} // end of setBuildingCode
 
-// Function: getBuildingCode
-// Objective: Retrieves the building code.
-std::string Building::getBuildingCode() const {
-	return buildingCode;
-} // end of getBuildingCode
-
-// Function: setBuildingName
-// Parameters: const std::string& buildingName
-// Objective: Sets the building name using the input provided.
-void Building::setBuildingName(const std::string& buildingName) {
-	this->buildingName = buildingName;
-} // end of setBuildingName
-
-// Function: getBuildingName
-// Objective: Retrieves the building name.
-std::string Building::getBuildingName() const {
-	return buildingName;
-} // end of getBuildingName
 

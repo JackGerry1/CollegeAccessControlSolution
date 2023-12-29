@@ -53,14 +53,12 @@ bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const
 		else if (formattedRoles.find("Manager") != std::string::npos) {
 			accessGranted = true;
 		}
-
-		else {
-			// Emergency mode access
-			if (formattedRoles.find("Emergency Responder") != std::string::npos) {
-				// Emergency Responder: Access only in emergency mode
-				accessGranted = true;
-			}
-
+	}
+	else {
+		// Emergency mode access
+		if (formattedRoles.find("Emergency Responder") != std::string::npos) {
+			// Emergency Responder: Access only in emergency mode
+			accessGranted = true;
 		}
 	}
 	return accessGranted;

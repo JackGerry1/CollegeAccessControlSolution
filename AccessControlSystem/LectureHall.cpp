@@ -9,7 +9,6 @@ URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af6
 bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState) {
 	// Deny access by default
 	bool accessGranted = false;
-
 	// Security: Access at any time, regardless of mode
 	if (formattedRoles.find("Security") != std::string::npos) {
 		accessGranted = true;
@@ -75,16 +74,15 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 
 		else if (formattedRoles.find("Manager") != std::string::npos) {
 			accessGranted = true;
+		}	
+	}
+	else {
+		// Emergency mode access
+		if (formattedRoles.find("Emergency Responder") != std::string::npos) {
+			// Emergency Responder: Access only in emergency mode
+			accessGranted = true;
 		}
 
-		else {
-			// Emergency mode access
-			if (formattedRoles.find("Emergency Responder") != std::string::npos) {
-				// Emergency Responder: Access only in emergency mode
-				accessGranted = true;
-			}
-
-		}
 	}
 	return accessGranted;
 }

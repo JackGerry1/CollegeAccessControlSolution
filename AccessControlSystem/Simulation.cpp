@@ -94,7 +94,6 @@ void Simulation::extractRoomInfo(const std::string& roomToJoin, std::string& roo
 bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string& formattedRoles, const std::string& roomState, const std::string& log) {
 	bool accessGranted = false;
 	std::string message;
-
 	if (roomType == "Lecture Hall") {
 		LectureHall lectureHall("", "", -1, "", -1);
 		accessGranted = lectureHall.verifyEntryRequirements(formattedRoles, roomState);

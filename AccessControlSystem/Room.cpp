@@ -27,9 +27,9 @@ std::string Room::roomStateToString(RoomState state) {
 } // end of roomStateToString
 
 // Function: verifyEntryRequirements
+// Paramaters: current user roles formatted, and the the room state of the building they are trying to enter
 // Objective: Placeholder function to verify entry requirements for the room.
-//            Actual logic for entry requirement verification should replace the placeholder return value.
-// Implement the updated function in the Room class
+// The Logic will be implemented in the children of this class
 bool Room::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState) {
 
     return false; // Deny access by default
