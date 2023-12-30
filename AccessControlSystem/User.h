@@ -8,7 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
-#include <cctype>  
+#include <map>
 // Forward declaration forming composition because a swipecard is needed for each user created.
 class SwipeCard; 
 // Represents a user with associated functionalities

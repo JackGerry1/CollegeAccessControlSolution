@@ -1,0 +1,1 @@
+ACCESS DENIED: User: Charlie Brown, Roles: Visitor / Guest, Staff Member, Student, Swipe Card ID: 456789123, Building Name: ART, Room: KA423, Room Type: Lecture Hall, Room State: EMERGENCY, Date And Time: 2023-12-30 09:03:14

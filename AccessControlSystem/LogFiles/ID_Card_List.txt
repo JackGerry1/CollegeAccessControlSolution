@@ -1,10 +1,3 @@
-Name: Rachel Hall, Roles: Contract Cleaner, Swipe Card ID: 279655504
-Name: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681    
-Name: Michael Brown, Roles: Security, Swipe Card ID: 543217896    
-Name: Oliver Martinez, Roles: Staff Member, Swipe Card ID: 345678901    
-Name: Wendy Johnson, Roles: Student, Swipe Card ID: 654321987
-Name: Charlie Brown, Roles: Visitor / Guest, Swipe Card ID: 456789123
+Name: Charlie Brown, Roles: Visitor / Guest, Staff Member, Student, Swipe Card ID: 456789123
 Name: Adam Smithy, Roles: Staff Member, Swipe Card ID: 667035640
 Name: Bobby Smith, Roles: Staff Member, Swipe Card ID: 733931100
-Name: Michael Jackson, Roles: Staff Member, Swipe Card ID: 264753760
-Name: Jack Gerry, Roles: Manager, Swipe Card ID: 665764123

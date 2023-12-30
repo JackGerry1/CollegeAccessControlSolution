@@ -10,6 +10,7 @@ References:
 	URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
 	URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
 	URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
+	URL: https://www.programiz.com/cpp-programming/map Date Accessed: 30/12/23
 */
 
 
@@ -445,45 +446,64 @@ void User::removeRole() {
 // Function: displayUsersAlphabetically
 // Objective: display current users alphabetically 
 void User::displayUsersAlphabetically() {
-	// Create a vector to hold user names
 	std::vector<std::string> names;
+	std::map<std::string, std::vector<std::string>> userRoles; // Using a map to associate roles with users
+	std::map<std::string, std::string> swipeCardIDs; // Mapping swipe card IDs to users
 
-	// Read user data from the file and store in a vector
 	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
-	std::string token, name; // Declare variables to hold extracted token and user name
+	std::string token, name, swipeID;
 
-	// Check if user data exists in the retrieved data from the file
 	if (!userData.empty()) {
-		// Loop through each line of user data
 		for (const std::string& userString : userData) {
-			// Parse userString to extract relevant information (name, role, etc.)
 			std::istringstream ss(userString);
+			std::vector<std::string> userRolesVector;
 			while (std::getline(ss, token, ',')) {
-				// Check if the current token contains user's name
 				if (token.find("Name:") != std::string::npos) {
-					// Extracting the name from the line
-					size_t pos = token.find("Name:");
-					// Assuming "Name: " has 6 characters because after that is the full name
-					name = token.substr(pos + 6);
-					// Add extracted name to the vector
-					names.push_back(name);
-					break;
+					size_t namePos = token.find("Name:");
+					name = token.substr(namePos + 6);
+				}
+				else if (token.find("Roles:") != std::string::npos) {
+					std::string existingRoles;
+					size_t rolePos = userString.find("Roles:");
+					size_t startSwipeCardIDPos = userString.find("Swipe Card ID:", rolePos);
+					if (rolePos != std::string::npos && startSwipeCardIDPos != std::string::npos) {
+						existingRoles = userString.substr(rolePos + 7, startSwipeCardIDPos - (rolePos + 9));
+						std::istringstream rolesStream(existingRoles);
+						std::string roleToken;
+						while (std::getline(rolesStream, roleToken, ',')) {
+							userRolesVector.push_back(roleToken);
+						}
+					}
+				}
+				else if (token.find("Swipe Card ID:") != std::string::npos) {
+					size_t swipeCardIDPos = token.find("Swipe Card ID:");
+					swipeID = token.substr(swipeCardIDPos + 15);
 				}
 			}
+
+			names.push_back(name);
+			userRoles[name] = userRolesVector;
+			swipeCardIDs[name] = swipeID; // Associate swipe card ID with the user's name
 		}
 
-		// Sort the names vector alphabetically
 		std::sort(names.begin(), names.end());
 
-		// Display the sorted list of users
 		std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
 		for (const auto& name : names) {
-			std::cout << "Name: " << name << std::endl; // Output each user's name
+			std::cout << "Name: " << name << ", Roles: ";
+			for (const auto& role : userRoles[name]) {
+				std::cout << role << ",";
+			}
+			std::cout << " Swipe Card ID: " << swipeCardIDs[name] << std::endl; // Retrieve swipe card ID using the user's name
 		}
 	}
 	else {
 		std::cout << "No users found in the log file.\n";
 	}
-} // end of displayUsersAlphabetically
+}
+
+// end of displayUsersAlphabetically
+
+
 
 
