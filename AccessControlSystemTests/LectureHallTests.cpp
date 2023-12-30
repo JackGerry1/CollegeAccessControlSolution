@@ -2,6 +2,12 @@
 
 #include "../AccessControlSystem/LectureHall.h" 
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
 // Test access for Security role
 TEST(LectureHallAccessTest, SecurityRoleAccess) {
     LectureHall lectureHall("", "", -1, "", -1);

@@ -2,6 +2,12 @@
 
 #include "../AccessControlSystem/SecureRoom.h" 
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
 TEST(SecureRoomTest, SecurityRoleGrantsAccess) {
     SecureRoom room("", "", -1, "", -1);
     ASSERT_TRUE(room.verifyEntryRequirements("Security", "NORMAL"));

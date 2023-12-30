@@ -1,6 +1,12 @@
 #include "pch.h"
 #include "../AccessControlSystem/Room.h"
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
 // Test fixture for the Room class
 class RoomTest : public ::testing::Test {
 protected:

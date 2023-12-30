@@ -3,6 +3,11 @@
 #include "../AccessControlSystem/Room.cpp"
 #include "../AccessControlSystem/BuildingStructureLog.cpp"
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
 
 // Test cases for setBuildingCode and getBuildingCode functions
 TEST(BuildingTest, SetAndGetBuildingCode) {

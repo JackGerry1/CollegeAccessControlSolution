@@ -5,6 +5,12 @@
 #include "../AccessControlSystem/SwipeCard.cpp"
 #include "../AccessControlSystem/IDCardLog.cpp"
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
 // Test for the GetFullName function
 TEST(UserTest, GetFullNameTest) {
 	// Create exampe user

@@ -3,6 +3,12 @@
 #include "pch.h"
 #include "../AccessControlSystem/SwipeCard.h"  // Include SwipeCard header
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
 // Test case for addSwipeCard function
 TEST(SwipeCardTest, AddSwipeCardTest) {
     // Arrange
