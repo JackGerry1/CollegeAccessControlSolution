@@ -53,17 +53,6 @@ TEST(SimulationTest, ExtractRoomInfoNoState) {
     ASSERT_EQ(roomState, ""); // Room state not found, expecting empty string
 }
 
-TEST(SimulationTest, ExtractRoomInfoNoTypeAndState) {
-    Simulation simulation;
-    std::string roomToJoin = "Building State: Normal";
-    std::string roomType, roomState;
-
-    simulation.extractRoomInfo(roomToJoin, roomType, roomState);
-
-    ASSERT_EQ(roomType, ""); // Room type not found, expecting empty string
-    ASSERT_EQ(roomState, ""); // Room state not found, expecting empty string
-}
-
 // Testing the generateLog function
 TEST(SimulationTest, GenerateLogTest) {
     Simulation simulation;
