@@ -51,8 +51,3 @@ void SwipeCard::removeSwipeCard(int userIndex, std::vector<std::string>& userDat
         std::cout << "Invalid user index entered.\n";
     }
 } // end of removeSwipeCard
-
-// function ot update a swipe card
-void SwipeCard::updateSwipeCard() {
-    // Implement updating of swipe card details
-}

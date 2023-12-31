@@ -21,6 +21,5 @@ public:
 
     std::string addSwipeCard();
     void removeSwipeCard(int userIndex, std::vector<std::string>& userData);
-    void updateSwipeCard();
 };
 
