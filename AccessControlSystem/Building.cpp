@@ -10,6 +10,7 @@ URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
 URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
 URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
 URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
+URL: https://www.geeksforgeeks.org/static_cast-in-cpp/ Date Accessed: 18/12/23
 URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
 */
 
@@ -70,11 +71,27 @@ void Building::addRoom() {
 	std::string roomType;
 	int floorNumber, roomNumber;
 
-	std::cout << "Enter the floor number: ";
-	std::cin >> floorNumber;
+	// Prompt the user to enter a valid floor number between 0 and 9
+	do {
+		std::cout << "Enter the floor number (between 0 and 9): ";
+		std::cin >> floorNumber; // Read user input for floor number
 
-	std::cout << "Enter the room number: ";
-	std::cin >> roomNumber;
+		// Check if the entered floor number is valid (between 0 and 9)
+		if (floorNumber < 0 || floorNumber > 9) {
+			std::cout << "Invalid floor number. Please enter a number between 0 and 9.\n";
+		}
+	} while (floorNumber < 0 || floorNumber > 9); // Repeat the loop until a valid floor number is entered
+
+	// Prompt the user to enter a valid room number between 1 and 99
+	do {
+		std::cout << "Enter the room number (between 1 and 99): ";
+		std::cin >> roomNumber; // Read user input for room number
+
+		// Check if the entered room number is valid (between 1 and 99)
+		if (roomNumber < 1 || roomNumber > 99) {
+			std::cout << "Invalid room number. Please enter a number between 1 and 99.\n";
+		}
+	} while (roomNumber < 1 || roomNumber > 99); // Repeat the loop until a valid room number is entered
 
 	// if room number less than < 10 append a 0 to the front so 1 becomes 01
 	std::string roomNumberStr = (roomNumber < 10) ? "0" + std::to_string(roomNumber) : std::to_string(roomNumber);
@@ -376,10 +393,10 @@ void Building::updateRoom() {
 					roomNumber[2] = floorUpdate[0];
 					std::cout << "Floor number updated to: " << floorUpdate << std::endl;
 				}
-				else {
-					// Inform the user about an invalid floor number and keep the floor number unchanged
-					std::cout << "Invalid floor number. Floor number remains unchanged.\n";
-				}
+			}
+			else {
+				// Display an error message for invalid input format (not a single digit)
+				std::cout << "Invalid input format or empty input. Please enter a single digit between 0 and 9.\n";
 			}
 
 			// Variable to store user input to determine whether the user wants to update the room number
@@ -508,12 +525,24 @@ void Building::addBuilding() {
 	// Prompt user for building name and set it
 	std::cout << "Enter building name: ";
 	std::cin >> name;
+	// Convert the building name to uppercase
+	std::transform(name.begin(), name.end(), name.begin(), ::toupper);
+
 	setBuildingName(name);
 
-	// Prompt user for building code and set it
-	std::cout << "Enter building code: ";
+	// Prompt user for building code
+	std::cout << "Enter building code (two uppercase characters): ";
 	std::cin >> code;
-	setBuildingCode(code);
+
+	// Check if the building code has the correct length and if so, convert it to uppercase
+	if (code.length() == 2) {
+		std::transform(code.begin(), code.end(), code.begin(), ::toupper);
+		setBuildingCode(code);
+	}
+	else {
+		std::cout << "Invalid building code format. Please enter two uppercase characters, NO NEW BUILDING CREATED.\n";
+		return;
+	}
 
 	// Check for duplicates based on building name and code
 	if (!BuildingStructureLog::isDuplicate(getBuildingName(), getBuildingCode())) {

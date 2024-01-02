@@ -160,11 +160,17 @@ int User::displayRoleMenuAndGetChoice() {
 // Returns: std::vector<std::string> - a vector containing the roles added by the user
 // Objective: Allows the user to add multiple roles to their profile
 std::vector<std::string> User::addRoles() {
+	const int maxRoles = 7; // Maximum number of roles allowed
 	std::vector<std::string> addedRoles; // Vector to store added roles
 	int numRoles;
 	std::cout << "Enter the number of roles to add: ";
 	std::cin >> numRoles; // User input: number of roles to add
 
+	// Limit the number of roles to the maximum allowed
+	if (numRoles > maxRoles) {
+		std::cout << "You can add a maximum of " << maxRoles << " roles.\n";
+		numRoles = maxRoles; 
+	}
 	// Loop to prompt the user for each role choice
 	for (int i = 0; i < numRoles; ++i) {
 		// Get role choice from the displayRoleMenuAndGetChoice function

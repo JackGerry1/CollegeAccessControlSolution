@@ -4,6 +4,7 @@
 
 // Header files necessary for this class
 #include <string>
+#include <algorithm>
 #include <sstream>
 #include <vector>
 #include <iostream>
