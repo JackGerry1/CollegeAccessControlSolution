@@ -1,3 +1,6 @@
+// SimulationTests.cpp : This file contains the tests for the Simulation class
+// Include the paths to the required files in the AccessControlSystem project
+
 #include "pch.h"
 #include "../AccessControlSystem/Simulation.h"  
 #include "../AccessControlSystem/LectureHall.h"  
@@ -12,58 +15,81 @@
 #include "../AccessControlSystem/DailyLogFile.h"
 #include "../AccessControlSystem/DailyLogFile.cpp"
 
+/*
+References:
+URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
+URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+*/
+
+// Test: Extract Roles from User Information
 TEST(SimulationTest, ExtractRolesTest) {
     Simulation simulation;
     std::vector<std::string> roles;
     std::string userToJoin = "Name: John Doe, Roles: Student, Staff, Swipe Card ID: 12345";
+
+    // Extract roles from the user information
     simulation.extractRoles(userToJoin, roles);
-    // Add your assertions here to validate the extracted roles vector
+
+    // Assertions to validate the extracted roles vector
     ASSERT_EQ(roles.size(), 3);
     ASSERT_EQ(roles[0], "Student");
     ASSERT_EQ(roles[1], " Staff");
 }
 
+// Test: Extract Room Information with Valid Data
 TEST(SimulationTest, ExtractRoomInfoValid) {
     Simulation simulation;
     std::string roomToJoin = "Room Type: Lecture Hall, Room State: Normal, Building State: Normal";
     std::string roomType, roomState;
 
+    // Extract room type and state from room information
     simulation.extractRoomInfo(roomToJoin, roomType, roomState);
 
+    // Validate the extracted room type and state
     ASSERT_EQ(roomType, "Lecture Hall");
     ASSERT_EQ(roomState, "Normal");
 }
 
+// Test: Extract Room Information with Missing Room Type
 TEST(SimulationTest, ExtractRoomInfoNoType) {
     Simulation simulation;
     std::string roomToJoin = "Room State: Normal, Building State: Normal";
     std::string roomType, roomState;
 
+    // Extract room type and state from room information
     simulation.extractRoomInfo(roomToJoin, roomType, roomState);
 
-    ASSERT_EQ(roomType, ""); // Room type not found, expecting empty string
+    // Validate the extracted room type (expecting an empty string as room type is missing)
+    ASSERT_EQ(roomType, "");
 }
 
+// Test: Extract Room Information with Missing Room State
 TEST(SimulationTest, ExtractRoomInfoNoState) {
     Simulation simulation;
     std::string roomToJoin = "Room Type: Lecture Hall, Building State: Normal";
     std::string roomType, roomState;
 
+    // Extract room type and state from room information
     simulation.extractRoomInfo(roomToJoin, roomType, roomState);
-    ASSERT_EQ(roomState, ""); // Room state not found, expecting empty string
+
+    // Validate the extracted room state (expecting an empty string as room state is missing)
+    ASSERT_EQ(roomState, "");
 }
 
-// Testing the generateLog function
+// Test: Generate Log with User and Room Information
 TEST(SimulationTest, GenerateLogTest) {
     Simulation simulation;
-    std::string userToJoin = "Name: John Doe, Roles: Student, Staff, Swipe Card ID: 12345";
-    std::string roomToJoin = "Building Name: BuildingA, Room: Room1, Room Type: Lecture Hall, Room State: NORMAL";
-    std::string roomState = "Normal";
-    std::string formattedRoles = "Student, Staff";
+    std::string userToJoin = "User: John Doe, Roles: Student, Staff Member, Swipe Card ID: 166657405, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
+    std::string roomToJoin = "Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
+    std::string roomState = "NORMAL";
+    std::string formattedRoles = "Student, Staff Member";
 
     std::string expectedLog =
-        "User: John Doe, Roles: Student, Staff, Swipe Card ID: 12345, Building Name: BuildingA, Room: Room1, Room Type: Lecture Hall, Room State: Normal";
+        "User: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Roles: Student, Staff Member, Swipe Card ID: 166657405, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
 
+    // Generate log based on user and room information
     std::string generatedLog = simulation.generateLog(userToJoin, roomToJoin, roomState, formattedRoles);
+
+    // Validate the generated log
     ASSERT_EQ(generatedLog, expectedLog);
 }

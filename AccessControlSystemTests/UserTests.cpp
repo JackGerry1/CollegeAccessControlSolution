@@ -9,6 +9,9 @@
 References:
 URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
 URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
+URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
+URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
 */
 
 // Test for the GetFullName function
@@ -50,6 +53,7 @@ TEST(UserTest, getRoleFromChoice_ValidChoices) {
 	EXPECT_EQ(user.getRoleFromChoice(7), "Emergency Responder");
 }
 
+// Test case for invalid input from getRoleFromChoice
 TEST(UserTest, getRoleFromChoice_InvalidChoice) {
 	User user("John", "Doe", std::vector<std::string>{""});
 	EXPECT_EQ(user.getRoleFromChoice(10), "No Role");

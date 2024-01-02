@@ -1,5 +1,14 @@
 #include "StaffRoom.h"
 
+/*
+References:
+URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 27/12/23
+URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
+*/
+
+// Function: verifyEntryRequirements
+// Parameters: const std::string& formattedRoles - formatted user roles const std::string& roomState - state of the room
+// Objective: Determines if access is granted based on user roles and room state.
 bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState)
 {
 	// Deny access by default
@@ -62,4 +71,4 @@ bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const
 		}
 	}
 	return accessGranted;
-}
+} // end of verifyEntryRequirements

@@ -1,3 +1,6 @@
+// BuildingTests.cpp : This file contains the tests for the Building class
+// Include the paths to the required files in the AccessControlSystem project
+
 #include "pch.h"
 #include "../AccessControlSystem/Building.cpp"
 #include "../AccessControlSystem/Room.cpp"

@@ -446,51 +446,70 @@ void User::removeRole() {
 // Function: displayUsersAlphabetically
 // Objective: display current users alphabetically 
 void User::displayUsersAlphabetically() {
-	std::vector<std::string> names;
-	std::map<std::string, std::vector<std::string>> userRoles; // Using a map to associate roles with users
-	std::map<std::string, std::string> swipeCardIDs; // Mapping swipe card IDs to users
+	// Initialize containers for user data
+	std::vector<std::string> names; // Container to store user names
+	std::map<std::string, std::vector<std::string>> userRoles; // Map to associate roles with users
+	std::map<std::string, std::string> swipeCardIDs; // Map to associate swipe card IDs with users
 
+	// Read user data from the file
 	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
 	std::string token, name, swipeID;
 
+	// Proceed if user data exists
 	if (!userData.empty()) {
+		// Loop through each user data entry
 		for (const std::string& userString : userData) {
-			std::istringstream ss(userString);
-			std::vector<std::string> userRolesVector;
+			std::istringstream ss(userString); // Create a string stream to process user data
+			std::vector<std::string> userRolesVector; // Initialize a vector to store user roles
+
+			// Parse user data string into tokens separated by commas
 			while (std::getline(ss, token, ',')) {
+				// Extract user's name
 				if (token.find("Name:") != std::string::npos) {
 					size_t namePos = token.find("Name:");
-					name = token.substr(namePos + 6);
+					name = token.substr(namePos + 6); // Extract the user's name from the token
 				}
+				// Extract user's roles
 				else if (token.find("Roles:") != std::string::npos) {
-					std::string existingRoles;
-					size_t rolePos = userString.find("Roles:");
-					size_t startSwipeCardIDPos = userString.find("Swipe Card ID:", rolePos);
+					// Extract existing roles associated with the user
+					std::string existingRoles; // Variable to store extracted existing roles
+					size_t rolePos = userString.find("Roles:"); // Find the position of "Roles:" in the user string
+					size_t startSwipeCardIDPos = userString.find("Swipe Card ID:", rolePos); // Find the position of "Swipe Card ID:" after "Roles:"
+
+					// Check if positions for roles and swipe card ID exist
 					if (rolePos != std::string::npos && startSwipeCardIDPos != std::string::npos) {
-						existingRoles = userString.substr(rolePos + 7, startSwipeCardIDPos - (rolePos + 9));
-						std::istringstream rolesStream(existingRoles);
-						std::string roleToken;
+						// Extract existing roles from the user string
+						existingRoles = userString.substr(rolePos + 7, startSwipeCardIDPos - (rolePos + 9)); // Extract roles substring between "Roles:" and "Swipe Card ID:"
+						std::istringstream rolesStream(existingRoles); // Create a string stream to process the extracted roles
+						std::string roleToken; // Variable to store individual role tokens
+
+						// Split the existing roles into individual role tokens separated by commas
 						while (std::getline(rolesStream, roleToken, ',')) {
-							userRolesVector.push_back(roleToken);
+							userRolesVector.push_back(roleToken); // Store individual roles in the userRolesVector
 						}
 					}
 				}
+				// Extract user's swipe card ID
 				else if (token.find("Swipe Card ID:") != std::string::npos) {
 					size_t swipeCardIDPos = token.find("Swipe Card ID:");
-					swipeID = token.substr(swipeCardIDPos + 15);
+					swipeID = token.substr(swipeCardIDPos + 15); // Extract the swipe card ID from the token
 				}
 			}
 
+			// Store user data into respective containers
 			names.push_back(name);
 			userRoles[name] = userRolesVector;
 			swipeCardIDs[name] = swipeID; // Associate swipe card ID with the user's name
 		}
 
+		// Sort user names alphabetically
 		std::sort(names.begin(), names.end());
 
+		// Display sorted user information
 		std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
 		for (const auto& name : names) {
 			std::cout << "Name: " << name << ", Roles: ";
+			// Display user roles
 			for (const auto& role : userRoles[name]) {
 				std::cout << role << ",";
 			}
@@ -498,11 +517,10 @@ void User::displayUsersAlphabetically() {
 		}
 	}
 	else {
+		// If no user data found in the log file
 		std::cout << "No users found in the log file.\n";
 	}
-}
-
-// end of displayUsersAlphabetically
+} // end of displayUsersAlphabetically
 
 
 

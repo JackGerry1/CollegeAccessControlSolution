@@ -6,6 +6,9 @@ URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 2
 URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
 */
 
+// Function: verifyEntryRequirements
+// Parameters: const std::string& formattedRoles - formatted user roles const std::string& roomState - state of the room
+// Objective: Determines if access is granted based on user roles and room state.
 bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState) {
 	// Deny access by default
 	bool accessGranted = false;
@@ -30,7 +33,7 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 			int currentHour = timeInfo.tm_hour;
 			int currentMinute = timeInfo.tm_min;
 
-			// Check if the current time is within the allowed time window for Staff Member
+			// Check if the current time is within the allowed time window for Staff Member (05:30 to 23:59)
 			if ((currentHour > 5 && currentHour < 23) || (currentHour == 5 && currentMinute >= 30) || (currentHour == 23 && currentMinute <= 59)) {
 				accessGranted = true;
 			}
@@ -85,4 +88,4 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 		}
 	}
 	return accessGranted;
-}
+} // end of verifyEntryRequirements

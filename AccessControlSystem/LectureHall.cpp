@@ -1,3 +1,5 @@
+// LectureHall.cpp : This file contains functions and attributes specifeid in the LectureHall.h file. 
+
 #include "LectureHall.h"
 
 /*
@@ -6,6 +8,9 @@ URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 2
 URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
 */
 
+// Function: verifyEntryRequirements
+// Paramaters: current roomState and formattedRoles of the user attempting to enter
+// Objective: Return true or false whether or not the simulated user can enter the room
 bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, const std::string& roomState) {
 	// Deny access by default
 	bool accessGranted = false;
@@ -34,6 +39,7 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 				accessGranted = true;
 			}
 		}
+		// Check for if a student or visitor/guest can enter the room
 		else if (formattedRoles.find("Student") != std::string::npos || formattedRoles.find("Visitor / Guest") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -51,6 +57,7 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 			}
 		}
 
+		// Check if a contract cleaner can enter the room
 		else if (formattedRoles.find("Contract Cleaner") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -71,18 +78,18 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 			}
 
 		}
-
+		// any time a manager can enter the room
 		else if (formattedRoles.find("Manager") != std::string::npos) {
 			accessGranted = true;
 		}	
 	}
 	else {
-		// Emergency mode access
+		// Emergency Responder: Access only in emergency mode
 		if (formattedRoles.find("Emergency Responder") != std::string::npos) {
-			// Emergency Responder: Access only in emergency mode
+			
 			accessGranted = true;
 		}
 
 	}
 	return accessGranted;
-}
+} // end of verifyEntryRequirements

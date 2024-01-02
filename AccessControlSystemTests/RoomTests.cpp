@@ -1,3 +1,6 @@
+// RoomTets.cpp : This file contains the tests for the Room class
+// Include the paths to the required files in the AccessControlSystem project
+
 #include "pch.h"
 #include "../AccessControlSystem/Room.h"
 

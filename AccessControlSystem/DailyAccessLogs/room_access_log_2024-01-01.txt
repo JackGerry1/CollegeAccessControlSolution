@@ -1,0 +1,12 @@
+ACCESS DENIED: User: Jack Gerry, Roles: Staff Member, , Swipe Card ID: 669055167, Building Name: STEM, Room: KS112, Room Type: Lecture Hall, Room State: EMERGENCY, Date And Time: 2024-01-01 20:10:58
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, , Swipe Card ID: 669055167, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:11:03
+LEFT ROOM: User: Jack Gerry, Roles: Staff Member, , Swipe Card ID: 669055167, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date and Time: 2024-01-01 20:11:07
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Visitor / Guest, Contract Cleaner, , Swipe Card ID: 783807102, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:13:15
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Visitor / Guest, Contract Cleaner, , Swipe Card ID: 783807102, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:13:56
+ACCESS GRANTED: User: Keith Smith, Roles: Student,  Swipe Card ID: , Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:14:32
+ACCESS GRANTED: User: Keith Smith, Roles: Student, Swipe Card ID: , Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:15:16
+LEFT ROOM: User: Keith Smith, Roles: Student, Swipe Card ID: , Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date and Time: 2024-01-01 20:15:20
+ACCESS GRANTED: User: Keith Smith, Roles: Student,  Swipe Card ID: 011771113, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:15:59
+ACCESS GRANTED: User: Keith Smith, Roles: Student, Swipe Card ID: 011771113, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:16:23
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Visitor / Guest, Contract Cleaner, Swipe Card ID: 783807102, Building Name: ART, Room: KA144, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:16:36
+ACCESS GRANTED: User: John Doe, Roles: Student, Staff Member, Swipe Card ID: 166657405, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Date And Time: 2024-01-01 20:20:33

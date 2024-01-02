@@ -1,7 +1,8 @@
-Name: Keith Smith, Roles: Student, Swipe Card ID: 
-Name: Jack Gerry, Roles: Staff Member, Swipe Card ID: 783807102
+Name: Keith Smith, Roles: Student, Swipe Card ID: 011771113
+Name: Jack Gerry, Roles: Staff Member, Visitor / Guest, Contract Cleaner, Swipe Card ID: 783807102
 Name: Jack Gerry, Roles: Staff Member, Swipe Card ID: 669055167
 Name: Michael Jackson, Roles: Staff Member, Swipe Card ID: 468735423
 Name: Jack Gerry, Roles: Staff Member, Swipe Card ID: 072703157
 Name: Jack Gerry, Roles: Staff Member, Swipe Card ID: 440051450
 Name: Jack Gerry, Roles: Staff Member, Swipe Card ID: 461340063
+Name: John Doe, Roles: Student, Staff Member, Swipe Card ID: 166657405

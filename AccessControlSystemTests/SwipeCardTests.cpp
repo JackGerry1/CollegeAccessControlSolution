@@ -1,4 +1,4 @@
-// UserTests.cpp : This file contains the tests for the User class
+// SwipeCardTests.cpp : This file contains the tests for the SwipeCard class
 // Include the paths to the required files in the AccessControlSystem project
 #include "pch.h"
 #include "../AccessControlSystem/SwipeCard.h"  // Include SwipeCard header
@@ -11,10 +11,10 @@ URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
 
 // Test case for addSwipeCard function
 TEST(SwipeCardTest, AddSwipeCardTest) {
-    // Arrange
+    // blank swipecard object
     SwipeCard swipeCard("");
 
-    // Act
+    // call the addSwipeCard function
     std::string generatedCardID = swipeCard.addSwipeCard();
 
     // Assert

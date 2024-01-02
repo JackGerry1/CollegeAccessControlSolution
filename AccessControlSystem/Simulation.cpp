@@ -2,26 +2,42 @@
 
 #include "Simulation.h"
 
+/*
+References:
+URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 27/12/23
+URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
+URL: https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string Date Accessed: 27/12/23
+URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
+URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
+URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
+URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
+URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
+*/
 
+// Function: startSimulation
+// Objective: allow user to choose which user they want to simulate
 void Simulation::startSimulation() {
+	// Retrieve user data from the file
 	std::vector<std::string> simUserData = IDCardLog::readUserDataFromFile();
 
 	if (!simUserData.empty()) {
+		// Display available user data for simulation
 		IDCardLog::displayUsersFromLogFile();
 
-		// Ask the user for the line number/index to simulate
+		// Ask for the line number/index to simulate
 		int lineNumber;
 		std::cout << "Enter the index/line number of the user you want to simulate: ";
 		std::cin >> lineNumber;
 
 		// Check if the entered line number is within the valid range
 		if (lineNumber >= 0 && lineNumber < simUserData.size()) {
-			std::string userToSimulate = simUserData[lineNumber]; // Retrieve the user data based on the input index
-			// Perform simulation logic using the user data and clear screen to make ui look nicer
+			std::string userToSimulate = simUserData[lineNumber]; // Get user data based on the input index
+
+			// Clear the screen for a better UI
 			system("cls");
 			std::cout << "Simulating user: " << userToSimulate << std::endl;
 
-			// Menu for simulation options
+			// Simulation menu for user actions
 			bool continueSimulation = true;
 			while (continueSimulation) {
 				int simOption;
@@ -33,7 +49,8 @@ void Simulation::startSimulation() {
 
 				switch (simOption) {
 				case 1:
-					joinRoom(userToSimulate);
+					// Perform room joining simulation
+					joinRoom(userToSimulate); 
 					break;
 				case 2:
 					// Stop the simulation
@@ -46,54 +63,85 @@ void Simulation::startSimulation() {
 				}
 			}
 		}
+		// erorr if invalid line number
 		else {
 			std::cout << "Invalid index/line number entered." << std::endl;
 		}
 	}
+	// error if no users to simulate
 	else {
 		std::cout << "No Users to Simulate" << std::endl;
 	}
 }
-
+// Function: extractRoles
+// Paramaters: string of the user that is attempting to join a room, and an empty vector for the user roles
 void Simulation::extractRoles(const std::string& userToJoin, std::vector<std::string>& roles) {
 	// Find the position of "Roles:"
 	size_t pos = userToJoin.find("Roles:");
+
 	if (pos != std::string::npos) {
 		// Extract roles substring after "Roles:"
 		std::string rolesString = userToJoin.substr(pos + 7); // Skip "Roles:" and space
+
+		// Find the position of "Swipe Card ID:"
 		size_t swipeCardPos = rolesString.find("Swipe Card ID:");
+
+		// If the position of "Swipe Card ID:" is found in the roles string,
+		// exclude the substring starting from "Swipe Card ID:" till the end
 		if (swipeCardPos != std::string::npos) {
-			rolesString = rolesString.substr(0, swipeCardPos); // Exclude swipe card information
+			rolesString = rolesString.substr(0, swipeCardPos);
 		}
 
+		// Use stringstream to split roles separated by ','
 		std::stringstream ss(rolesString);
 		std::string role;
-		// Tokenize roles separated by ','
+
+		// Tokenize roles separated by ',' and Store each role in the roles vector
 		while (std::getline(ss, role, ',')) {
-			roles.push_back(role);
+			roles.push_back(role); 
 		}
 	}
-}
+} // end of extractRoles
+
+// Function: extractRoomInfo
+// Paramaters: The room that has been chosen the empty strings for roomType and roomState
+// Objective: extract the room type and room state for the room that the user is attempting to access. 
 void Simulation::extractRoomInfo(const std::string& roomToJoin, std::string& roomType, std::string& roomState) {
 	// Find the positions of "Room Type:" and "Room State:"
 	size_t typePos = roomToJoin.find("Room Type:");
 	size_t statePos = roomToJoin.find("Room State:");
+
+	// Check if both "Room Type:" and "Room State:" are found in the input string
 	if (typePos != std::string::npos && statePos != std::string::npos) {
 		// Extract room type substring after "Room Type:"
 		size_t typeStart = typePos + 11; // Skip "Room Type:" and space
-		size_t typeEnd = roomToJoin.find(',', typeStart); // Find end of room type string
+		size_t typeEnd = roomToJoin.find(',', typeStart); // Find the end of the room type string
 		roomType = roomToJoin.substr(typeStart, typeEnd - typeStart);
 
-		// Extract room state substring after "Room State:" and stop at the comma before "Building State:"
+		// Extract room state substring after "Room State:" and stop before "Building State:"
 		size_t stateStart = statePos + 12; // Skip "Room State:" and space
 		size_t buildingStatePos = roomToJoin.find("Building State:");
+
+		// Determine the endpoint for the room state substring:
+		// If "Building State:" exists in the string, the endpoint for the room state substring
+		// is set just before "Building State:". Otherwise, it takes the end of the roomToJoin string.
 		size_t stateEnd = (buildingStatePos != std::string::npos) ? buildingStatePos - 2 : roomToJoin.size();
+
+		// Extract the room state substring starting from stateStart and ending at stateEnd
 		roomState = roomToJoin.substr(stateStart, stateEnd - stateStart);
 	}
-}
+} // end of extractRoomInfo
+
+
+// Function: verifyRoomAccess
+// Paramaters: roomType string, formattedRoles string, roomState string and the current generated log message. 
+// Objective: choose one of the overriden functions based on the room type, return true or false then write that log message to the daily log file
 bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string& formattedRoles, const std::string& roomState, const std::string& log) {
-	bool accessGranted = false;
-	std::string message;
+	bool accessGranted = false; // Flag to track access permission
+	std::string message; // String to store the access status message
+
+	// Check the type of room and verify access based on room type
+	// will call a different overloaded function based on the room type
 	if (roomType == "Lecture Hall") {
 		LectureHall lectureHall("", "", -1, "", -1);
 		accessGranted = lectureHall.verifyEntryRequirements(formattedRoles, roomState);
@@ -111,29 +159,40 @@ bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string
 		accessGranted = secureRoom.verifyEntryRequirements(formattedRoles, roomState);
 	}
 	else {
-		std::cout << "Unknown room type encountered." << std::endl;
+		std::cout << "Unknown room type encountered." << std::endl; // Handle an unknown room type
 	}
 
+	// Formulate the access status message based on accessGranted flag
 	if (accessGranted) {
 		message = "ACCESS GRANTED: " + log;
 	}
 	else {
 		message = "ACCESS DENIED: " + log;
 	}
-	std::string dateTime = getDateAndTime();
+	// Get the current date and time
+	std::string dateTime = getDateAndTime(); 
 
-	message += ", Date And Time: " + dateTime;
+	message += ", Date And Time: " + dateTime; // Include date and time in the access status message
 	std::cout << "Adding To Daily Access Log: " << message << std::endl;
-	DailyLogFile::logRoomAccessAttempts(message);
-	
 
-	return accessGranted;
-}
+	DailyLogFile::logRoomAccessAttempts(message); // Log the access attempt in the daily log file
 
+	return accessGranted; // Return the access permission status
+} // end of verifyRoomAccess
+
+// Function: joinRoom
+// Paramaters: string of userToJoin
+// Objective: get all of the user and room information required to pass into the verifyRoomAccess function
 void Simulation::joinRoom(const std::string& userToJoin) {
+	// Retrieve room data from the file
 	std::vector<std::string> roomData = BuildingStructureLog::readRoomDataFromFile();
+
+	// Display user information
 	std::cout << userToJoin << std::endl;
+
+	// Check if room data exists
 	if (!roomData.empty()) {
+		// Display building structure information
 		BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
 
 		// Ask the user for the index/line number of the room to join
@@ -143,10 +202,9 @@ void Simulation::joinRoom(const std::string& userToJoin) {
 
 		// Check if the entered room index is valid
 		if (roomIndex >= 0 && roomIndex < roomData.size()) {
+			// Retrieve room data based on the input index
+			std::string roomToJoin = roomData[roomIndex];
 
-			// Check if the entered room index is valid
-
-			std::string roomToJoin = roomData[roomIndex]; // Retrieve room data based on the input index
 			// Extract roles from the user to join
 			std::vector<std::string> roles;
 			extractRoles(userToJoin, roles);
@@ -155,48 +213,37 @@ void Simulation::joinRoom(const std::string& userToJoin) {
 			std::string roomType, roomState;
 			extractRoomInfo(roomToJoin, roomType, roomState);
 
-			std::string formattedRoles;
+			// Generate log information with roles as a single string
+			std::string rolesString;
 			if (!roles.empty()) {
-				std::stringstream rolesOutput;
-
-				auto rolesIter = roles.begin();
-				rolesOutput << *rolesIter; // Output the first role
-
-				// Output subsequent roles preceded by "," if they exist
-				for (++rolesIter; rolesIter != roles.end(); ++rolesIter) {
-					rolesOutput << "," << *rolesIter;
+				rolesString = roles[0]; // Initialize with the first role
+				for (int i = 1; i < roles.size(); ++i) {
+					rolesString += "," + roles[i]; // Append subsequent roles with a comma separator
 				}
-
-				// Get the resulting string
-				formattedRoles = rolesOutput.str();
-
-				// Remove trailing spaces and commas
-				formattedRoles.erase(
-					std::find_if(
-						formattedRoles.rbegin(),
-						formattedRoles.rend(),
-						[](char ch) { return ch != ' ' && ch != ','; }
-					).base(),
-					formattedRoles.end()
-				);
 			}
-			
-			std::string log = generateLog(userToJoin, roomToJoin, roomState, formattedRoles);
-			bool accessGranted = verifyRoomAccess(roomType, formattedRoles, roomState, log);
+			// Generate log information
+			std::string log = generateLog(userToJoin, roomToJoin, roomState, rolesString);
 
-			// leave room additional functionality
+			// Verify room access based on room type, roles, and state, and log access attempt
+			bool accessGranted = verifyRoomAccess(roomType, rolesString, roomState, log);
+
+			// Perform additional functionality if access is granted
 			if (accessGranted) {
-				leaveRoom(log);
+				leaveRoom(log); 
 			}
 		}
 		else {
 			std::cout << "Invalid room index/line number entered." << std::endl;
 		}
 	}
-}
+} // end of joinRoom
 
+
+// Function: leaveRoom
+// Paramater: the log string 
+// Objective: to allow the user to leave the room if they desire
 void Simulation::leaveRoom(const std::string& log) {
-	bool leavingRoom = false;
+	bool leavingRoom = false; // Initialize leavingRoom flag
 
 	// Display menu to allow the user to leave the room
 	while (!leavingRoom) {
@@ -205,75 +252,88 @@ void Simulation::leaveRoom(const std::string& log) {
 			"2. Go Back To Simulation Menu\n"
 			"Choose an option: ";
 		int choice;
-		std::cin >> choice;
+		std::cin >> choice; // User input for choice
 
 		switch (choice) {
 		case 1: {
-			std::string leaveDateTime = getDateAndTime();
+			std::string leaveDateTime = getDateAndTime(); // Get current date and time
+			// Construct a message indicating leaving the room with log information and the leave time
 			std::string leaveMessage = "LEFT ROOM: " + log + ", Date and Time: " + leaveDateTime;
+			// Log the leaving attempt with the assembled message
 			DailyLogFile::logRoomAccessAttempts(leaveMessage);
-			std::cout << "You have left the room.\n";
-			leavingRoom = true;
+			std::cout << "You have left the room.\n"; // Inform the user about leaving
+			leavingRoom = true; // Set leavingRoom to true to exit the loop
 			break;
 		}
 		case 2:
-			// Set leavingRoom to true to exit the loop
-			system("cls");
+			// Set leavingRoom to true to exit the loop and return to the simulation menu
+			system("cls"); // Clear the console screen
 			std::cout << "Returned To Simulation Menu" << std::endl;
-			leavingRoom = true; 
+			leavingRoom = true;
 			break;
 		default:
-			std::cout << "Invalid choice. Please choose again.\n";
+			std::cout << "Invalid choice. Please choose again.\n"; // Prompt for a valid choice
 			break;
-		
 		}
 	}
-}
+} // end of leaveRoom
 
 
+// Function: generateLog
+// Paramaters: userToJoin, roomToJoin, roomstate, formattedRoles
+// Objective: to generate a message log for every access attempt
 std::string Simulation::generateLog(const std::string& userToJoin, const std::string& roomToJoin, const std::string& roomState, const std::string& formattedRoles) {
-	size_t nameStart = userToJoin.find("Name:") + 6;
-	size_t nameEnd = userToJoin.find(", Roles:");
-	std::string userName = userToJoin.substr(nameStart, nameEnd - nameStart);
+	// Extract user's name from userToJoin string
+	size_t nameStart = userToJoin.find("Name:") + 6; // Find the start of the name substring
+	size_t nameEnd = userToJoin.find(", Roles:"); // Find the end of the name substring
+	std::string userName = userToJoin.substr(nameStart, nameEnd - nameStart); // Extract the user's name
 
-	size_t swipeCardStart = userToJoin.find("Swipe Card ID:") + 15;
-	std::string swipeCardID = userToJoin.substr(swipeCardStart);
+	// Extract swipe card ID from userToJoin string
+	size_t swipeCardStart = userToJoin.find("Swipe Card ID:") + 15; // Find the start of the swipe card ID substring
+	std::string swipeCardID = userToJoin.substr(swipeCardStart); // Extract the swipe card ID
 
-	// Replace quad spaces with an empty string
-	size_t foundQuadSpaces = swipeCardID.find("    ");
+	// Remove quad spaces from swipe card ID
+	size_t foundQuadSpaces = swipeCardID.find("    "); // Find quad spaces
 	while (foundQuadSpaces != std::string::npos) {
-		swipeCardID.replace(foundQuadSpaces, 4, "");
-		foundQuadSpaces = swipeCardID.find("    ", foundQuadSpaces + 1);
+		swipeCardID.replace(foundQuadSpaces, 4, ""); // Replace quad spaces with an empty string
+		foundQuadSpaces = swipeCardID.find("    ", foundQuadSpaces + 1); // Find the next occurrence
 	}
 
-	size_t roomTypeStart = roomToJoin.find("Room Type:") + 11;
-	size_t roomTypeEnd = roomToJoin.find(", Room State:");
-	std::string roomType = roomToJoin.substr(roomTypeStart, roomTypeEnd - roomTypeStart);
+	// Extract room information from roomToJoin string
+	size_t roomTypeStart = roomToJoin.find("Room Type:") + 11; // Find the start of the room type substring
+	size_t roomTypeEnd = roomToJoin.find(", Room State:"); // Find the end of the room type substring
+	std::string roomType = roomToJoin.substr(roomTypeStart, roomTypeEnd - roomTypeStart); // Extract the room type
 
-	size_t buildingNameStart = roomToJoin.find("Building Name:") + 15;
-	size_t buildingNameEnd = roomToJoin.find(", Room:");
-	std::string buildingName = roomToJoin.substr(buildingNameStart, buildingNameEnd - buildingNameStart);
+	size_t buildingNameStart = roomToJoin.find("Building Name:") + 15; // Find the start of the building name substring
+	size_t buildingNameEnd = roomToJoin.find(", Room:"); // Find the end of the building name substring
+	std::string buildingName = roomToJoin.substr(buildingNameStart, buildingNameEnd - buildingNameStart); // Extract the building name
 
-	size_t roomNumberStart = roomToJoin.find("Room:") + 6;
-	size_t roomNumberEnd = roomToJoin.find(", Room Type:");
-	std::string roomNumber = roomToJoin.substr(roomNumberStart, roomNumberEnd - roomNumberStart);
+	size_t roomNumberStart = roomToJoin.find("Room:") + 6; // Find the start of the room number substring
+	size_t roomNumberEnd = roomToJoin.find(", Room Type:"); // Find the end of the room number substring
+	std::string roomNumber = roomToJoin.substr(roomNumberStart, roomNumberEnd - roomNumberStart); // Extract the room number
 
+	// Construct the log message using extracted information
 	std::string logMessage =
 		"User: " + userName + ", Roles: " + formattedRoles + ", Swipe Card ID: " + swipeCardID +
 		", Building Name: " + buildingName + ", Room: " + roomNumber +
 		", Room Type: " + roomType + ", Room State: " + roomState;
 
-	return logMessage;
-}
+	return logMessage; // Return the constructed log message
+} // end of generateLog
 
 
+// Function: stopSimulation
+// Objective: allow the user to stop the simulation
 void Simulation::stopSimulation() {
-	system("cls");
-	std::cout << "Simulation Stopped\n\n";
-}
+	// Inform the user that the simulation has stopped
+	system("cls"); 
+	std::cout << "Simulation Stopped\n\n"; 
+} // end of stopSimulation
 
+// Function: getDateAndTime
+// Objective: format the date and time into YYYY-MM-DD HH-MM-SS
 std::string Simulation::getDateAndTime() {
-	// Get current unformatted time
+	// Get current unformatted time as 'time_t'
 	time_t now = time(0);
 
 	// Create a 'tm' structure to store the broken-down time
@@ -282,11 +342,11 @@ std::string Simulation::getDateAndTime() {
 	// Convert 'time_t' to a local time and store it in 'ltm'
 	localtime_s(&ltm, &now);
 
-	// Create a string stream to Format the time as: YYYY-MM-DD HH:MM:SS
+	// Create a string stream to format the time as: YYYY-MM-DD HH:MM:SS
 	std::ostringstream oss;
 	oss << std::put_time(&ltm, "%Y-%m-%d %H:%M:%S");
 
 	std::string dateTime = oss.str();
 
-	return dateTime;
-}
+	return dateTime; // Return the formatted date and time
+} // end of getDateAndTime
