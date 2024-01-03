@@ -82,7 +82,7 @@ void User::addUser() {
 
 	// Construct user information string: includes name, roles, and swipe card ID
 	std::string userInfo = "Name: " + getFullName() + ", Roles:";
-	for (size_t i = 0; i < roles.size(); ++i) {
+	for (int i = 0; i < roles.size(); ++i) {
 		userInfo += " " + roles[i];
 		if (i != roles.size() - 1) {
 			userInfo += ",";
@@ -444,7 +444,6 @@ void User::removeRole() {
 	IDCardLog::updateUserDataFile(userData);
 
 	// Output the result of the role removal
-	std::cout << "Role removed from the user at index " << userIndex << ":\n";
 	std::cout << "Role removed from the user at index " << userIndex << ":\n";
 	std::cout << "Updated User Info: " << userData[userIndex] << std::endl;
 } // end of removeRole

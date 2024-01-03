@@ -26,16 +26,16 @@ int main() {
 		std::cout << "4. Update User\n";
 		std::cout << "5. Add Roles To Existing Users\n";
 		std::cout << "6. Remove Roles From Existing Users\n";
-		std::cout << "7. Display ID_Card_List.txt File\n";
-		std::cout << "8. Add Building\n";
-		std::cout << "9: Add Room\n";
-		std::cout << "10. Remove Room\n";
-		std::cout << "11. Change Room State\n";
-		std::cout << "12. Update Room\n";
-		std::cout << "13. Display Room And Building Info\n";
-		std::cout << "14. Start Simulation\n";
-		std::cout << "15. View Today's Access Attempts\n";
-		std::cout << "16. Remove Swipe Card\n";
+		std::cout << "7. Remove Swipe Card\n";
+		std::cout << "8. Display ID_Card_List.txt File\n";
+		std::cout << "9. Add Building\n";
+		std::cout << "10: Add Room\n";
+		std::cout << "11. Remove Room\n";
+		std::cout << "12. Change Room State\n";
+		std::cout << "13. Update Room\n";
+		std::cout << "14. Display Room And Building Info\n";
+		std::cout << "15. Start Simulation\n";
+		std::cout << "16. View Today's Access Attempts\n";
 		std::cout << "17. Exit\n";
 		std::cout << "Enter your choice: ";
 		// Taking user input for menu choice
@@ -70,46 +70,46 @@ int main() {
 		case 6:
 			newUser.removeRole();
 			break;
-		// display user file
+		// remove swipe card
 		case 7:
+			newUser.removeSwipeCardInput();
+			break;
+		// display user log file
+		case 8:
 			IDCardLog::displayUsersFromLogFile();
 			break;
 		// add new building case
-		case 8:
+		case 9:
 			// Call addBuilding method from Building class 
 			newBuilding.addBuilding(); 
 			break;
 		// add new room case
-		case 9: 
+		case 10: 
 			newBuilding.addRoom();
 			break;
 		// remove room case 
-		case 10: 
+		case 11: 
 			newBuilding.removeRoom();
 			break;
 		// change state case
-		case 11:
+		case 12:
 			newBuilding.changeRoomAndBuildingState();
 			break;
 		// update room case
-		case 12:
+		case 13:
 			newBuilding.updateRoom();
 			break;
 		// display room and building information
-		case 13:
+		case 14:
 			BuildingStructureLog::displayFileInfo("LogFiles/Building_Structure.txt");
 			break;
 		// start simulation
-		case 14: 
+		case 15: 
 			sim.startSimulation();
 			break;
 		// view today's access attempts
-		case 15:
-			DailyLogFile::viewRoomAccessAttempts();
-			break;
-		// remove swipe card
 		case 16:
-			newUser.removeSwipeCardInput();
+			DailyLogFile::viewRoomAccessAttempts();
 			break;
 		// exit program case
 		case 17:
