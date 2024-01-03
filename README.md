@@ -4,8 +4,8 @@ This C++ console application efficiently manages rooms, users, and swipe cards w
 ## Installation Instructions
 
 ### Prerequisites
-- **Git**: Install Git for version control.
-- **Visual Studio**: Install Visual Studio IDE for C++ development.
+- **[Git](https://git-scm.com/)**: Install Git for version control.
+- **[Visual Studio](https://visualstudio.microsoft.com/)**: Install Visual Studio IDE for C++ development.
 
 ### Steps
 1. **Clone Repository**: Open Git Bash or your command line and run:
@@ -83,8 +83,105 @@ Below, you'll find detailed explanations for each class within the system, outli
 - Inherits attributes from the `Building` class and includes additional details specific to rooms.
 - It encompasses attributes such as floor number, room type (e.g., Lecture Hall, Teaching Room), room number, and the state of the room (Normal or Emergency).
 - Utilizes an enum (`RoomState`) to represent the state of a room.
-- Provides a virtual method (`verifyEntryRequirements()`) that will be implemented in its children's classes.
+- Provides a virtual method (`verifyEntryRequirements()`) that will be overridden in its children's classes.
 - Offers getter and setter methods for managing floor number, room type, room number, and room state.
 - Implements functionality to convert `RoomState` enum values to their corresponding string representation (`roomStateToString()`).
 - Interacts with the `Building` class due to its inheritance relationship for managing building-related attributes.
 
+#### LectureHall Class
+
+- The `LectureHall` class, inheriting from `Room`, represents lecture halls within the system.
+- Inherits the attributes and functionalities of the `Room` class and extends them to manage specific functionalities related to lecture halls.
+- Provides an overridden method (`verifyEntryRequirements`) to verify access requirements for the lecture hall based on user roles and room state.
+
+#### StaffRoom Class
+
+- The `StaffRoom` class, a child of `Room`, signifies staff rooms within the system.
+- Inherits attributes and functionalities from the `Room` class, specializing in functionalities specific to staff rooms.
+- Implements an overridden method (`verifyEntryRequirements`) to determine access permissions based on user roles and room state.
+
+#### SecureRoom Class
+
+- The `SecureRoom` class, inheriting from `Room`, represents secure rooms within the system.
+- Inherits properties and functionalities from the `Room` class and offers specialized functionalities for secure room access.
+- Provides an overridden method (`verifyEntryRequirements`) to validate access based on user roles and room state.
+
+#### TeachingRoom Class
+
+- The `TeachingRoom` class, a subclass of `Room`, denotes teaching rooms within the system.
+- Inherits functionalities and properties from the `Room` class and extends them to manage specific functionalities for teaching rooms.
+- Implements an overridden method (`verifyEntryRequirements`) to assess access requirements considering user roles and room state.
+
+### BuildingStructureLog Class
+
+- The `BuildingStructureLog` class manages building-related log operations within the system.
+- Provides static methods to handle various building data functionalities.
+- Includes functions to verify unique buildings (`isDuplicate()`), log building information to specified file locations (`logInfo()`), and display stored file information (`displayFileInfo()`).
+- Offers methods to retrieve building information at a specified index (`getBuildingInfo()`), manage room data operations within log files (`readRoomDataFromFile()`), and remove room information based on the index (`removeRoomFromLogFile()`).
+- Update room info like floor number, room number, etc by using the (`updateRoomDataFile()`).
+- Interacts with the `Building` class to facilitate building-related data management and operations.
+
+### Simulation Class
+
+- Manages the simulation operations within the system for user-room interactions.
+- Contains methods to start (`startSimulation()`) and stop (`stopSimulation()`) the simulation.
+- Handles the joining and leaving of users from rooms through methods like `joinRoom()` and `leaveRoom()`.
+- Extracts user roles (`extractRoles()`) and room information (`extractRoomInfo()`) for access verification.
+- Verifies user access to specific rooms based on roles, room type, and state using `verifyRoomAccess()`.
+- Generates log messages (`generateLog()`) based on user, room, and access information.
+- Utilizes classes such as `User`, `Room`, and its child classes (`LectureHall`, `TeachingRoom`, `StaffRoom`, `SecureRoom`), and `DailyLogFile`.
+- Provides functionality to retrieve the current date and time in a formatted string (`getDateAndTime()`).
+
+### DailyLogFile Class
+
+- Manages daily log file operations within the system for room access attempts.
+- Provides functionalities to log room access attempts (`logRoomAccessAttempts()`) by appending access information to a daily log file.
+- Includes a method (`viewRoomAccessAttempts()`) to display room access attempts stored in the daily log file.
+- Utilizes file input/output operations and string formatting to handle log information.
+- Contains a private method (`getFormattedDate()`) to generate and return the formatted date as a string for logging purposes.
+
+## Unit Tests (Gtest)
+
+For quality assurance and validation, alongside manual testing, this solution includes unit test files using Google Test (`gtest`). Below are the additional files used for testing:
+
+- `UserTests.cpp`: Unit tests for the `User` class functionalities.
+- `SwipeCardTests.cpp`: Unit tests for the `SwipeCard` class operations.
+- `LectureHallTests.cpp`: Unit tests specific to the functionalities of the `LectureHall` class.
+- `SecureRoomTests.cpp`: Unit tests focusing on the `SecureRoom` class functionalities.
+- `StaffRoomTests.cpp`: Unit tests for the `StaffRoom` class.
+- `TeachingRoomTests.cpp`: Unit tests covering functionalities of the `TeachingRoom` class.
+- `BuildingTests.cpp`: Unit tests related to the `Building` class.
+- `RoomTests.cpp`: Unit tests for the `Room` class and its functionalities.
+- `SimulationTests.cpp`: Tests for the simulation functionalities.
+
+## References
+
+Clark, M. (2023) 'Creating a Formatted Date String from Date Time in C', CopyProgramming. Available at: [https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string](https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string) [Accessed 27th December 2023].
+
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com. Available at: [https://cplusplus.com/reference/vector/vector/erase/](https://cplusplus.com/reference/vector/vector/erase/) [Accessed 18th December 2023].
+
+Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com. Available at: [https://en.cppreference.com/w/cpp/types/size_t](https://en.cppreference.com/w/cpp/types/size_t) [Accessed 18th December 2023].
+
+Gangwar, M. (2023) 'How to Create a Random Number Generator in C++', DigitalOcean. Available at: [https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus](https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus) [Accessed 13th December 2023].
+
+GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. Available at: [https://www.geeksforgeeks.org/sort-string-characters/](https://www.geeksforgeeks.org/sort-string-characters/) [Accessed 14th December 2023].
+
+GeeksForGeeks (2023b) 'Substring in C++', GeeksforGeeks. Available at: [https://www.geeksforgeeks.org/substring-in-cpp/](https://www.geeksforgeeks.org/substring-in-cpp/) [Accessed 18th December 2023].
+
+GoogleTest (2023a) 'Advanced GoogleTest Topics', GoogleTest. Available at: [https://google.github.io/googletest/advanced.html](https://google.github.io/googletest/advanced.html) [Accessed 15th December 2023].
+
+GoogleTest (2023b) 'GoogleTest Primer', GoogleTest. Available at: [https://google.github.io/googletest/primer.html](https://google.github.io/googletest/primer.html) [Accessed 15th December 2023].
+
+Haleem, A. (2020) 'Exploring Date and Time with Chrono', Medium. Available at: [https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62](https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62) [Accessed 27th December 2023].
+
+Instructables (n.d.) 'How to Do the Singleton Design Pattern in C++', Instructables. Available at: [https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/](https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/) [Accessed 27th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics. Available at: [https://www.scaler.com/topics/cpp-string-replace/](https://www.scaler.com/topics/cpp-string-replace/) [Accessed 18th December 2023].
+
+Programiz (2023a) 'C++ File Handling', Programiz. Available at: [https://www.programiz.com/cpp-programming/file-handling](https://www.programiz.com/cpp-programming/file-handling) [Accessed 14th December 2023].
+
+Programiz (2023b) 'C++ Map', Programiz. Available at: [https://www.programiz.com/cpp-programming/map](https://www.programiz.com/cpp-programming/map) [Accessed 30th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean. Available at: [https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus](https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus) [Accessed 18th December 2023].
+
+Tutorialspoint (2020) 'C++ Date and Time - Tutorialspoint', Tutorialspoint. Available at: [https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm](https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm) [Accessed 27th December 2023].
