@@ -2,3 +2,4 @@ Building Name: STEM, Building Code: KS
 Building Name: ART, Building Code: KA
 Building Name: CONSTRUCTION, Building Code: KC
 Building Name: BRICKLAYING, Building Code: KB
+Building Name: LIBRARY, Building Code: KL

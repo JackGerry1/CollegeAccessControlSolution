@@ -1,0 +1,5 @@
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 783807102, Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2024-01-03 20:27:12
+ACCESS DENIED: User: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681, Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2024-01-03 20:27:37
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 783807102, Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2024-01-03 20:28:20
+ACCESS GRANTED: User: Jack Gerry, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 783807102, Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Date And Time: 2024-01-03 20:31:59
+LEFT ROOM: User: Jack Gerry, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 783807102, Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Date and Time: 2024-01-03 21:06:37

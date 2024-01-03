@@ -314,7 +314,7 @@ std::string Simulation::generateLog(const std::string& userToJoin, const std::st
 
 	// Construct the log message using extracted information
 	std::string logMessage =
-		"User: " + userName + ", Roles: " + formattedRoles + ", Swipe Card ID: " + swipeCardID +
+		"User: " + userName + ", Roles: " + formattedRoles + "Swipe Card ID: " + swipeCardID +
 		", Building Name: " + buildingName + ", Room: " + roomNumber +
 		", Room Type: " + roomType + ", Room State: " + roomState;
 
