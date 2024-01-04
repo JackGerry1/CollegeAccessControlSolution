@@ -82,7 +82,7 @@ TEST(SimulationTest, GenerateLogTest) {
     std::string userToJoin = "User: John Doe, Roles: Student, Staff Member, Swipe Card ID: 166657405, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
     std::string roomToJoin = "Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
     std::string roomState = "NORMAL";
-    std::string formattedRoles = "Student, Staff Member";
+    std::string formattedRoles = "Student, Staff Member, ";
 
     std::string expectedLog =
         "User: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Roles: Student, Staff Member, Swipe Card ID: 166657405, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL, Building Name: ART, Room: KA412, Room Type: Teaching Room, Room State: NORMAL";
