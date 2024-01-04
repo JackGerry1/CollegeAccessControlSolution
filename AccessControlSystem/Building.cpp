@@ -23,7 +23,7 @@ Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th Dec
 GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. 
 Available at: https://www.geeksforgeeks.org/sort-string-characters/ [Accessed 14th December 2023].
 
-Samual, S. (2019). 'static_cast in C++.' www.tutorialspoint.com. 
+Samual, S. (2019). 'static_cast in C++.', Tutorialspoint.
 Available at: https://www.tutorialspoint.com/static-cast-in-cplusplus [Accessed 18th December 2023].
 */
 
