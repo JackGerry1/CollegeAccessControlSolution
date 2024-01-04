@@ -184,4 +184,6 @@ Programiz (2023b) 'C++ Map', Programiz. Available at: [https://www.programiz.com
 
 Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean. Available at: [https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus](https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus) [Accessed 18th December 2023].
 
+Samual, S. (2019). 'static_cast in C++.', Tutorialspoint. Available at: [https://www.tutorialspoint.com/static-cast-in-cplusplus](https://www.tutorialspoint.com/static-cast-in-cplusplus) [Accessed 18th December 2023].
+
 Tutorialspoint (2020) 'C++ Date and Time - Tutorialspoint', Tutorialspoint. Available at: [https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm](https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm) [Accessed 27th December 2023].
