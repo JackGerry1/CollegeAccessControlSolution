@@ -5,8 +5,12 @@
 
 /*
 References:
-    URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
-    URL: https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string Date Accessed: 27/12/23
+
+Programiz (2023a) 'C++ File Handling', Programiz. 
+Available at: https://www.programiz.com/cpp-programming/file-handling [Accessed 14th December 2023].
+    
+Clark, M. (2023) 'Creating a Formatted Date String from Date Time in C', CopyProgramming. 
+Available at: https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string [Accessed 27th December 2023].
 */
 
 // Function: getFormattedDate

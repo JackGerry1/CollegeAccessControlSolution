@@ -4,8 +4,11 @@
 
 /*
 References:
-URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/233
-URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com.
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Programiz (2023a) 'C++ File Handling', Programiz.
+Available at: https://www.programiz.com/cpp-programming/file-handling [Accessed 14th December 2023].
 */
 
 // Function: logInfo
@@ -179,7 +182,7 @@ std::string BuildingStructureLog::getBuildingInfo(int index) {
 // Paramater: vector of strings for the newly updated room data
 // Objective: Update the room data in the "LogFiles/Building_Structure.txt" file with the provided updated room data.
 void BuildingStructureLog::updateRoomDataFile(const std::vector<std::string>& updatedRoomData) {
-    // Open the file in truncation mode to clear its contents or create a new file
+    // Open the file in truncation mode to clear its contents before adding the new data
     std::ofstream outputFile("LogFiles/Building_Structure.txt", std::ios::trunc);
 
     // Check if the file is open and writable

@@ -5,13 +5,23 @@
 
 /*
 References:
-URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
-URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
-URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
-URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
-URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
-URL: https://www.geeksforgeeks.org/static_cast-in-cpp/ Date Accessed: 18/12/23
-URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com.
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics.
+Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean.
+Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
+
+Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com. 
+Available at: https://en.cppreference.com/w/cpp/types/size_t [Accessed 18th December 2023].
+
+GeeksForGeeks (2023b) 'Substring in C++', GeeksforGeeks. 
+Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th December 2023].
+
+GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. 
+Available at: https://www.geeksforgeeks.org/sort-string-characters/ [Accessed 14th December 2023].
 */
 
 // Constructor for the Building class, initializes building properties
@@ -250,7 +260,7 @@ void Building::changeRoomAndBuildingState() {
 			std::string buildingState = Room::roomStateToString(newState);
 
 			// Track changes in building state due to room state changes
-			bool buildingStateChanged = false; // Track if any room in this building changed its state
+			bool buildingStateChanged = false; // Track if any building changed its state
 			bool anyRoomInBuildingChanged = false; // Track if any room in the building changed
 
 			// Loop through room data to update building state based on room state changes
@@ -260,18 +270,21 @@ void Building::changeRoomAndBuildingState() {
 				// Check if the room data contains building-related information
 				if (currentBuildingNameStart != std::string::npos) {
 					size_t currentBuildingNameEnd = roomData[i].find(", Room: ");
+					// get building current building name and compare it against the room that has had their state changed
 					std::string currentBuildingName = roomData[i].substr(currentBuildingNameStart + 15, currentBuildingNameEnd - currentBuildingNameStart - 15);
 
 					// Check if the room belongs to the same building as the selected room
 					if (currentBuildingName == buildingName) {
+						// get current room state and building state from the current room being searched
 						size_t currentRoomStateStart = roomData[i].find("Room State: ");
 						size_t currentRoomStateEnd = roomData[i].find(", Building State:");
+
+						// room state is located between "Room State: " and , "Building State:"
 						std::string currentRoomStateStr = roomData[i].substr(currentRoomStateStart + 12, currentRoomStateEnd - currentRoomStateStart - 12);
 
 						// Update the room state in the room data for the rooms within the same building
 						if (currentRoomStateStr != buildingState) {
-							roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState +
-								roomData[i].substr(currentRoomStateEnd);
+							roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState + roomData[i].substr(currentRoomStateEnd);
 							buildingStateChanged = true; // Flag that a building changed its state
 						}
 
@@ -520,6 +533,7 @@ void Building::addBuilding() {
 	std::cout << "CURRENT BUILDINGS: " << std::endl;
 	BuildingStructureLog::displayFileInfo("LogFiles/BuildingInfo.txt");
 
+	// variables for building code and name
 	std::string code, name;
 
 	// Prompt user for building name and set it
@@ -539,6 +553,7 @@ void Building::addBuilding() {
 		std::transform(code.begin(), code.end(), code.begin(), ::toupper);
 		setBuildingCode(code);
 	}
+	// erorr if building code is not correct
 	else {
 		std::cout << "Invalid building code format. Please enter two uppercase characters, NO NEW BUILDING CREATED.\n";
 		return;

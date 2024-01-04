@@ -7,11 +7,20 @@
 
 /*
 References:
-URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
-URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
-URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
-URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
-URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
+GoogleTest (2023a) 'Advanced GoogleTest Topics', GoogleTest. 
+Available at: https://google.github.io/googletest/advanced.html [Accessed 15th December 2023].
+
+GoogleTest (2023b) 'GoogleTest Primer', GoogleTest. 
+Available at: https://google.github.io/googletest/primer.html [Accessed 15th December 2023].
+
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com. 
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics. 
+Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean. 
+Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
 */
 
 // Test for the GetFullName function

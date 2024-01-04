@@ -8,15 +8,17 @@
 
 /*
 References:
-    URL: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ Date Accessed: 27/12/23
+    Instructables (n.d.) 'How to Do the Singleton Design Pattern in C++', Instructables. 
+    Available at: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ [Accessed 27th December 2023].
 */
-
 
 // Define a class for handling ID card logging operations
 class IDCardLog {
 private:
+    // declare static instance of the IDCardLog class for the singleton design pattern
     static IDCardLog* instance;
-    IDCardLog(); // Private constructor declaration
+    // Private constructor declaration
+    IDCardLog(); 
 public:
     // Function declaration
     static IDCardLog* getInstance();

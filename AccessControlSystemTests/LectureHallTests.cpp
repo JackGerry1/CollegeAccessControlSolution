@@ -6,10 +6,17 @@
 
 /*
 References:
-URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
-URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
-URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 27/12/23
-URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
+GoogleTest (2023a) 'Advanced GoogleTest Topics', GoogleTest.
+Available at: https://google.github.io/googletest/advanced.html [Accessed 15th December 2023].
+
+GoogleTest (2023b) 'GoogleTest Primer', GoogleTest.
+Available at: https://google.github.io/googletest/primer.html [Accessed 15th December 2023].
+
+Tutorialspoint (2020) 'C++ Date and Time - Tutorialspoint', Tutorialspoint.
+Available at: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm [Accessed 27th December 2023].
+
+Haleem, A. (2020) 'Exploring Date and Time with Chrono', Medium.
+Available at: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 [Accessed 27th December 2023].
 */
 
 // Test: Security Role Access

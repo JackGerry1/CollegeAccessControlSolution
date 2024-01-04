@@ -4,31 +4,47 @@
 
 /*
 References:
-	URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
-	URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
-	URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
-	URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
-	URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
-	URL: https://www.programiz.com/cpp-programming/file-handling Date Accessed: 14/12/23
-	URL: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ Date Accessed: 27/12/23
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com.
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics.
+Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean.
+Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
+
+Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com.
+Available at: https://en.cppreference.com/w/cpp/types/size_t [Accessed 18th December 2023].
+
+GeeksForGeeks (2023b) 'Substring in C++', GeeksforGeeks.
+Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th December 2023].
+
+Programiz (2023a) 'C++ File Handling', Programiz. 
+Available at: https://www.programiz.com/cpp-programming/file-handling [Accessed 14th December 2023].
+
+Instructables (n.d.) 'How to Do the Singleton Design Pattern in C++', Instructables. 
+Available at: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ [Accessed 27th December 2023].
 */
 
-
+// Set the IDCardLog instance to a nullptr;
 IDCardLog* IDCardLog::instance = nullptr;
 
-IDCardLog::IDCardLog() {
-	// Initialization logic, if any
-}
+// Blank Constructor for IDCardLog
+IDCardLog::IDCardLog() {}
 
+// Function: getInstance
+// Objective: If no instance of the IDCardLog class exists create one, whilst preventing it from creating multiple of them. 
 IDCardLog* IDCardLog::getInstance() {
+	// only create new instance if one does not exist
+	// else return the one that currently exists. 
 	if (!instance) {
 		instance = new IDCardLog();
 	}
 	return instance;
-}
+} // end of getInstance
 
 // Function: logUserData
-// Purpose: Log user data when creating a new user
+// Objective: Log user data when creating a new user
 void IDCardLog::logUserData(const std::string& userInfo) {
 	// Open the file in append mode within the "LogFiles" directory
 	std::ofstream outputFile("LogFiles/ID_Card_List.txt", std::ios::app);
@@ -48,7 +64,7 @@ void IDCardLog::logUserData(const std::string& userInfo) {
 } // end of logUserData
 
 // Function: readUserDataFromFile
-// Purpose: read user data from the file in a vector friendy form
+// Objective: read user data from the file in a vector friendy form
 std::vector<std::string> IDCardLog::readUserDataFromFile() {
 	// Open the file for reading
 	std::ifstream inputFile("LogFiles/ID_Card_List.txt");
@@ -90,7 +106,7 @@ void IDCardLog::displayUsersFromLogFile() {
 		std::cout << "Current Users:\n";
 
 		// Loop through the user data vector and display each user's information
-		for (size_t i = 0; i < userData.size(); ++i) {
+		for (int i = 0; i < userData.size(); ++i) {
 			std::cout << i << ". " << userData[i] << '\n'; // Display user information with index
 		}
 
@@ -148,7 +164,7 @@ std::string IDCardLog::updateUserRoles(const std::string& userData, const std::v
 
 			// Join roles into a string with commas
 			std::string updatedRoles;
-			for (size_t i = 0; i < existingRolesVec.size(); ++i) {
+			for (int i = 0; i < existingRolesVec.size(); ++i) {
 				if (i != 0) {
 					updatedRoles += ", ";
 				}

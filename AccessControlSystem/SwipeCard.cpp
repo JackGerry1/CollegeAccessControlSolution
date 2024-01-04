@@ -3,12 +3,12 @@
 #include "SwipeCard.h"
 
 /* References:
-    URL: https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus Date Accessed: 13/12/23
-    URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
+    Gangwar, M. (2023) 'How to Create a Random Number Generator in C++', DigitalOcean. 
+    Available at: https://www.digitalocean.com/community/tutorials/random-number-generator-c-plus-plus [Accessed 13th December 2023].
+    
+    Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com. 
+    Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
 */
-
-//TODO: create a get cardID function to get the value outside this class?
-// also update the .h file to include this new function 
 
 // Constructor initializing with the cardID for the SwipeCard
 SwipeCard::SwipeCard(std::string cardID)

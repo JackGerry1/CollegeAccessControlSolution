@@ -4,13 +4,26 @@
 #include <tuple>
 /*
 References:
-	URL: https://www.geeksforgeeks.org/sort-string-characters/ Date Accessed: 14/12/23
-	URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
-	URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
-	URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
-	URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
-	URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
-	URL: https://www.programiz.com/cpp-programming/map Date Accessed: 30/12/23
+GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. 
+Available at: https://www.geeksforgeeks.org/sort-string-characters/ [Accessed 14th December 2023].
+
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com.
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics.
+Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean.
+Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
+
+Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com. 
+Available at: https://en.cppreference.com/w/cpp/types/size_t [Accessed 18th December 2023].
+
+GeeksForGeeks (2023b) 'Substring in C++', GeeksforGeeks. 
+Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th December 2023].
+
+Programiz (2023b) 'C++ Map', Programiz. 
+Available at: https://www.programiz.com/cpp-programming/map [Accessed 30th December 2023].
 */
 
 
@@ -321,15 +334,22 @@ void User::updateUser() {
 // Function: removeSwipeCardInput
 // Objective: get the correct user input and pass into the removeSwipeCard for the rest of the functionality
 void User::removeSwipeCardInput() {
+	// read data and put into a vector of strings, where each element is a user
 	std::vector<std::string> userData = IDCardLog::readUserDataFromFile();
+
+	// blank swipecard declartion
 	SwipeCard swipeCard("");
+
+	// make sure that there are users in the log file
 	if (userData.empty()) {
 		std::cout << "No users found in the log file.\n";
 		return;
 	}
 
+	// display the current users
 	IDCardLog::displayUsersFromLogFile();
-
+	
+	// ask for user input for the index of the swipecard that they want removed
 	int userIndex;
 	std::cout << "Enter the index/line number of the user to remove the swipe card from: ";
 	std::cin >> userIndex;
@@ -400,6 +420,7 @@ void User::removeRole() {
 		return;
 	}
 
+	// ask user for role index
 	int roleIndex;
 	std::cout << "Enter the index of the role to remove (0-" << existingRolesVec.size() - 1 << "): ";
 	std::cin >> roleIndex;
@@ -425,6 +446,8 @@ void User::removeRole() {
 			updatedUserStream << ",";
 		}
 	}
+	// this is for the first role, or if you remove the last role from a user 
+	// it keeps the same format to allow roles to be added back again
 	else {
 		updatedUserStream << ",";
 	}
@@ -434,6 +457,8 @@ void User::removeRole() {
 	userData[userIndex] = updatedRoles + selectedUser.substr(swipeCardIDPos - 1);
 
 	// Replace double spaces with single space in the updated user information
+	// Did this because I could not figure out where the double space issue was caused in the above program, 
+	// so just decided to replace them with single spaces instead. 
 	size_t found = userData[userIndex].find("  ");
 	while (found != std::string::npos) {
 		userData[userIndex].replace(found, 2, " ");
@@ -510,15 +535,17 @@ void User::displayUsersAlphabetically() {
 		// Sort user names alphabetically
 		std::sort(names.begin(), names.end());
 
-		// Display sorted user information
+		// Display sorted user information in the form
+		// Name: Jack Blackwood, Roles: Student, Swipe Card ID: 559072654
 		std::cout << "\nALPHABETICAL LIST OF USERS" << std::endl;
 		for (const auto& name : names) {
 			std::cout << "Name: " << name << ", Roles: ";
-			// Display user roles
+			// Display user roles there can be more than one so that is why it is in a nested loop
 			for (const auto& role : userRoles[name]) {
 				std::cout << role << ",";
 			}
-			std::cout << " Swipe Card ID: " << swipeCardIDs[name] << std::endl; // Retrieve swipe card ID using the user's name
+			// Retrieve and append swipe card ID using the user's name
+			std::cout << " Swipe Card ID: " << swipeCardIDs[name] << std::endl; 
 		}
 	}
 	else {
@@ -526,7 +553,3 @@ void User::displayUsersAlphabetically() {
 		std::cout << "No users found in the log file.\n";
 	}
 } // end of displayUsersAlphabetically
-
-
-
-

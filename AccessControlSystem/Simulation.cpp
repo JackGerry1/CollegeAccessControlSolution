@@ -4,14 +4,29 @@
 
 /*
 References:
-URL: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm Date Accessed: 27/12/23
-URL: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 Date Accessed: 27/12/23
-URL: https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string Date Accessed: 27/12/23
-URL: https://www.scaler.com/topics/cpp-string-replace/ Date Accessed: 18/12/23
-URL: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus 18/12/23
-URL: https://www.geeksforgeeks.org/substring-in-cpp/ Date Accessed: 18/12/23
-URL: https://cplusplus.com/reference/vector/vector/erase/ Date Accessed: 18/12/23
-URL: https://en.cppreference.com/w/cpp/types/size_t Date Accessed: 18/12/23
+Tutorialspoint (2020) 'C++ Date and Time - Tutorialspoint', Tutorialspoint.
+Available at: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm [Accessed 27th December 2023].
+
+Haleem, A. (2020) 'Exploring Date and Time with Chrono', Medium.
+Available at: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 [Accessed 27th December 2023].
+
+Clark, M. (2023) 'Creating a Formatted Date String from Date Time in C', CopyProgramming. 
+Available at: https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string [Accessed 27th December 2023].
+
+Kaushik, A. (2022) 'C++ String Replace Function', Scaler Topics.
+Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th December 2023].
+
+Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean.
+Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
+
+GeeksForGeeks (2023b) 'Substring in C++', GeeksforGeeks.
+Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th December 2023].
+
+Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com.
+Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com.
+Available at: https://en.cppreference.com/w/cpp/types/size_t [Accessed 18th December 2023].
 */
 
 // Function: startSimulation

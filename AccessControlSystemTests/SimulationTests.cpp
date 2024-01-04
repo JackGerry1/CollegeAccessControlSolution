@@ -17,8 +17,11 @@
 
 /*
 References:
-URL: https://google.github.io/googletest/primer.html Date Accessed: 15/12/23
-URL: https://google.github.io/googletest/advanced.html Date Accessed: 15/12/23
+GoogleTest (2023a) 'Advanced GoogleTest Topics', GoogleTest.
+Available at: https://google.github.io/googletest/advanced.html [Accessed 15th December 2023].
+
+GoogleTest (2023b) 'GoogleTest Primer', GoogleTest.
+Available at: https://google.github.io/googletest/primer.html [Accessed 15th December 2023].
 */
 
 // Test: Extract Roles from User Information
