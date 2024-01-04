@@ -21,6 +21,9 @@ Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th D
 
 Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean. 
 Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
+
+Samual, S. (2019). 'static_cast in C++.' www.tutorialspoint.com.
+Available at: https://www.tutorialspoint.com/static-cast-in-cplusplus [Accessed 18th December 2023].
 */
 
 // Test for the GetFullName function
@@ -52,7 +55,10 @@ TEST(UserTest, DisplayUsersAlphabetically_EmptyLogFile) {
 
 // Test cases for getRoleFromChoice function
 TEST(UserTest, getRoleFromChoice_ValidChoices) {
+    // Create a user object
 	User user("John", "Doe", std::vector<std::string>{""});
+
+    // check if integer is correctly corresponds to a role i.e 1 == Staff Member
 	EXPECT_EQ(user.getRoleFromChoice(1), "Staff Member");
 	EXPECT_EQ(user.getRoleFromChoice(2), "Student");
 	EXPECT_EQ(user.getRoleFromChoice(3), "Visitor / Guest");
@@ -64,7 +70,10 @@ TEST(UserTest, getRoleFromChoice_ValidChoices) {
 
 // Test case for invalid input from getRoleFromChoice
 TEST(UserTest, getRoleFromChoice_InvalidChoice) {
+    // Create a user object
 	User user("John", "Doe", std::vector<std::string>{""});
+
+    // check if it handles invalid roles index so > 7 or < 1
 	EXPECT_EQ(user.getRoleFromChoice(10), "No Role");
 	EXPECT_EQ(user.getRoleFromChoice(-1), "No Role");
 }

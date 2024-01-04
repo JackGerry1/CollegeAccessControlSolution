@@ -22,6 +22,9 @@ Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th Dec
 
 GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. 
 Available at: https://www.geeksforgeeks.org/sort-string-characters/ [Accessed 14th December 2023].
+
+Samual, S. (2019). 'static_cast in C++.' www.tutorialspoint.com. 
+Available at: https://www.tutorialspoint.com/static-cast-in-cplusplus [Accessed 18th December 2023].
 */
 
 // Constructor for the Building class, initializes building properties
@@ -289,7 +292,7 @@ void Building::changeRoomAndBuildingState() {
 						}
 
 						// Mark if the selected room or any other room in the building changed state
-						if (i == static_cast<size_t>(selectedRoomIndex)) {
+						if (i == static_cast<int>(selectedRoomIndex)) {
 							anyRoomInBuildingChanged = true; // Selected room changed
 						}
 					}

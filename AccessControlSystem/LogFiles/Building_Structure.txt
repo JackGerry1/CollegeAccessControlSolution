@@ -1,5 +1,5 @@
 Building Name: STEM, Room: KS133, Room Type: Staff Room, Room State: NORMAL, Building State: NORMAL
-Building Name: ART, Room: KA144, Room Type: Teaching Room, Room State: EMERGENCY, Building State: EMERGENCY
+Building Name: ART, Room: KA144, Room Type: Teaching Room, Room State: NORMAL, Building State: NORMAL
 Building Name: STEM, Room: KS455, Room Type: Secure Room, Room State: NORMAL, Building State: NORMAL
-Building Name: ART, Room: KA401, Room Type: Lecture Hall, Room State: EMERGENCY, Building State: EMERGENCY
+Building Name: ART, Room: KA401, Room Type: Lecture Hall, Room State: NORMAL, Building State: NORMAL
 Building Name: STEM, Room: KS201, Room Type: Secure Room, Room State: NORMAL, Building State: NORMAL
