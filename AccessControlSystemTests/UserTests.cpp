@@ -22,7 +22,7 @@ Available at: https://www.scaler.com/topics/cpp-string-replace/ [Accessed 18th D
 Ram, V. (2022) 'How to use the string find() in C++', DigitalOcean. 
 Available at: https://www.digitalocean.com/community/tutorials/string-find-c-plus-plus [Accessed 18th December 2023].
 
-Samual, S. (2019). 'static_cast in C++.' www.tutorialspoint.com.
+Samual, S. (2019). 'static_cast in C++.', Tutorialspoint.
 Available at: https://www.tutorialspoint.com/static-cast-in-cplusplus [Accessed 18th December 2023].
 */
 
