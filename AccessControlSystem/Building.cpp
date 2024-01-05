@@ -530,6 +530,7 @@ void Building::updateRoom() {
 			BuildingStructureLog::updateRoomDataFile(roomData);
 		}
 	}
+	// error if no rooms are found
 	else {
 		std::cout << "No rooms found in the log file.\n\n";
 	}
