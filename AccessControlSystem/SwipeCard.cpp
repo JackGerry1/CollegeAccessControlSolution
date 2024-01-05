@@ -48,7 +48,7 @@ void SwipeCard::removeSwipeCard(int userIndex, std::vector<std::string>& userDat
         // If "Swipe Card ID:" is found in the user's line
         if (swipeCardPos != std::string::npos) {
             // Erase the swipe card ID from the user's line
-            // The erase function removes characters starting from swipeCardPos + 15 to the end of the string
+            // The erase function removes characters starting from swipeCardPos + 15 (where the start of the cardID is) to the end of the string
             userLine.erase(swipeCardPos + 15, userLine.size() - (swipeCardPos + 15));
         }
 

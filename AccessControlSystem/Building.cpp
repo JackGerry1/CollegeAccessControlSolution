@@ -287,6 +287,7 @@ void Building::changeRoomAndBuildingState() {
 
 						// Update the room state in the room data for the rooms within the same building
 						if (currentRoomStateStr != buildingState) {
+							// keep the stuff before and after the room state the same but change the room state to match the building state
 							roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState + roomData[i].substr(currentRoomStateEnd);
 							buildingStateChanged = true; // Flag that a building changed its state
 						}
@@ -323,16 +324,20 @@ void Building::changeRoomAndBuildingState() {
 			// Update the building state in the log file
 			BuildingStructureLog::updateRoomDataFile(roomData);
 		}
+		// error for invalid room index
 		else {
 			std::cout << "Invalid room index selected.\n";
 		}
 	}
+	// error if no rooms found in the log file
 	else {
 		std::cout << "No rooms found in the log file.\n\n";
 	}
 
 } // end of changeRoomAndBuildingState
 
+// Function: updateRoom
+// Objective: update the room based on the user inputs 
 void Building::updateRoom() {
 	std::vector<std::string> roomData = BuildingStructureLog::readRoomDataFromFile();
 
@@ -477,6 +482,7 @@ void Building::updateRoom() {
 				std::cout << "3. Staff Room\n";
 				std::cout << "4. Secure Room\n";
 
+				// get the new room type
 				int selectedType;
 				std::cout << "Enter the number corresponding to the new room type: ";
 				std::cin >> selectedType;
@@ -578,6 +584,3 @@ void Building::addBuilding() {
 		std::cout << "Building with the same name or code already exists. Not added to log.\n";
 	}
 } // end of addBuilding
-
-
-

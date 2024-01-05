@@ -1,7 +1,7 @@
 // User.cpp : This file contains functions and attributes specifeid in the User.h file. 
 
 #include "User.h"
-#include <tuple>
+
 /*
 References:
 GeeksForGeeks (2023a) 'Sort string of characters', GeeksforGeeks. 
@@ -97,6 +97,8 @@ void User::addUser() {
 	std::string userInfo = "Name: " + getFullName() + ", Roles:";
 	for (int i = 0; i < roles.size(); ++i) {
 		userInfo += " " + roles[i];
+
+		// add a comma along as you are not at the last role for that user
 		if (i != roles.size() - 1) {
 			userInfo += ",";
 		}
@@ -176,8 +178,10 @@ std::vector<std::string> User::addRoles() {
 	const int maxRoles = 7; // Maximum number of roles allowed
 	std::vector<std::string> addedRoles; // Vector to store added roles
 	int numRoles;
+
+	// User input: number of roles to add
 	std::cout << "Enter the number of roles to add: ";
-	std::cin >> numRoles; // User input: number of roles to add
+	std::cin >> numRoles; 
 
 	// Limit the number of roles to the maximum allowed
 	if (numRoles > maxRoles) {
@@ -210,9 +214,10 @@ void User::addRoleToUser() {
 		// Display the users available in the log file
 		IDCardLog::displayUsersFromLogFile();
 
+		// User input: index of the user to modify
 		int index;
 		std::cout << "Enter the index of the user to add roles: ";
-		std::cin >> index; // User input: index of the user to modify
+		std::cin >> index; 
 
 		// Validate the entered index
 		if (index >= 0 && index < userData.size()) {
@@ -261,6 +266,7 @@ void User::removeUser() {
 		// Removing the user based on the provided index from the log file
 		IDCardLog::removeUserFromLogFile(index);
 	}
+	// error if no user are found in the log file
 	else {
 		std::cout << "No users found in the log file. Nothing to remove.\n\n";
 	}
@@ -311,6 +317,7 @@ void User::updateUser() {
 			std::string generateCardInput;
 			std::cin >> generateCardInput;
 
+			// set generate card to true meaning it will be updated in the updateUserInLogFile funciton
 			if (generateCardInput == "yes") {
 				generateCard = true;
 			}
@@ -322,10 +329,12 @@ void User::updateUser() {
 			std::cout << "User updated with:\nForename: " << newForename << "\nSurname: " << newSurname
 				<< "\nSwipe card updated: " << (generateCard ? "Yes" : "No") << std::endl;
 		}
+		// error for invalid index entered
 		else {
 			std::cout << "Invalid index.\n";
 		}
 	}
+	// erorr for no users in log file
 	else {
 		std::cout << "No users found in the log file.\n\n";
 	}
@@ -372,6 +381,7 @@ void User::removeRole() {
 	// Display available users from the log file
 	IDCardLog::displayUsersFromLogFile();
 
+	// prompt for index 
 	int userIndex;
 	std::cout << "Enter the index of the user to remove a role from: ";
 	std::cin >> userIndex;
@@ -436,12 +446,15 @@ void User::removeRole() {
 
 	// Reconstruct the updated user information with the removed role
 	std::ostringstream updatedUserStream;
+
+	// add info after the "Name: " up until ", Roles"
 	updatedUserStream << "Name: " << selectedUser.substr(6, rolesPos - 8);
 	updatedUserStream << ", Roles: ";
 
-	// Append the roles to the updated user information
+	// Append the remaining roles back onto the updated user stream separated by a comma
 	if (!existingRolesVec.empty()) {
-		for (size_t i = 0; i < existingRolesVec.size(); ++i) {
+		for (int i = 0; i < existingRolesVec.size(); ++i) {
+			// put the remaining roles into the updated user stream
 			updatedUserStream << existingRolesVec[i];
 			updatedUserStream << ",";
 		}
@@ -452,9 +465,11 @@ void User::removeRole() {
 		updatedUserStream << ",";
 	}
 
-	// Generate the updated user information string
-	std::string updatedRoles = updatedUserStream.str();
-	userData[userIndex] = updatedRoles + selectedUser.substr(swipeCardIDPos - 1);
+	// Generate the updated user information string 
+	std::string updatedUser = updatedUserStream.str();
+
+	// updatedUser contains name and role info and then add the swipecard info for that selected user
+	userData[userIndex] = updatedUser + selectedUser.substr(swipeCardIDPos - 1);
 
 	// Replace double spaces with single space in the updated user information
 	// Did this because I could not figure out where the double space issue was caused in the above program, 

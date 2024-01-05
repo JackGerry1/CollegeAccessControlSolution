@@ -1,5 +1,5 @@
 Name: Jack Gerry, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 783807102
-Name: Sandra White, Roles: Manager, Staff Member, Swipe Card ID: 554204774
+Name: Sandra White, Roles: Staff Member, Student, Visitor / Guest, Swipe Card ID: 554204774
 Name: Rachel Hall, Roles: Contract Cleaner, Swipe Card ID: 912345678
 Name: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681
 Name: Lily Garcia, Roles: Manager, Swipe Card ID: 216549873

@@ -25,9 +25,10 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 	// Check the room state first
 	if (roomState == "NORMAL") {
 
-		// Check if any of the roles match the allowed entry requirements
+		// Check if any of the roles match the allowed entry requirements 
+		// the below is for Staff Member
 		if (formattedRoles.find("Staff Member") != std::string::npos) {
-			// Get the current system time
+			// Get the current system time and convert into time_t for localtime_s
 			auto now = std::chrono::system_clock::now();
 			std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
 
@@ -42,6 +43,7 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 				accessGranted = true;
 			}
 		}
+		// Student Check
 		else if (formattedRoles.find("Student") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -58,7 +60,7 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 				accessGranted = true;
 			}
 		}
-
+		// Contract Cleaner Check
 		else if (formattedRoles.find("Contract Cleaner") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -79,15 +81,15 @@ bool TeachingRoom::verifyEntryRequirements(const std::string& formattedRoles, co
 			}
 
 		}
-
+		// check for manager
 		else if (formattedRoles.find("Manager") != std::string::npos) {
 			accessGranted = true;
 		}
 	}
+	// Emergency mode access
 	else {
-		// Emergency mode access
+		// Emergency Responder: Access only in emergency mode
 		if (formattedRoles.find("Emergency Responder") != std::string::npos) {
-			// Emergency Responder: Access only in emergency mode
 			accessGranted = true;
 		}
 	}

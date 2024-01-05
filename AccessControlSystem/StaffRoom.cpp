@@ -27,8 +27,9 @@ bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const
 	if (roomState == "NORMAL") {
 
 		// Check if any of the roles match the allowed entry requirements
+		// this is the check for Staff Members
 		if (formattedRoles.find("Staff Member") != std::string::npos) {
-			// Get the current system time
+			// Get the current system time and convert to time_t for localtime_s
 			auto now = std::chrono::system_clock::now();
 			std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
 
@@ -43,6 +44,7 @@ bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const
 				accessGranted = true;
 			}
 		}
+		// check for Contract Cleaner
 		else if (formattedRoles.find("Contract Cleaner") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -63,14 +65,15 @@ bool StaffRoom::verifyEntryRequirements(const std::string& formattedRoles, const
 			}
 
 		}
+		// check for manager
 		else if (formattedRoles.find("Manager") != std::string::npos) {
 			accessGranted = true;
 		}
 	}
+	// Emergency mode access
 	else {
-		// Emergency mode access
+		// Emergency Responder: Access only in emergency mode
 		if (formattedRoles.find("Emergency Responder") != std::string::npos) {
-			// Emergency Responder: Access only in emergency mode
 			accessGranted = true;
 		}
 	}

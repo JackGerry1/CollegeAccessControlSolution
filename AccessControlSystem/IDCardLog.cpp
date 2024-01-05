@@ -165,6 +165,7 @@ std::string IDCardLog::updateUserRoles(const std::string& userData, const std::v
 			// Join roles into a string with commas
 			std::string updatedRoles;
 			for (int i = 0; i < existingRolesVec.size(); ++i) {
+				// dont need to append a comma if the it is the first role
 				if (i != 0) {
 					updatedRoles += ", ";
 				}

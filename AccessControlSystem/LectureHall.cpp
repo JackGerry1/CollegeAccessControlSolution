@@ -27,6 +27,7 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 	if (roomState == "NORMAL") {
 
 		// Check if any of the roles match the allowed entry requirements
+		// below is a check for staff member
 		if (formattedRoles.find("Staff Member") != std::string::npos) {
 			// Get the current system time
 			auto now = std::chrono::system_clock::now();
@@ -87,6 +88,7 @@ bool LectureHall::verifyEntryRequirements(const std::string& formattedRoles, con
 			accessGranted = true;
 		}	
 	}
+	// check for emergeny state
 	else {
 		// Emergency Responder: Access only in emergency mode
 		if (formattedRoles.find("Emergency Responder") != std::string::npos) {

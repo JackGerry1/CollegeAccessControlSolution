@@ -156,25 +156,32 @@ bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string
 	std::string message; // String to store the access status message
 
 	// Check the type of room and verify access based on room type
+	// will then create a empty object for the specifed room type
 	// will call a different overloaded function based on the room type
+	
+	// check for lecture hall
 	if (roomType == "Lecture Hall") {
 		LectureHall lectureHall("", "", -1, "", -1);
 		accessGranted = lectureHall.verifyEntryRequirements(formattedRoles, roomState);
 	}
+	// check for teaching room
 	else if (roomType == "Teaching Room") {
 		TeachingRoom teachingRoom("", "", -1, "", -1);
 		accessGranted = teachingRoom.verifyEntryRequirements(formattedRoles, roomState);
 	}
+	// check for staff room
 	else if (roomType == "Staff Room") {
 		StaffRoom staffRoom("", "", -1, "", -1);
 		accessGranted = staffRoom.verifyEntryRequirements(formattedRoles, roomState);
 	}
+	// check for secure room
 	else if (roomType == "Secure Room") {
 		SecureRoom secureRoom("", "", -1, "", -1);
 		accessGranted = secureRoom.verifyEntryRequirements(formattedRoles, roomState);
 	}
+	// it has gone terribly wrong if you end up here
 	else {
-		std::cout << "Unknown room type encountered." << std::endl; // Handle an unknown room type
+		std::cout << "Unknown room type encountered." << std::endl; 
 	}
 
 	// Formulate the access status message based on accessGranted flag
@@ -187,10 +194,12 @@ bool Simulation::verifyRoomAccess(const std::string& roomType, const std::string
 	// Get the current date and time
 	std::string dateTime = getDateAndTime(); 
 
-	message += ", Date And Time: " + dateTime; // Include date and time in the access status message
+	// Include date and time in the access status message before logging it
+	message += ", Date And Time: " + dateTime; 
 	std::cout << "Adding To Daily Access Log: " << message << std::endl;
 
-	DailyLogFile::logRoomAccessAttempts(message); // Log the access attempt in the daily log file
+	// Log the access attempt in the daily log file
+	DailyLogFile::logRoomAccessAttempts(message); 
 
 	return accessGranted; // Return the access permission status
 } // end of verifyRoomAccess
@@ -247,6 +256,7 @@ void Simulation::joinRoom(const std::string& userToJoin) {
 				leaveRoom(log); 
 			}
 		}
+		// error message for invalid index
 		else {
 			std::cout << "Invalid room index/line number entered." << std::endl;
 		}
@@ -361,6 +371,7 @@ std::string Simulation::getDateAndTime() {
 	std::ostringstream oss;
 	oss << std::put_time(&ltm, "%Y-%m-%d %H:%M:%S");
 
+	// convert string stream to string
 	std::string dateTime = oss.str();
 
 	return dateTime; // Return the formatted date and time

@@ -19,6 +19,7 @@ bool SecureRoom::verifyEntryRequirements(const std::string& formattedRoles, cons
         // Grant access to Manager only in NORMAL mode
         accessGranted = true;
     }
+    // Emergency Access State
     else {
         // Grant access to Emergency Responder only in emergency mode
         if (formattedRoles.find("Emergency Responder") != std::string::npos) {
