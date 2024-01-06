@@ -25,6 +25,9 @@ Available at: https://www.geeksforgeeks.org/sort-string-characters/ [Accessed 14
 
 Samual, S. (2019). 'static_cast in C++.', Tutorialspoint.
 Available at: https://www.tutorialspoint.com/static-cast-in-cplusplus [Accessed 18th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Constructor for the Building class, initializes building properties

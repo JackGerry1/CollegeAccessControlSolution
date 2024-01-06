@@ -9,6 +9,9 @@ Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18t
 
 Programiz (2023a) 'C++ File Handling', Programiz.
 Available at: https://www.programiz.com/cpp-programming/file-handling [Accessed 14th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Function: logInfo

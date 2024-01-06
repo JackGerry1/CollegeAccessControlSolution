@@ -24,6 +24,9 @@ Available at: https://www.programiz.com/cpp-programming/file-handling [Accessed 
 
 Instructables (n.d.) 'How to Do the Singleton Design Pattern in C++', Instructables. 
 Available at: https://www.instructables.com/How-to-Do-the-Singleton-Design-Pattern-in-C/ [Accessed 27th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Set the IDCardLog instance to a nullptr;

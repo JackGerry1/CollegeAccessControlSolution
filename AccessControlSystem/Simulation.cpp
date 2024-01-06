@@ -27,6 +27,9 @@ Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18t
 
 Cppreference (2023) 'std::size_t - cppreference.com', en.cppreference.com.
 Available at: https://en.cppreference.com/w/cpp/types/size_t [Accessed 18th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Function: startSimulation

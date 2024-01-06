@@ -1,6 +1,14 @@
 // SecureRoom.cpp : This file contains functions and attributes specifeid in the SecureRoomHall.h file. 
 #include "SecureRoom.h"
 
+/*
+References: 
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
+
+*/
+
 // Function: verifyEntryRequirements
 // Parameters: const std::string& formattedRoles - formatted user roles const std::string& roomState - state of the room
 // Objective: Determines if access is granted based on user roles and room state.

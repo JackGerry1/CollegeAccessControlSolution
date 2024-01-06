@@ -8,6 +8,9 @@
     
     Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com. 
     Available at: https://cplusplus.com/reference/vector/vector/erase/ [Accessed 18th December 2023].
+
+    Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+    Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Constructor initializing with the cardID for the SwipeCard

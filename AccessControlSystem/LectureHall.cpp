@@ -10,6 +10,9 @@ Available at: https://www.tutorialspoint.com/cplusplus/cpp_date_time.htm [Access
 
 Haleem, A. (2020) 'Exploring Date and Time with Chrono', Medium.
 Available at: https://ambreen2006.medium.com/exploring-date-and-time-with-chrono-3a8e9af60f62 [Accessed 27th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy.
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 // Function: verifyEntryRequirements

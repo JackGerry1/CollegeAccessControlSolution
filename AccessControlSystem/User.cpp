@@ -24,6 +24,9 @@ Available at: https://www.geeksforgeeks.org/substring-in-cpp/ [Accessed 18th Dec
 
 Programiz (2023b) 'C++ Map', Programiz. 
 Available at: https://www.programiz.com/cpp-programming/map [Accessed 30th December 2023].
+
+Sinha, A. (2022). string::npos in C++. [Online] CodeSpeedy. 
+Available at: https://www.codespeedy.com/stringnpos-in-cpp/ [Accessed 18th December 2023].
 */
 
 
