@@ -156,6 +156,8 @@ For quality assurance and validation, alongside manual testing, this solution in
 
 ## References
 
+Sinha, A. (2022). 'string::npos in C++.', CodeSpeedy. Available at: [https://www.codespeedy.com/stringnpos-in-cpp/](https://www.codespeedy.com/stringnpos-in-cpp/) [Accessed 18th December 2023].
+
 Clark, M. (2023) 'Creating a Formatted Date String from Date Time in C', CopyProgramming. Available at: [https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string](https://copyprogramming.com/howto/c-get-formated-date-string-from-date-time#c11-get-current-date-and-time-as-string) [Accessed 27th December 2023].
 
 Cplusplus.com (2023) 'std::vector::erase', Cplusplus.com. Available at: [https://cplusplus.com/reference/vector/vector/erase/](https://cplusplus.com/reference/vector/vector/erase/) [Accessed 18th December 2023].
