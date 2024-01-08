@@ -1,9 +1,8 @@
-Name: Jack J, Roles: Staff Member, Contract Cleaner, Swipe Card ID: 525365346
 Name: Sandra White, Roles: Staff Member, Student, Visitor / Guest, Swipe Card ID: 554204774
 Name: Rachel Hall, Roles: Contract Cleaner, Swipe Card ID: 912345678
 Name: Natalie Lee, Roles: Emergency Responder, Swipe Card ID: 597534681
 Name: Lily Garcia, Roles: Manager, Swipe Card ID: 216549873
-Name: Quentin Adams, Roles: Visitor / Guest, Swipe Card ID: 
+Name: Quentin Adams, Roles: Visitor / Guest, Swipe Card ID: 782450497
 Name: Michael Brown, Roles: Security, Swipe Card ID: 543217896
 Name: Xavier Adams, Roles: Visitor / Guest, Swipe Card ID: 789123456
 Name: Oliver Martinez, Roles: Staff Member, Swipe Card ID: 345678901
@@ -20,7 +19,4 @@ Name: Ursula Harris, Roles: Emergency Responder, Swipe Card ID: 975346812
 Name: Victor King, Roles: Staff Member, Swipe Card ID: 456789012
 Name: Jasmine Clark, Roles: Visitor / Guest, Swipe Card ID: 567891234
 Name: Thomas Wright, Roles: Security, Swipe Card ID: 432178965
-Name: Hannah Evans, Roles: Staff Member, Swipe Card ID: 234567890
-Name: Bob Smith, Roles: Student, Swipe Card ID: 987654321
-Name: Alice Johnson, Roles: Staff Member, Swipe Card ID: 123456789
-Name: Jack Blackwood, Roles: Student, Swipe Card ID: 559072654
+Name: Keith White, Roles: Contract Cleaner, Manager, Swipe Card ID: 529356851
