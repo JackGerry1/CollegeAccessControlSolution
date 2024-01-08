@@ -145,7 +145,8 @@ void Building::addRoom() {
 	// Retrieve building information based on the selected building index
 	std::string buildingInfo = BuildingStructureLog::getBuildingInfo(selectedBuildingIndex);
 
-	// Extract the building code from the retrieved building information
+	// Extract the building code from the retrieved building information it
+	// it is after "Building Code: ", but before the new line 
 	size_t buildingCodeStart = buildingInfo.find("Building Code: ");
 	std::string buildingCode = buildingInfo.substr(buildingCodeStart + 15, buildingInfo.find("\n", buildingCodeStart) - buildingCodeStart - 15);
 
@@ -155,7 +156,7 @@ void Building::addRoom() {
 	// Create a unique label for the room by combining building code, floor number, and room number
 	std::string roomLabel = buildingCode + std::to_string(floorNumber) + roomNumberStr;
 
-	// Extract the building name from the retrieved building information
+	// Extract the building name from the retrieved building information which is after "Building Name: " but before "Buidling Code: "
 	std::string buildingName = buildingInfo.substr(buildingInfo.find("Building Name: ") + 15, buildingInfo.find(", Building Code:") - buildingInfo.find("Building Name: ") - 15);
 
 	// Set various attributes of the newRoom object
@@ -242,7 +243,8 @@ void Building::changeRoomAndBuildingState() {
 			size_t buildingNameStart = roomInfo.find("Building Name: ");
 			size_t buildingNameEnd = roomInfo.find(", Room: ");
 
-			// Extract the building name from the room information using the identified positions
+			// Extract the building name from the room information using the identified positions, 
+			// which is after "Building Name: " but before ", Room: "
 			std::string buildingName = roomInfo.substr(buildingNameStart + 15, buildingNameEnd - buildingNameStart - 15);
 
 			// Find the start and end positions of the room state within the room information
@@ -250,6 +252,7 @@ void Building::changeRoomAndBuildingState() {
 			size_t roomStateEnd = roomInfo.find(", Building State:");
 
 			// Extract the room state as a string from the room information using the identified positions
+			// which is after "Room State: " but before ", Building State:"
 			std::string roomStateStr = roomInfo.substr(roomStateStart + 12, roomStateEnd - roomStateStart - 12);
 
 			// Toggle the room state between "NORMAL" and "EMERGENCY"
@@ -271,12 +274,15 @@ void Building::changeRoomAndBuildingState() {
 
 			// Loop through room data to update building state based on room state changes
 			for (size_t i = 0; i < roomData.size(); ++i) {
+				// find the start of the building name
 				size_t currentBuildingNameStart = roomData[i].find("Building Name: ");
 
 				// Check if the room data contains building-related information
 				if (currentBuildingNameStart != std::string::npos) {
+					// find the end of the building name
 					size_t currentBuildingNameEnd = roomData[i].find(", Room: ");
-					// get building current building name and compare it against the room that has had their state changed
+					// get building current building name and compare it against the room that has had their state changed, 
+					// which located after "Building Name: " but before ", Room: "
 					std::string currentBuildingName = roomData[i].substr(currentBuildingNameStart + 15, currentBuildingNameEnd - currentBuildingNameStart - 15);
 
 					// Check if the room belongs to the same building as the selected room
@@ -292,12 +298,14 @@ void Building::changeRoomAndBuildingState() {
 						if (currentRoomStateStr != buildingState) {
 							// keep the stuff before and after the room state the same but change the room state to match the building state
 							roomData[i] = roomData[i].substr(0, currentRoomStateStart + 12) + buildingState + roomData[i].substr(currentRoomStateEnd);
-							buildingStateChanged = true; // Flag that a building changed its state
+							// Flag that a building changed its state
+							buildingStateChanged = true; 
 						}
 
 						// Mark if the selected room or any other room in the building changed state
 						if (i == static_cast<int>(selectedRoomIndex)) {
-							anyRoomInBuildingChanged = true; // Selected room changed
+							// Selected room changed
+							anyRoomInBuildingChanged = true; 
 						}
 					}
 				}
@@ -312,12 +320,15 @@ void Building::changeRoomAndBuildingState() {
 					// Check if the room data contains building-related information
 					if (currentBuildingNameStart != std::string::npos) {
 						size_t currentBuildingNameEnd = roomData[i].find(", Room: ");
+
+						// find the current building name, which is located between "Building Name: " and ", Room: "
 						std::string currentBuildingName = roomData[i].substr(currentBuildingNameStart + 15, currentBuildingNameEnd - currentBuildingNameStart - 15);
 
 						// Check if the room belongs to the same building as the selected room
 						if (currentBuildingName == buildingName) {
 							size_t buildingStateStart = roomData[i].find("Building State: ");
 							// Update the building state for the rooms within the same building
+							// which is located after the "Building State: "
 							roomData[i] = roomData[i].substr(0, buildingStateStart + 16) + buildingState;
 						}
 					}
@@ -372,8 +383,10 @@ void Building::updateRoom() {
 				size_t roomPos = roomInfo.find(", Room: ");
 				if (roomPos != std::string::npos) {
 					// Extract building name and room number
+					// building name is after "Building Name: " but before ", Room: "
+					// room number is after ", Room: " but before ", Room Type: "
 					buildingName = roomInfo.substr(buildingNamePos + 15, roomPos - (buildingNamePos + 15));
-					roomNumber = roomInfo.substr(roomPos + 8, roomInfo.find(", Room Type: ") - (roomPos + 8)); // Adjust based on the expected structure
+					roomNumber = roomInfo.substr(roomPos + 8, roomInfo.find(", Room Type: ") - (roomPos + 8)); 
 
 					// Find the position of "Room Type: " in the room information
 					size_t roomTypePos = roomInfo.find("Room Type: ");
@@ -385,8 +398,13 @@ void Building::updateRoom() {
 							size_t buildingStatePos = roomInfo.find(", Building State: ");
 							if (buildingStatePos != std::string::npos) {
 								// Extract room type, room state, and building state from roomInfo
+								// room type is located after ", Room Type: " but before ", Room State: "
 								roomType = roomInfo.substr(roomTypePos + 11, roomStatePos - (roomTypePos + 11));
+								
+								// room state is located ", Room State: " but before ", Buidling State: "
 								roomState = roomInfo.substr(roomStatePos + 14, buildingStatePos - (roomStatePos + 14));
+								
+								// building state is located after the ", Building State: "
 								buildingState = roomInfo.substr(buildingStatePos + 18);
 							}
 						}

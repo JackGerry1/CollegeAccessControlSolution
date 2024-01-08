@@ -99,7 +99,7 @@ void Simulation::extractRoles(const std::string& userToJoin, std::vector<std::st
 
 	if (pos != std::string::npos) {
 		// Extract roles substring after "Roles:"
-		std::string rolesString = userToJoin.substr(pos + 7); // Skip "Roles:" and space
+		std::string rolesString = userToJoin.substr(pos + 7); 
 
 		// Find the position of "Swipe Card ID:"
 		size_t swipeCardPos = rolesString.find("Swipe Card ID:");
@@ -132,12 +132,16 @@ void Simulation::extractRoomInfo(const std::string& roomToJoin, std::string& roo
 	// Check if both "Room Type:" and "Room State:" are found in the input string
 	if (typePos != std::string::npos && statePos != std::string::npos) {
 		// Extract room type substring after "Room Type:"
-		size_t typeStart = typePos + 11; // Skip "Room Type:" and space
-		size_t typeEnd = roomToJoin.find(',', typeStart); // Find the end of the room type string
+		size_t typeStart = typePos + 11;
+
+		// Find the end of the room type string
+		size_t typeEnd = roomToJoin.find(',', typeStart); 
+
+		// Assign the room type, which is found between the typeStart and typeEnd
 		roomType = roomToJoin.substr(typeStart, typeEnd - typeStart);
 
 		// Extract room state substring after "Room State:" and stop before "Building State:"
-		size_t stateStart = statePos + 12; // Skip "Room State:" and space
+		size_t stateStart = statePos + 12; 
 		size_t buildingStatePos = roomToJoin.find("Building State:");
 
 		// Determine the endpoint for the room state substring:

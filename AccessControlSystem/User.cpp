@@ -400,7 +400,7 @@ void User::removeRole() {
 	std::cout << "Selected User: " << selectedUser << std::endl;
 
 	// Find the position of the "Roles: " substring in the user's information
-	// It identifies the starting point of the roles in the user data
+	// It identifies the starting point of the roles in the user data ie "Roles: Student, Staff Member"
 	size_t rolesPos = selectedUser.find("Roles: ");
 	if (rolesPos == std::string::npos) {
 		std::cout << "Roles information not found for this user.\n";
@@ -408,14 +408,14 @@ void User::removeRole() {
 	}
 
 	// Find the position of "Swipe Card ID: " after the roles information
-	// Identifies the end point of roles and the start of the swipe card data
+	// Identifies the end point of roles and the start of the swipe card data ie. "Swipe Card ID: 12345678"
 	size_t swipeCardIDPos = selectedUser.find("Swipe Card ID: ", rolesPos);
 	if (swipeCardIDPos == std::string::npos) {
 		std::cout << "Invalid user data format.\n";
 		return;
 	}
 
-	// Extract the existing roles as a substring
+	// Extract the existing roles as a substring, which is after the "Roles: " but before the "Swipe Card ID: 123456789"
 	std::string existingRoles = selectedUser.substr(rolesPos + 7, swipeCardIDPos - (rolesPos + 9));
 
 	// Parse the existing roles into a vector using stringstream
@@ -450,7 +450,7 @@ void User::removeRole() {
 	// Reconstruct the updated user information with the removed role
 	std::ostringstream updatedUserStream;
 
-	// add info after the "Name: " up until ", Roles"
+	// add the same info after the "Name: " up until ", Roles"
 	updatedUserStream << "Name: " << selectedUser.substr(6, rolesPos - 8);
 	updatedUserStream << ", Roles: ";
 
@@ -512,42 +512,55 @@ void User::displayUsersAlphabetically() {
 
 			// Parse user data string into tokens separated by commas
 			while (std::getline(ss, token, ',')) {
-				// Extract user's name
 				if (token.find("Name:") != std::string::npos) {
 					size_t namePos = token.find("Name:");
-					name = token.substr(namePos + 6); // Extract the user's name from the token
+
+					// Extract the user's name from the token
+					name = token.substr(namePos + 6); 
 				}
 				// Extract user's roles
 				else if (token.find("Roles:") != std::string::npos) {
 					// Extract existing roles associated with the user
-					std::string existingRoles; // Variable to store extracted existing roles
-					size_t rolePos = userString.find("Roles:"); // Find the position of "Roles:" in the user string
-					size_t startSwipeCardIDPos = userString.find("Swipe Card ID:", rolePos); // Find the position of "Swipe Card ID:" after "Roles:"
+
+					// Variable to store extracted existing roles
+					std::string existingRoles;
+
+					// Find the position of "Roles:" in the user string
+					size_t rolePos = userString.find("Roles:");
+
+					// Find the position of "Swipe Card ID:" after "Roles:"
+					size_t startSwipeCardIDPos = userString.find("Swipe Card ID:", rolePos); 
 
 					// Check if positions for roles and swipe card ID exist
 					if (rolePos != std::string::npos && startSwipeCardIDPos != std::string::npos) {
-						// Extract existing roles from the user string
-						existingRoles = userString.substr(rolePos + 7, startSwipeCardIDPos - (rolePos + 9)); // Extract roles substring between "Roles:" and "Swipe Card ID:"
-						std::istringstream rolesStream(existingRoles); // Create a string stream to process the extracted roles
-						std::string roleToken; // Variable to store individual role tokens
+						
+						// Extract roles substring between "Roles:" and "Swipe Card ID:" from the current user 
+						existingRoles = userString.substr(rolePos + 7, startSwipeCardIDPos - (rolePos + 9)); 
 
-						// Split the existing roles into individual role tokens separated by commas
+						// Create a string stream to process the extracted roles
+						std::istringstream rolesStream(existingRoles);
+
+						// Variable to store the existing roles
+						std::string roleToken;
+
+						// Store individual roles in the userRolesVector this will be mapped to the corresponding user
 						while (std::getline(rolesStream, roleToken, ',')) {
-							userRolesVector.push_back(roleToken); // Store individual roles in the userRolesVector
+							userRolesVector.push_back(roleToken); 
 						}
 					}
 				}
 				// Extract user's swipe card ID
 				else if (token.find("Swipe Card ID:") != std::string::npos) {
 					size_t swipeCardIDPos = token.find("Swipe Card ID:");
-					swipeID = token.substr(swipeCardIDPos + 15); // Extract the swipe card ID from the token
+					// Extract the swipe card ID from the token after "Swipe Card ID: "
+					swipeID = token.substr(swipeCardIDPos + 15);
 				}
 			}
 
-			// Store user data into respective containers
+			// Store user data into respective containers associate userRoles and swipeCardIDs with the current user name
 			names.push_back(name);
 			userRoles[name] = userRolesVector;
-			swipeCardIDs[name] = swipeID; // Associate swipe card ID with the user's name
+			swipeCardIDs[name] = swipeID; 
 		}
 
 		// Sort user names alphabetically

@@ -139,24 +139,30 @@ std::string IDCardLog::updateUserRoles(const std::string& userData, const std::v
 
 		// Check if 'Swipe Card ID: ' is found after 'Roles: '
 		if (swipeCardIDPos != std::string::npos) {
-			// Find the end position of roles, considering it ends before ',' or 'Swipe Card ID: '
+			// Find the end position of roles, considering it ends at the "," which is just before "Swipe Card ID: "
 			size_t endOfRolesPos = updatedUser.find(",", rolesPos);
 			if (endOfRolesPos == std::string::npos || endOfRolesPos > swipeCardIDPos) {
 				endOfRolesPos = swipeCardIDPos;
 			}
 
-			// Extract existing roles as a substring
+			// Extract existing roles as a substring, which is after "Roles: " but before "Swipe Card ID: "
 			std::string existingRoles = updatedUser.substr(rolesPos + 7, endOfRolesPos - (rolesPos + 7));
 
-			// Split existing roles into a vector
-			std::istringstream rolesStream(existingRoles);
-			std::vector<std::string> existingRolesVec;
-			std::string roleToken;
+			// Create a stringstream to tokenize the existing roles
+			std::istringstream rolesStream(existingRoles); 
+
+			// Vector to store existing roles
+			std::vector<std::string> existingRolesVec; 
+			
+			// variable to store each role, before it goes into the vector of roles
+			std::string roleToken; 
+
+			// Tokenize the existing roles based on commas and store them in a vector
 			while (std::getline(rolesStream, roleToken, ',')) {
-				existingRolesVec.push_back(roleToken);
+				existingRolesVec.push_back(roleToken); 
 			}
 
-			// Append new roles that are not already present in the existing roles vector
+			// Append new roles that are not already present in the existing roles vector at the end of it
 			for (const auto& newRole : rolesToAdd) {
 				// Check if the new role is not already in the existing roles vector
 				if (std::find(existingRolesVec.begin(), existingRolesVec.end(), newRole) == existingRolesVec.end()) {
@@ -263,29 +269,35 @@ void IDCardLog::updateUserInLogFile(int index, const std::string& newForename, c
 		// Find the starting position of the 'Role: ' substring in the user data
 		size_t roleStart = userToUpdate.find("Role: ");
 		if (roleStart != std::string::npos) {
-			// Find the end position of the role substring
+			// Find the end position of the individual role substring, which is before the ","
 			size_t roleEnd = userToUpdate.find(",", roleStart);
-			// Extract the existing role information from the user data
+			// Extract the existing role information from the user data for each role, which is between "Role: " and "," after it
 			existingRole = userToUpdate.substr(roleStart + 6, roleEnd - roleStart - 6);
 		}
 
 		// Find the starting position of the 'Swipe Card ID: ' substring in the user data
 		size_t swipeCardStart = userToUpdate.find("Swipe Card ID: ");
 		if (swipeCardStart != std::string::npos) {
-			// Extract the existing swipe card ID information from the user data
+			// Extract the existing swipe card ID information from the user data, which is after "Swipe Card ID: "
 			swipeCardID = userToUpdate.substr(swipeCardStart + 15);
 		}
 
-		// Update forename and/or surname if provided
+		// Update forename and/or surname if required
+
+		// find where the name stars, which is after the "Name: "
 		size_t nameStart = userToUpdate.find("Name: ") + 6;
-		size_t commaPosition = userToUpdate.find(",", nameStart); // Find the comma after the name
-		size_t surnameStart = userToUpdate.find(" ", nameStart); // Find the space between forename and surname
+
+		// Find the comma after the name, which is where the role starts
+		size_t commaPosition = userToUpdate.find(",", nameStart);
+
+		// Find the space between forename and surname
+		size_t surnameStart = userToUpdate.find(" ", nameStart); 
 
 		// Update surname if provided
 		if (!newSurname.empty()) {
 			// Check if the surname exists in the user data
 			if (surnameStart != std::string::npos) {
-				// Find the position of the space after the current surname
+				// Find the position of the space after the current surnameStart position
 				size_t spaceAfterSurname = userToUpdate.find(" ", surnameStart + 1);
 				// Calculate the length of the current surname
 				size_t surnameLength = (spaceAfterSurname != std::string::npos) ? spaceAfterSurname - (surnameStart + 1) : userToUpdate.length() - (surnameStart + 1);
@@ -314,11 +326,13 @@ void IDCardLog::updateUserInLogFile(int index, const std::string& newForename, c
 			userToUpdate.replace(userToUpdate.find("Swipe Card ID: ") + 15, userToUpdate.find("\n") - (userToUpdate.find("Swipe Card ID: ") + 15), swipeCardID);
 		}
 
-		std::cout << "User information updated.\n"; // Display success message
-		updateUserDataFile(userData); // Update the log file with the modified user data
+		// Display success message and update the log file with the modified user data
+		std::cout << "User information updated.\n"; 
+		updateUserDataFile(userData); 
 	}
+	// Display error message for invalid index
 	else {
-		std::cout << "Invalid index.\n"; // Display error message for invalid index
+		std::cout << "Invalid index.\n"; 
 	}
 } // end of updateUserInLogFile
 
