@@ -392,7 +392,7 @@ void User::removeRole() {
 	// Validate the entered user index
 	if (userIndex < 0 || userIndex >= userData.size()) {
 		std::cout << "Invalid user index.\n";
-		return;
+		return; // return if invalid index entered 
 	}
 
 	// outputs the selected user
@@ -404,7 +404,7 @@ void User::removeRole() {
 	size_t rolesPos = selectedUser.find("Roles: ");
 	if (rolesPos == std::string::npos) {
 		std::cout << "Roles information not found for this user.\n";
-		return;
+		return; // return if there is no roles for the user to remove
 	}
 
 	// Find the position of "Swipe Card ID: " after the roles information
@@ -412,7 +412,7 @@ void User::removeRole() {
 	size_t swipeCardIDPos = selectedUser.find("Swipe Card ID: ", rolesPos);
 	if (swipeCardIDPos == std::string::npos) {
 		std::cout << "Invalid user data format.\n";
-		return;
+		return; // return if the data is in an invalid format. 
 	}
 
 	// Extract the existing roles as a substring, which is after the "Roles: " but before the "Swipe Card ID: 123456789"
