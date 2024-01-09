@@ -378,33 +378,43 @@ void Building::updateRoom() {
 
 			// Find the position of "Building Name: " in the room information
 			size_t buildingNamePos = roomInfo.find("Building Name: ");
-			if (buildingNamePos == std::string::npos) return; // If "Building Name: " not found, exit
-
+			if (buildingNamePos == std::string::npos) {
+				return; // If "Building Name: " not found, exit
+			}
+			
 			// Find the position of ", Room: " in the room information after "Building Name: "
 			size_t roomPos = roomInfo.find(", Room: ", buildingNamePos);
-			if (roomPos == std::string::npos) return; // If ", Room: " not found, exit
+			if (roomPos == std::string::npos) {
+				return; // If ", Room: " not found, exit
+			}
 
 			// Extract building name between "Building Name: " and ", Room: "
 			buildingName = roomInfo.substr(buildingNamePos + 15, roomPos - (buildingNamePos + 15));
 
 			// Find the position of "Room Type: " in the room information after ", Room: "
 			size_t roomTypePos = roomInfo.find("Room Type: ", roomPos);
-			if (roomTypePos == std::string::npos) return; // If "Room Type: " not found, exit
+			if (roomTypePos == std::string::npos) {
+				return; // If "Room Type: " not found, exit
+			}
 
 			// Extract room number between ", Room: " and "Room Type: "
 			roomNumber = roomInfo.substr(roomPos + 8, roomTypePos - (roomPos + 8));
 
 			// Find the position of ", Room State: " in the room information after "Room Type: "
 			size_t roomStatePos = roomInfo.find(", Room State: ", roomTypePos);
-			if (roomStatePos == std::string::npos) return; // If ", Room State: " not found, exit
+			if (roomStatePos == std::string::npos) {
+				return; // If ", Room State: " not found, exit
+			}
 
 			// Extract room type between "Room Type: " and ", Room State: "
 			roomType = roomInfo.substr(roomTypePos + 11, roomStatePos - (roomTypePos + 11));
 
 			// Find the position of ", Building State: " in the room information after ", Room State: "
 			size_t buildingStatePos = roomInfo.find(", Building State: ", roomStatePos);
-			if (buildingStatePos == std::string::npos) return; // If ", Building State: " not found, exit
-
+			if (buildingStatePos == std::string::npos) {
+				return; // If ", Building State: " not found, exit
+			}
+			
 			// Extract room state between ", Room State: " and ", Building State: "
 			roomState = roomInfo.substr(roomStatePos + 14, buildingStatePos - (roomStatePos + 14));
 
