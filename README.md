@@ -1,6 +1,7 @@
 # College Access Control Solution
 This C++ console application efficiently manages rooms, users, and swipe cards within a college environment. It facilitates user and role management, room and building administration, access logs, and user simulation for testing via an intuitive menu system.
-
+![Demo of my project](github_assets/simulation.gif)
+addtoupdateuser.gif
 ## Installation Instructions
 
 ### Prerequisites
@@ -29,14 +30,55 @@ This C++ console application efficiently manages rooms, users, and swipe cards w
 5. **Deploying the Program**:
     - If needed, create an installer or package as per deployment requirements.
 
-
 ## Key Features
 
-- **User & Role Management**: Admins can add, remove, and update users and their unique swipe cards, along with assigning or removing roles.
-- **Room & Building Administration**: Add, remove, and update buildings and rooms, altering room states between "NORMAL" and "EMERGENCY," affecting building status.
-- **Access Control Logic**: Access to rooms is governed by room state, type, time, and user roles. Emergency states limit access to designated staff only.
-- **Log Files**: Three log files capture user and card information, access attempts, and the college's room and building structure.
-- **User Simulation**: Enables admins to simulate users accessing rooms, and generating log entries. If access is granted, admins can also log users leaving the room.
+### 1. **User & Role Management**
+Admins can:
+- Add, remove, and update users.
+- Manage unique swipe cards.
+- Assign or remove roles.
+
+![User Management](github_assets/addtoupdateuser.gif)  
+![Role Management](github_assets/addrolestodisplaylist.gif)
+
+---
+
+### 2. **Room & Building Administration**
+Admins can:
+- Add, remove, and update buildings and rooms.
+- Change room states between **"NORMAL"** and **"EMERGENCY"**, which affects the building's status.
+
+![Add Building](github_assets/addbuilding.gif)  
+![Update Room State](github_assets/addroomtochnageroomstate.gif)  
+![Update and Display Rooms](github_assets/updateanddisplayrooms.gif)
+
+---
+
+### 3. **Access Control Logic**
+Access to rooms is controlled by:
+- Room state (Normal vs Emergency).
+- Room type.
+- Time of day.
+- User roles.
+
+**Emergency states** limit access to designated staff only.
+
+---
+
+### 4. **Log Files**
+Three log files track:
+- User and card information.
+- Access attempts.
+- The college's room and building structure.
+
+---
+
+### 5. **User Simulation**
+Admins can simulate users accessing rooms and generate log entries:
+- If access is granted, admins can also log users leaving the room.
+
+![User Simulation](github_assets/simulation.gif)
+
 
 ## Class Responsibilities
 Below, you'll find detailed explanations for each class within the system, outlining their responsibilities and functionalities.
