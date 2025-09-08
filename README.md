@@ -1,7 +1,7 @@
 # College Access Control Solution
 This C++ console application efficiently manages rooms, users, and swipe cards within a college environment. It facilitates user and role management, room and building administration, access logs, and user simulation for testing via an intuitive menu system.
 ![Demo of my project](github_assets/simulation.gif)
-addtoupdateuser.gif
+
 ## Installation Instructions
 
 ### Prerequisites
